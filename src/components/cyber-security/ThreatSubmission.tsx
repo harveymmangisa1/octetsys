@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShieldAlert, Spy, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck } from "lucide-react";
+import { ShieldAlert, Incognito, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck } from "lucide-react";
 import { type LinkAssessmentState } from '@/app/actions';
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -86,7 +86,7 @@ export function ThreatSubmission() {
           <Tabs defaultValue="report" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="report"><ShieldAlert className="mr-2" /> Report Attack</TabsTrigger>
-              <TabsTrigger value="abuse"><Spy className="mr-2" /> Anonymous Abuse</TabsTrigger>
+              <TabsTrigger value="abuse"><Incognito className="mr-2" /> Anonymous Abuse</TabsTrigger>
               <TabsTrigger value="phishing"><Link2 className="mr-2" /> Phishing Check</TabsTrigger>
             </TabsList>
             <TabsContent value="report">
