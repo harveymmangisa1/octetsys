@@ -7,6 +7,7 @@ import { Portfolio } from "@/components/home/Portfolio";
 import { TechFaq } from "@/components/home/TechFaq";
 import { Campaigns } from "@/components/home/Campaigns";
 import { Consultation } from "@/components/home/Consultation";
+import { Cta } from "@/components/home/Cta";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <TechFaq />
         <Campaigns />
         <Consultation />
+        <Cta />
       </main>
       <Footer />
     </div>
