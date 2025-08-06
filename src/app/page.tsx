@@ -16,8 +16,8 @@ export default function Home() {
         <Hero />
         <Services />
         <Portfolio />
-        <Campaigns />
         <TechFaq />
+        <Campaigns />
         <Consultation />
       </main>
       <Footer />

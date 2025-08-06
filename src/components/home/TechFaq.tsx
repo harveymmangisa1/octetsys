@@ -6,7 +6,7 @@ import { askQuestion, type FaqState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bot, ThumbsUp, Lightbulb } from 'lucide-react';
+import { Sparkles, Bot, ThumbsUp } from 'lucide-react';
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -26,7 +26,7 @@ function SubmitButton() {
         </>
       ) : (
         <>
-          <Lightbulb className="mr-2 h-4 w-4" />
+          <Sparkles className="mr-2 h-4 w-4" />
           Ask AI
         </>
       )}
@@ -46,16 +46,16 @@ export function TechFaq() {
         variant: "destructive",
       });
     }
-  }, [state, toast]);
+  }, [state.error, toast]);
 
   return (
-    <section className="py-16 sm:py-24">
+    <section id="faq" className="py-16 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="max-w-3xl mx-auto shadow-lg">
+        <Card className="max-w-3xl mx-auto shadow-lg border-border/80">
           <CardHeader className="text-center">
-            <CardTitle className="font-headline text-3xl text-primary">AI-Powered Tech FAQ</CardTitle>
-            <CardDescription className="mt-2">
-              Have a quick IT question? Our AI assistant is here to help.
+            <CardTitle className="font-headline text-3xl text-foreground">AI-Powered Tech FAQ</CardTitle>
+            <CardDescription className="mt-2 text-lg">
+              Have a quick IT question? Our AI assistant is here to help 24/7.
             </CardDescription>
           </CardHeader>
           <form action={formAction}>
@@ -65,7 +65,7 @@ export function TechFaq() {
                   name="question"
                   placeholder="e.g., How do I reset my router?"
                   required
-                  className="flex-grow"
+                  className="flex-grow text-base"
                 />
                 <SubmitButton />
               </div>
@@ -73,14 +73,14 @@ export function TechFaq() {
           </form>
           {(state.answer) && (
             <CardFooter>
-              <div className="mt-4 p-4 bg-accent/20 rounded-lg w-full">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center">
+              <div className="mt-4 p-5 bg-secondary/50 rounded-lg w-full">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
                     <ThumbsUp className="h-5 w-5" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-accent-foreground">AI Answer:</p>
-                    <p className="text-muted-foreground">{state.answer}</p>
+                    <p className="font-bold text-foreground">AI Answer:</p>
+                    <p className="text-muted-foreground mt-1">{state.answer}</p>
                   </div>
                 </div>
               </div>

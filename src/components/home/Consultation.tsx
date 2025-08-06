@@ -2,24 +2,25 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 export function Consultation() {
   return (
     <section id="consultation" className="relative bg-primary text-primary-foreground overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center relative z-10">
-        <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Ready to Elevate Your Business?
         </h2>
-        <p className="mt-4 text-lg leading-8 text-primary-foreground/80 max-w-2xl mx-auto">
+        <p className="mt-6 text-lg leading-8 text-primary-foreground/80 max-w-2xl mx-auto">
           Schedule a free, no-obligation consultation with our IT experts to discuss your challenges and discover how Octet Systems can drive your success.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
+        <div className="mt-10">
           <Button
             size="lg"
-            className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-transform hover:scale-105"
             asChild
           >
-            <Link href="#">Book a Free Consultation</Link>
+            <Link href="#">Book a Free Consultation <ArrowRight className="ml-2" /></Link>
           </Button>
         </div>
       </div>

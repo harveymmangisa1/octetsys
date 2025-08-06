@@ -15,17 +15,17 @@ const services = [
   {
     icon: Network,
     title: "Networking & Infrastructure",
-    description: "Robust network design, setup, and maintenance for seamless connectivity and performance.",
+    description: "Robust network design, setup, and maintenance for seamless connectivity.",
   },
   {
     icon: ShieldCheck,
     title: "Cybersecurity Consulting",
-    description: "Protect your assets with our expert security assessments, threat mitigation, and awareness campaigns.",
+    description: "Protect your assets with our expert security assessments and threat mitigation.",
   },
   {
     icon: Wrench,
     title: "System Support",
-    description: "Reliable remote and on-site support to keep your systems running smoothly and efficiently.",
+    description: "Reliable remote and on-site support to keep your systems running smoothly.",
   },
   {
     icon: GraduationCap,
@@ -45,7 +45,7 @@ const services = [
   {
     icon: Camera,
     title: "CCTV & Biometrics",
-    description: "Advanced surveillance and access control systems for enhanced security and peace of mind.",
+    description: "Advanced surveillance and access control systems for enhanced security.",
   },
   {
     icon: BrainCircuit,
@@ -56,24 +56,24 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-16 sm:py-24 bg-card">
+    <section id="services" className="py-16 sm:py-24 bg-secondary/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="font-headline text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Comprehensive IT Services
           </h2>
           <p className="mt-4 text-lg leading-8 text-muted-foreground">
-            From foundational infrastructure to cutting-edge AI, we've got you covered.
+            From foundational infrastructure to cutting-edge AI, we've got you covered with a full suite of technology solutions.
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
-            <Card key={service.title} className="text-center hover:shadow-lg transition-shadow">
+            <Card key={service.title} className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-transparent hover:border-primary">
               <CardHeader>
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <service.icon className="h-6 w-6" aria-hidden="true" />
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <service.icon className="h-7 w-7" aria-hidden="true" />
                 </div>
-                <CardTitle className="mt-4 font-headline">{service.title}</CardTitle>
+                <CardTitle className="mt-4 font-headline text-lg">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>{service.description}</CardDescription>
