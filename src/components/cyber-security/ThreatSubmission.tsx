@@ -1,20 +1,22 @@
+
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
-import { assessLink } from '@/app/actions';
+import { assessLink, submitIncidentReport, submitAbuseReport, analyzeEmailContent } from '@/app/actions';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShieldAlert, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck, KeyRound, Dices } from "lucide-react";
+import { ShieldAlert, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck, KeyRound, Dices, MailWarning } from "lucide-react";
 import { IncognitoIcon } from './IncognitoIcon';
-import { type LinkAssessmentState } from '@/app/actions';
-import { useEffect } from 'react';
+import { type LinkAssessmentState, type IncidentReportState, type AbuseReportState } from '@/app/actions';
+import { useEffect, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { PasswordGuide } from './PasswordGuide';
 import { PasswordStrength } from './PasswordStrength';
+import { EmailAnalyzer } from './EmailAnalyzer';
 
 const initialLinkState: LinkAssessmentState = {
   isPhishing: null,
@@ -22,7 +24,19 @@ const initialLinkState: LinkAssessmentState = {
   error: null,
 };
 
-function SubmitButton() {
+const initialIncidentState: IncidentReportState = {
+  ticketId: null,
+  message: null,
+  error: null,
+};
+
+const initialAbuseState: AbuseReportState = {
+  confirmationId: null,
+  nextSteps: null,
+  error: null,
+}
+
+function IncidentSubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending}>
@@ -37,6 +51,22 @@ function SubmitButton() {
     </Button>
   );
 }
+
+function AbuseSubmitButton() {
+    const { pending } = useFormStatus();
+    return (
+      <Button type="submit" disabled={pending}>
+        {pending ? (
+          <>
+            <Bot className="mr-2 h-4 w-4 animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          "Submit Anonymously"
+        )}
+      </Button>
+    );
+  }
 
 function AssessLinkSubmitButton() {
   const { pending } = useFormStatus();
@@ -59,18 +89,40 @@ function AssessLinkSubmitButton() {
 
 
 export function ThreatSubmission() {
-  const [linkState, linkFormAction] = useFormState(assessLink, initialLinkState);
   const { toast } = useToast();
+
+  const [linkState, linkFormAction] = useFormState(assessLink, initialLinkState);
+  const [incidentState, incidentFormAction] = useFormState(submitIncidentReport, initialIncidentState);
+  const [abuseState, abuseFormAction] = useFormState(submitAbuseReport, initialAbuseState);
+  
+  const incidentFormRef = useRef<HTMLFormElement>(null);
+  const abuseFormRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (linkState.error) {
-      toast({
-        title: "Error",
-        description: linkState.error,
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: linkState.error, variant: "destructive" });
     }
   }, [linkState.error, toast]);
+
+  useEffect(() => {
+    if (incidentState.error) {
+      toast({ title: "Submission Failed", description: incidentState.error, variant: "destructive" });
+    }
+    if (incidentState.ticketId) {
+        toast({ title: "Report Submitted", description: incidentState.message || "Your report has been received." });
+        incidentFormRef.current?.reset();
+    }
+  }, [incidentState, toast]);
+
+  useEffect(() => {
+    if (abuseState.error) {
+        toast({ title: "Submission Failed", description: abuseState.error, variant: "destructive" });
+    }
+    if (abuseState.confirmationId) {
+        toast({ title: "Report Submitted Anonymously", description: abuseState.nextSteps || "Your report has been received." });
+        abuseFormRef.current?.reset();
+    }
+  }, [abuseState, toast]);
 
 
   return (
@@ -86,36 +138,37 @@ export function ThreatSubmission() {
         </div>
         <div className="mt-12 max-w-4xl mx-auto">
           <Tabs defaultValue="report" className="w-full">
-            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-5">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-6">
               <TabsTrigger value="report"><ShieldAlert className="mr-2" /> Report</TabsTrigger>
               <TabsTrigger value="abuse"><IncognitoIcon className="mr-2" /> Anonymous</TabsTrigger>
               <TabsTrigger value="phishing"><Link2 className="mr-2" /> Phishing</TabsTrigger>
-              <TabsTrigger value="guide"><KeyRound className="mr-2" /> Password Guide</TabsTrigger>
-              <TabsTrigger value="strength"><Dices className="mr-2" /> Strength Check</TabsTrigger>
+              <TabsTrigger value="email"><MailWarning className="mr-2" /> Email Scan</TabsTrigger>
+              <TabsTrigger value="guide"><KeyRound className="mr-2" /> Guide</TabsTrigger>
+              <TabsTrigger value="strength"><Dices className="mr-2" /> Strength</TabsTrigger>
             </TabsList>
             <TabsContent value="report">
               <Card>
                 <CardContent className="p-6">
-                  <form className="space-y-4">
+                  <form ref={incidentFormRef} action={incidentFormAction} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Your Name (Optional)</Label>
-                        <Input id="name" placeholder="John Doe" />
+                        <Input id="name" name="name" placeholder="John Doe" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email">Your Email (Optional)</Label>
-                        <Input id="email" type="email" placeholder="john.doe@example.com" />
+                        <Input id="email" name="email" type="email" placeholder="john.doe@example.com" />
                       </div>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="incident-type">Type of Incident</Label>
-                        <Input id="incident-type" placeholder="e.g., Ransomware, Phishing, Data Breach" />
+                        <Input id="incident-type" name="incident-type" placeholder="e.g., Ransomware, Phishing, Data Breach" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="description">Description of Incident</Label>
-                      <Textarea id="description" placeholder="Please provide as much detail as possible..." rows={5} />
+                      <Textarea id="description" name="description" placeholder="Please provide as much detail as possible..." rows={5} required />
                     </div>
-                    <SubmitButton />
+                    <IncidentSubmitButton />
                   </form>
                 </CardContent>
               </Card>
@@ -126,16 +179,16 @@ export function ThreatSubmission() {
                   <div className="bg-blue-100/50 border border-blue-200 text-blue-800 text-sm rounded-md p-4 mb-4">
                     <p>This submission is anonymous. We do not collect any personal information, IP addresses, or browser data.</p>
                   </div>
-                  <form className="space-y-4">
+                  <form ref={abuseFormRef} action={abuseFormAction} className="space-y-4">
                      <div className="space-y-2">
                       <Label htmlFor="abuse-type">Type of Abuse</Label>
-                      <Input id="abuse-type" placeholder="e.g., Harassment, Hate Speech, Impersonation" />
+                      <Input id="abuse-type" name="abuse-type" placeholder="e.g., Harassment, Hate Speech, Impersonation" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="abuse-description">Description of Abuse</Label>
-                      <Textarea id="abuse-description" placeholder="Please provide a detailed account of the abuse..." rows={5}/>
+                      <Textarea id="abuse-description" name="abuse-description" placeholder="Please provide a detailed account of the abuse..." rows={5} required/>
                     </div>
-                     <SubmitButton />
+                     <AbuseSubmitButton />
                   </form>
                 </CardContent>
               </Card>
@@ -176,6 +229,9 @@ export function ThreatSubmission() {
                   )}
                 </CardContent>
               </Card>
+            </TabsContent>
+             <TabsContent value="email">
+                <EmailAnalyzer />
             </TabsContent>
             <TabsContent value="guide">
                 <PasswordGuide />
