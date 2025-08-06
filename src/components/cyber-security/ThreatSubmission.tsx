@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShieldAlert, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck } from "lucide-react";
+import { ShieldAlert, Link2, Bot, Sparkles, AlertCircle, CheckCircle2, ShieldCheck, KeyRound, Dices } from "lucide-react";
 import { IncognitoIcon } from './IncognitoIcon';
 import { type LinkAssessmentState } from '@/app/actions';
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { PasswordGuide } from './PasswordGuide';
+import { PasswordStrength } from './PasswordStrength';
 
 const initialLinkState: LinkAssessmentState = {
   isPhishing: null,
@@ -84,10 +86,12 @@ export function ThreatSubmission() {
         </div>
         <div className="mt-12 max-w-4xl mx-auto">
           <Tabs defaultValue="report" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="report"><ShieldAlert className="mr-2" /> Report Attack</TabsTrigger>
-              <TabsTrigger value="abuse"><IncognitoIcon className="mr-2" /> Anonymous Abuse</TabsTrigger>
-              <TabsTrigger value="phishing"><Link2 className="mr-2" /> Phishing Check</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-5">
+              <TabsTrigger value="report"><ShieldAlert className="mr-2" /> Report</TabsTrigger>
+              <TabsTrigger value="abuse"><IncognitoIcon className="mr-2" /> Anonymous</TabsTrigger>
+              <TabsTrigger value="phishing"><Link2 className="mr-2" /> Phishing</TabsTrigger>
+              <TabsTrigger value="guide"><KeyRound className="mr-2" /> Password Guide</TabsTrigger>
+              <TabsTrigger value="strength"><Dices className="mr-2" /> Strength Check</TabsTrigger>
             </TabsList>
             <TabsContent value="report">
               <Card>
@@ -172,6 +176,12 @@ export function ThreatSubmission() {
                   )}
                 </CardContent>
               </Card>
+            </TabsContent>
+            <TabsContent value="guide">
+                <PasswordGuide />
+            </TabsContent>
+            <TabsContent value="strength">
+                <PasswordStrength />
             </TabsContent>
           </Tabs>
         </div>
