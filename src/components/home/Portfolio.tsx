@@ -1,35 +1,60 @@
 
+'use client';
+
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import React from "react";
 
 const projects = [
   {
-    title: "Corporate Mobile App",
-    description: "A cross-platform mobile application for internal communications and productivity, boosting employee engagement.",
+    title: "MedVet Ltd",
+    description: "A corporate website for a veterinary medicine supplier, featuring a clean product catalog and contact information.",
     image: "https://placehold.co/600x400",
-    hint: "app interface",
-    tags: ["Mobile App", "Software Dev"],
+    hint: "veterinary medicine",
+    tags: ["Web Development", "Corporate"],
+    url: "https://medvetltd.com",
   },
   {
-    title: "Enterprise Network Overhaul",
-    description: "Complete redesign and implementation of a secure, high-speed network infrastructure for a financial institution.",
+    title: "DroneLink Malawi",
+    description: "A dynamic website for a drone services company, showcasing their aerial imaging and data solutions.",
     image: "https://placehold.co/600x400",
-    hint: "network diagram",
-    tags: ["Networking", "Cybersecurity"],
+    hint: "drone landscape",
+    tags: ["Web Development", "Tech Startup"],
+    url: "https://dronelinkmw.com",
   },
   {
-    title: "Retail CCTV & Biometrics",
-    description: "Installation of a comprehensive CCTV and biometric access control system for a multi-location retail chain.",
+    title: "Joyful Kids",
+    description: "A warm and inviting website for a children's organization, designed to be friendly and accessible.",
     image: "https://placehold.co/600x400",
-    hint: "security camera",
-    tags: ["CCTV", "Biometrics"],
+    hint: "children playing",
+    tags: ["Web Development", "Non-Profit"],
+    url: "https://joyfulkidsmw.org",
+  },
+  {
+    title: "DJ Bubblegum",
+    description: "A vibrant and energetic personal website for a DJ, featuring event dates and music samples.",
+    image: "https://placehold.co/600x400",
+    hint: "dj setup",
+    tags: ["Web Development", "Personal Brand"],
+    url: "https://djbubblegum.com",
   },
 ];
 
 export function Portfolio() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; 
+  }
+
   return (
     <section id="portfolio" className="py-16 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,7 +66,7 @@ export function Portfolio() {
             We deliver results. Explore some of our recent projects that showcase our commitment to excellence.
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
           {projects.map((project) => (
             <Card key={project.title} className="flex flex-col overflow-hidden group hover:shadow-xl transition-all duration-300">
               <div className="overflow-hidden">
@@ -63,9 +88,25 @@ export function Portfolio() {
               <CardContent className="flex-grow">
                 <p className="text-muted-foreground">{project.description}</p>
               </CardContent>
-              <CardFooter className="bg-secondary/30">
-                <Button variant="link" className="w-full text-primary group-hover:underline">
-                  View Case Study <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <CardFooter className="bg-secondary/30 p-2 flex justify-between items-center gap-2">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="ghost" className="flex-1 text-primary group-hover:underline">
+                      <Eye className="mr-2 h-4 w-4"/> Live Preview
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-[90vw] h-[90vh] flex flex-col p-0">
+                    <DialogHeader className="p-4 border-b">
+                      <DialogTitle>{project.title} - Live Preview</DialogTitle>
+                    </DialogHeader>
+                    <iframe src={project.url} className="w-full h-full border-0" title={project.title} />
+                  </DialogContent>
+                </Dialog>
+
+                <Button variant="link" asChild className="flex-1 text-primary group-hover:underline">
+                   <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    Visit Site <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                   </a>
                 </Button>
               </CardFooter>
             </Card>
