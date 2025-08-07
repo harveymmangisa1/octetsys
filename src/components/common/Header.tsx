@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { ModeToggle } from "./ModeToggle";
 
 export function Header() {
   return (
@@ -23,6 +24,7 @@ export function Header() {
           <Link href="/#faq" className="text-muted-foreground hover:text-primary transition-colors">FAQ</Link>
         </nav>
         <div className="flex items-center gap-4 ml-auto">
+          <ModeToggle />
           <Button asChild>
             <Link href="/#consultation">Book a Consultation</Link>
           </Button>
