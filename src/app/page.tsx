@@ -6,7 +6,7 @@ import { Services } from "@/components/home/Services";
 import { Portfolio } from "@/components/home/Portfolio";
 import { TechFaq } from "@/components/home/TechFaq";
 import { Campaigns } from "@/components/home/Campaigns";
-import { Testimonials } from "@/components/home/Testimonials";
+import { Feedback } from "@/components/home/Feedback";
 import { Consultation } from "@/components/home/Consultation";
 import { Cta } from "@/components/home/Cta";
 
@@ -20,7 +20,7 @@ export default function Home() {
         <Portfolio />
         <TechFaq />
         <Campaigns />
-        <Testimonials />
+        <Feedback />
         <Consultation />
         <Cta />
       </main>

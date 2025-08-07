@@ -7,3 +7,5 @@ import '@/ai/flows/link-assessment-genai.ts';
 import '@/ai/flows/report-incident-genai.ts';
 import '@/ai/flows/report-abuse-genai.ts';
 import '@/ai/flows/email-analyzer-genai.ts';
+import '@/ai/flows/submit-feedback-genai.ts';
+

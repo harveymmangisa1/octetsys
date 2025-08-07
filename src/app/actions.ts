@@ -6,6 +6,7 @@ import { assessLink as assessLinkFlow, type LinkAssessmentInput } from '@/ai/flo
 import { reportIncident as reportIncidentFlow, type ReportIncidentInput } from '@/ai/flows/report-incident-genai';
 import { reportAbuse as reportAbuseFlow, type ReportAbuseInput } from '@/ai/flows/report-abuse-genai';
 import { analyzeEmail as analyzeEmailFlow, type EmailAnalysisInput } from '@/ai/flows/email-analyzer-genai';
+import { submitFeedback as submitFeedbackFlow, type SubmitFeedbackInput } from '@/ai/flows/submit-feedback-genai';
 import { z } from 'zod';
 
 export interface FaqState {
@@ -187,5 +188,42 @@ export async function analyzeEmailContent(
     } catch (e) {
         console.error(e);
         return { isSuspicious: null, analysis: null, riskScore: null, error: 'An AI error occurred during email analysis.' };
+    }
+}
+
+export interface FeedbackState {
+    confirmationMessage: string | null;
+    error: string | null;
+}
+
+const FeedbackSchema = z.object({
+    name: z.string().optional(),
+    company: z.string().optional(),
+    feedback: z.string().min(15, { message: "Feedback must be at least 15 characters long." }),
+});
+
+export async function submitFeedback(
+    prevState: FeedbackState,
+    formData: FormData
+): Promise<FeedbackState> {
+    const validatedFields = FeedbackSchema.safeParse({
+        name: formData.get('name'),
+        company: formData.get('company'),
+        feedback: formData.get('feedback'),
+    });
+
+    if (!validatedFields.success) {
+        return {
+            confirmationMessage: null,
+            error: validatedFields.error.errors.map(e => e.message).join(', ')
+        };
+    }
+
+    try {
+        const result = await submitFeedbackFlow(validatedFields.data);
+        return { ...result, error: null };
+    } catch (e) {
+        console.error(e);
+        return { confirmationMessage: null, error: 'An AI error occurred while submitting your feedback.' };
     }
 }
