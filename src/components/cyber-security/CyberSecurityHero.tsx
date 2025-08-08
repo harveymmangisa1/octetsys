@@ -37,7 +37,7 @@ export function CyberSecurityHero() {
             </p>
             <div className="mt-10 flex items-center justify-center lg:justify-start gap-x-4">
               <Button size="lg" asChild className="transition-transform hover:scale-105">
-                <Link href="/#consultation">Get a Security Audit <ArrowRight className="ml-2" /></Link>
+                <Link href="/contact">Get a Security Audit <ArrowRight className="ml-2" /></Link>
               </Button>
             </div>
           </div>
@@ -74,3 +74,5 @@ export function CyberSecurityHero() {
     </section>
   );
 }
+
+    

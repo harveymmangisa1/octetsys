@@ -20,7 +20,7 @@ export function Consultation() {
             className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-transform hover:scale-105"
             asChild
           >
-            <Link href="#">Book a Free Consultation <ArrowRight className="ml-2" /></Link>
+            <Link href="/contact">Book a Free Consultation <ArrowRight className="ml-2" /></Link>
           </Button>
         </div>
       </div>
@@ -35,3 +35,5 @@ export function Consultation() {
     </section>
   );
 }
+
+    

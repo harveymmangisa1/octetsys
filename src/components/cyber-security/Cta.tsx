@@ -20,7 +20,7 @@ export function Cta() {
               className="transition-transform hover:scale-105"
               asChild
             >
-              <Link href="/#consultation">Schedule a Free Consultation <ArrowRight className="ml-2" /></Link>
+              <Link href="/contact">Schedule a Free Consultation <ArrowRight className="ml-2" /></Link>
             </Button>
           </div>
         </div>
@@ -28,3 +28,5 @@ export function Cta() {
     </section>
   );
 }
+
+    

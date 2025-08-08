@@ -7,6 +7,7 @@ import { reportIncident as reportIncidentFlow, type ReportIncidentInput } from '
 import { reportAbuse as reportAbuseFlow, type ReportAbuseInput } from '@/ai/flows/report-abuse-genai';
 import { analyzeEmail as analyzeEmailFlow, type EmailAnalysisInput, type EmailAnalysisOutput } from '@/ai/flows/email-analyzer-genai';
 import { submitFeedback as submitFeedbackFlow, type SubmitFeedbackInput } from '@/ai/flows/submit-feedback-genai';
+import { submitContactForm as submitContactFormFlow, type ContactFormInput } from '@/ai/flows/contact-form-genai';
 import { z } from 'zod';
 
 export interface FaqState {
@@ -288,5 +289,47 @@ export async function chatWithNzeru(
     return { response: null, error: 'An AI error occurred. Please try again later.' };
   }
 }
+
+export interface ContactFormState {
+    confirmationMessage: string | null;
+    error: string | null;
+}
+
+const ContactFormSchema = z.object({
+    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    email: z.string().email({ message: "Please enter a valid email address." }),
+    company: z.string().optional(),
+    service: z.string().min(3, { message: "Please select a service." }),
+    message: z.string().min(15, { message: "Message must be at least 15 characters." }),
+});
+
+export async function submitContactForm(
+    prevState: ContactFormState,
+    formData: FormData
+): Promise<ContactFormState> {
+    const validatedFields = ContactFormSchema.safeParse({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        company: formData.get('company'),
+        service: formData.get('service'),
+        message: formData.get('message'),
+    });
+    
+    if (!validatedFields.success) {
+        return {
+            confirmationMessage: null,
+            error: validatedFields.error.errors.map(e => e.message).join(', ')
+        };
+    }
+    
+    try {
+        const result = await submitContactFormFlow(validatedFields.data);
+        return { ...result, error: null };
+    } catch (e) {
+        console.error(e);
+        return { confirmationMessage: null, error: 'An AI error occurred while submitting your message.' };
+    }
+}
+    
 
     

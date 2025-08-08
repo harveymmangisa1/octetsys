@@ -13,13 +13,13 @@ export function Cta() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
-                    href="/#consultation"
+                    href="/contact"
                     className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                     >
                     Schedule Consultation
                     </Link>
                     <Link
-                    href="/#faq"
+                    href="/contact"
                     className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
                     >
                     Contact Us
@@ -30,3 +30,5 @@ export function Cta() {
     </section>
   );
 }
+
+    
