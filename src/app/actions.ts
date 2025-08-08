@@ -5,7 +5,7 @@ import { techFaq, type TechFaqInput } from '@/ai/flows/tech-faq-genai';
 import { assessLink as assessLinkFlow, type LinkAssessmentInput } from '@/ai/flows/link-assessment-genai';
 import { reportIncident as reportIncidentFlow, type ReportIncidentInput } from '@/ai/flows/report-incident-genai';
 import { reportAbuse as reportAbuseFlow, type ReportAbuseInput } from '@/ai/flows/report-abuse-genai';
-import { analyzeEmail as analyzeEmailFlow, type EmailAnalysisInput } from '@/ai/flows/email-analyzer-genai';
+import { analyzeEmail as analyzeEmailFlow, type EmailAnalysisInput, type EmailAnalysisOutput } from '@/ai/flows/email-analyzer-genai';
 import { submitFeedback as submitFeedbackFlow, type SubmitFeedbackInput } from '@/ai/flows/submit-feedback-genai';
 import { z } from 'zod';
 
@@ -154,12 +154,13 @@ export async function submitAbuseReport(
     }
 }
 
+
 export interface EmailAnalysisState {
     isSuspicious: boolean | null;
     analysis: string | null;
     riskScore: number | null;
     error: string | null;
-}
+};
 
 const EmailSchema = z.object({
     emailContent: z.string().min(50, { message: "Email content must be at least 50 characters." }),
@@ -196,34 +197,96 @@ export interface FeedbackState {
     error: string | null;
 }
 
-const FeedbackSchema = z.object({
-    name: z.string().optional(),
-    company: z.string().optional(),
-    feedback: z.string().min(15, { message: "Feedback must be at least 15 characters long." }),
-});
-
 export async function submitFeedback(
     prevState: FeedbackState,
     formData: FormData
 ): Promise<FeedbackState> {
-    const validatedFields = FeedbackSchema.safeParse({
+    const validatedFields = z.object({
+        name: z.string().optional(),
+        company: z.string().optional(),
+        feedback: z.string().min(15, {message: "Feedback must be at least 15 characters long."}),
+    }).safeParse({
         name: formData.get('name'),
         company: formData.get('company'),
         feedback: formData.get('feedback'),
     });
-
+    
     if (!validatedFields.success) {
         return {
             confirmationMessage: null,
             error: validatedFields.error.errors.map(e => e.message).join(', ')
         };
     }
-
+    
     try {
         const result = await submitFeedbackFlow(validatedFields.data);
         return { ...result, error: null };
     } catch (e) {
         console.error(e);
-        return { confirmationMessage: null, error: 'An AI error occurred while submitting your feedback.' };
+        return { confirmationMessage: null, error: 'An AI error occurred while submitting feedback.' };
     }
 }
+
+
+function formatEmailAnalysisResult(result: EmailAnalysisOutput): string {
+  if (result.isSuspicious !== null && result.analysis !== null && result.riskScore !== null) {
+      const riskLevel = result.riskScore >= 90 ? 'Very High' : result.riskScore >= 75 ? 'High' : result.riskScore >= 50 ? 'Medium' : result.riskScore >= 25 ? 'Low' : 'Very Low';
+      return `Email Analysis:\nStatus: ${result.isSuspicious ? 'Suspicious' : 'Appears Safe'}\nRisk Score: ${result.riskScore}% (${riskLevel})\nAnalysis: ${result.analysis}`;
+  }
+  return "Could not analyze email.";
+}
+
+function formatLinkAssessmentResult(result: LinkAssessmentState): string {
+    if (result.error) {
+        return `Error assessing link: ${result.error}`;
+    }
+    if (result.isPhishing !== null && result.explanation !== null) {
+        return `Link Assessment:\nStatus: ${result.isPhishing ? 'Potentially Malicious' : 'Appears Safe'}\nExplanation: ${result.explanation}`;
+    }
+ return "Could not assess link.";
+}
+
+export async function chatWithNzeru(
+ userMessage: string,
+ // Optional: add conversation history here later
+): Promise<{ response: string | null; error: string | null }> {
+  try {
+    let nzeruResponse: string | null = null;
+
+    const lowerCaseMessage = userMessage.toLowerCase();
+
+    // Very basic intent matching. In a real app, this would be more sophisticated.
+    if (lowerCaseMessage.includes('how do i') || lowerCaseMessage.includes('what is') || lowerCaseMessage.includes('can you explain')) {
+        const input: TechFaqInput = { question: userMessage };
+        const result = await techFaq(input);
+        nzeruResponse = result.answer;
+    } else if (lowerCaseMessage.includes('http') || lowerCaseMessage.includes('www.')) {
+        // Basic URL detection
+        const urlMatch = userMessage.match(/https?:\/\/[^\s]+/);
+        if(urlMatch) {
+            const input: LinkAssessmentInput = { url: urlMatch[0] };
+            const result = await assessLinkFlow(input);
+            nzeruResponse = formatLinkAssessmentResult(result);
+        } else {
+            nzeruResponse = "That doesn't look like a valid URL. Please provide a full URL starting with http or https.";
+        }
+    } else if (lowerCaseMessage.length > 50 && (lowerCaseMessage.includes('subject:') || lowerCaseMessage.includes('from:'))) {
+        // Basic email content detection
+        const input: EmailAnalysisInput = { emailContent: userMessage };
+        const result = await analyzeEmailFlow(input);
+        nzeruResponse = formatEmailAnalysisResult(result);
+    } else {
+      // Default to general tech FAQ
+      const input: TechFaqInput = { question: userMessage };
+      const result = await techFaq(input);
+      nzeruResponse = result.answer;
+    }
+
+    return { response: nzeruResponse, error: null };
+  } catch (e) {
+    console.error(e);
+    return { response: null, error: 'An AI error occurred. Please try again later.' };
+  }
+}
+
+    

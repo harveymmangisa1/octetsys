@@ -72,8 +72,8 @@ export function EmailAnalyzer() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline text-2xl">AI Email Analyzer</CardTitle>
-        <CardDescription>Paste the full content of a suspicious email below to get an instant security analysis.</CardDescription>
+        <CardTitle className="font-headline text-2xl">Nzeru's Email Security Scan</CardTitle>
+        <CardDescription>Paste the full content of a suspicious email below to get an instant security analysis from Nzeru, your AI security assistant.</CardDescription>
       </CardHeader>
       <CardContent>
         <form action={formAction} className="space-y-4">

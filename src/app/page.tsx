@@ -9,6 +9,7 @@ import { Campaigns } from "@/components/home/Campaigns";
 import { Feedback } from "@/components/home/Feedback";
 import { Consultation } from "@/components/home/Consultation";
 import { Cta } from "@/components/home/Cta";
+import { NzeruFAB } from "@/components/common/NzeruFAB";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         <Cta />
       </main>
       <Footer />
+      <NzeruFAB />
     </div>
   );
 }
