@@ -247,12 +247,12 @@ function formatLinkAssessmentResult(result: LinkAssessmentState): string {
  return "Could not assess link.";
 }
 
-export async function chatWithNzeru(
+export async function chatWithBwenzi(
  userMessage: string,
  // Optional: add conversation history here later
 ): Promise<{ response: string | null; error: string | null }> {
   try {
-    let nzeruResponse: string | null = null;
+    let bwenziResponse: string | null = null;
 
     const lowerCaseMessage = userMessage.toLowerCase();
 
@@ -260,30 +260,30 @@ export async function chatWithNzeru(
     if (lowerCaseMessage.includes('how do i') || lowerCaseMessage.includes('what is') || lowerCaseMessage.includes('can you explain')) {
         const input: TechFaqInput = { question: userMessage };
         const result = await techFaq(input);
-        nzeruResponse = result.answer;
+        bwenziResponse = result.answer;
     } else if (lowerCaseMessage.includes('http') || lowerCaseMessage.includes('www.')) {
         // Basic URL detection
         const urlMatch = userMessage.match(/https?:\/\/[^\s]+/);
         if(urlMatch) {
             const input: LinkAssessmentInput = { url: urlMatch[0] };
             const result = await assessLinkFlow(input);
-            nzeruResponse = formatLinkAssessmentResult(result);
+            bwenziResponse = formatLinkAssessmentResult(result);
         } else {
-            nzeruResponse = "That doesn't look like a valid URL. Please provide a full URL starting with http or https.";
+            bwenziResponse = "That doesn't look like a valid URL. Please provide a full URL starting with http or https.";
         }
     } else if (lowerCaseMessage.length > 50 && (lowerCaseMessage.includes('subject:') || lowerCaseMessage.includes('from:'))) {
         // Basic email content detection
         const input: EmailAnalysisInput = { emailContent: userMessage };
         const result = await analyzeEmailFlow(input);
-        nzeruResponse = formatEmailAnalysisResult(result);
+        bwenziResponse = formatEmailAnalysisResult(result);
     } else {
       // Default to general tech FAQ
       const input: TechFaqInput = { question: userMessage };
       const result = await techFaq(input);
-      nzeruResponse = result.answer;
+      bwenziResponse = result.answer;
     }
 
-    return { response: nzeruResponse, error: null };
+    return { response: bwenziResponse, error: null };
   } catch (e) {
     console.error(e);
     return { response: null, error: 'An AI error occurred. Please try again later.' };

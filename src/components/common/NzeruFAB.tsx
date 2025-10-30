@@ -1,9 +1,10 @@
+
 'use client';
 import { Sparkles, MessageSquare, X } from 'lucide-react';
 import { useState } from 'react';
-import { NzeruChatbot } from './NzeruChatbot';
+import { BwenziChatbot } from './NzeruChatbot';
 
-export function NzeruFAB() {
+export function BwenziFAB() {
   const [isOpen, setIsOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
 
@@ -27,7 +28,7 @@ export function NzeruFAB() {
             className="absolute bottom-16 right-0 mb-2 p-3 text-sm text-primary-foreground bg-primary rounded-lg shadow-lg cursor-pointer animate-in fade-in-0 slide-in-from-bottom-2"
             onClick={handleInitialClick}
           >
-            Hi, I'm Nzeru, your Cyber Security AI Partner! Ask me anything.
+            Hi, I'm Bwenzi, your Cyber Security AI Partner! Ask me anything.
             <div className="absolute -bottom-1 right-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-primary"></div>
           </div>
         )}
@@ -39,7 +40,7 @@ export function NzeruFAB() {
           {isOpen ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
         </button>
       </div>
-      {isOpen && <NzeruChatbot onClose={() => setIsOpen(false)} />}
+      {isOpen && <BwenziChatbot onClose={() => setIsOpen(false)} />}
     </>
   );
 }

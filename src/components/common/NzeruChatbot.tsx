@@ -7,14 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Send, X } from 'lucide-react';
-import { chatWithNzeru } from '@/app/actions';
+import { chatWithBwenzi } from '@/app/actions';
 
-interface NzeruChatbotProps {
+interface BwenziChatbotProps {
   onClose: () => void;
 }
 
-export function NzeruChatbot({ onClose }: NzeruChatbotProps) {
-  const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'nzeru' }[]>([]);
+export function BwenziChatbot({ onClose }: BwenziChatbotProps) {
+  const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'bwenzi' }[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -29,23 +29,23 @@ export function NzeruChatbot({ onClose }: NzeruChatbotProps) {
       setIsThinking(true);
 
       try {
-        const response = await chatWithNzeru(trimmedMessage);
+        const response = await chatWithBwenzi(trimmedMessage);
         if (response.error) {
           setMessages((prevMessages) => [
             ...prevMessages,
-            { text: `Error: ${response.error}`, sender: 'nzeru' },
+            { text: `Error: ${response.error}`, sender: 'bwenzi' },
           ]);
         } else if (response.response) {
           setMessages((prevMessages) => [
             ...prevMessages,
-            { text: response.response, sender: 'nzeru' },
+            { text: response.response, sender: 'bwenzi' },
           ]);
         }
       } catch (error) {
         console.error(error);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: 'My apologies, I seem to be having trouble connecting. Please try again in a moment.', sender: 'nzeru' },
+          { text: 'My apologies, I seem to be having trouble connecting. Please try again in a moment.', sender: 'bwenzi' },
         ]);
       } finally {
         setIsThinking(false);
@@ -61,7 +61,7 @@ export function NzeruChatbot({ onClose }: NzeruChatbotProps) {
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] w-full max-w-sm">
       <Card className="flex flex-col h-[500px] shadow-lg rounded-xl">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="font-headline text-lg">Nzeru - Your Cyber Pal</CardTitle>        
+          <CardTitle className="font-headline text-lg">Bwenzi - Your Cyber Pal</CardTitle>        
            <Button variant="ghost" size="icon" onClick={onClose}>
              <X className="h-4 w-4" />
            </Button>
@@ -69,7 +69,7 @@ export function NzeruChatbot({ onClose }: NzeruChatbotProps) {
         <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
           <div className="flex justify-start">
               <div className="rounded-lg p-3 max-w-[80%] bg-muted text-muted-foreground">
-                <p>Hello! I'm Nzeru, your AI cyber security assistant. How can I help you today? You can ask me a question, or check a link for safety.</p>
+                <p>Hello! I'm Bwenzi, your AI cyber security assistant. How can I help you today? You can ask me a question, or check a link for safety.</p>
               </div>
           </div>
           {messages.map((message, index) => (
@@ -101,7 +101,7 @@ export function NzeruChatbot({ onClose }: NzeruChatbotProps) {
         <CardFooter className="p-4 pt-0">
           <form onSubmit={sendMessage} className="flex w-full space-x-2">
             <Input
-              placeholder="Ask Nzeru..."
+              placeholder="Ask Bwenzi..."
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               disabled={isThinking}

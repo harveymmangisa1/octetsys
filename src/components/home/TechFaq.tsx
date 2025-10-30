@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
@@ -52,9 +53,9 @@ export function TechFaq() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="max-w-3xl mx-auto shadow-lg border-border/80">
           <CardHeader className="text-center">
-            <CardTitle className="font-headline text-3xl text-foreground">Ask Nzeru: Your Tech Wisdom Guide</CardTitle>
+            <CardTitle className="font-headline text-3xl text-foreground">Ask Bwenzi: Your Tech Wisdom Guide</CardTitle>
             <CardDescription className="mt-2 text-lg">
-              Have a quick IT question? Nzeru, your AI assistant, is here to help 24/7.
+              Have a quick IT question? Bwenzi, your AI assistant, is here to help 24/7.
             </CardDescription>
           </CardHeader>
           <form action={formAction}>
