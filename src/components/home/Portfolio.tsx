@@ -1,14 +1,28 @@
 'use client'
 import { useState } from 'react';
-import Image from 'next/image';
 import { ArrowRight, Eye, ExternalLink, Briefcase } from 'lucide-react';
+import Image from 'next/image';
 import { Badge } from "@/components/ui/badge";
 import placeholderImages from '@/lib/placeholder-images.json';
-
-const projects = placeholderImages.portfolio;
+import Link from 'next/link';
+import { Button } from '../ui/button';
 
 export function Portfolio() {
   const [previewProject, setPreviewProject] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const categories = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'web', label: 'Web Development' },
+    { id: 'network', label: 'Infrastructure' },
+    { id: 'cctv', label: 'Security' },
+    { id: 'training', label: 'Training' },
+    { id: 'event', label: 'Events' },
+  ];
+
+  const filteredProjects = activeFilter === 'all' 
+    ? placeholderImages.portfolio
+    : placeholderImages.portfolio.filter(p => p.category.toLowerCase().includes(activeFilter.toLowerCase()));
 
   return (
     <section id="portfolio" className="py-24 bg-white">
@@ -27,14 +41,31 @@ export function Portfolio() {
           </h2>
           
           <p className="text-lg text-slate-600 leading-relaxed">
-            From corporate websites to innovative digital solutions, we bring ideas to life 
-            with precision and creativity.
+            From web development to network infrastructure, security systems, and professional training—explore our diverse portfolio of successful projects.
           </p>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap gap-3 mb-12 pb-8 border-b border-slate-200">
+          {categories.map((cat) => (
+            <Button
+              key={cat.id}
+              variant={activeFilter === cat.id ? 'default' : 'secondary'}
+              onClick={() => setActiveFilter(cat.id)}
+              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                activeFilter === cat.id
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              {cat.label}
+            </Button>
+          ))}
         </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={project.title}
               className="group bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
@@ -53,13 +84,13 @@ export function Portfolio() {
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 flex items-center justify-center gap-3">
-                    <button
+                    <Button
                       onClick={() => setPreviewProject(project)}
                       className="bg-white text-slate-900 px-4 py-2 rounded-xl font-medium hover:bg-slate-100 transition-all transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 delay-75 flex items-center gap-2"
                     >
                       <Eye className="w-4 h-4" />
                       <span>Preview</span>
-                    </button>
+                    </Button>
                     <a
                       href={project.url}
                       target="_blank"
@@ -74,9 +105,9 @@ export function Portfolio() {
 
                 {/* Category badge */}
                 <div className="absolute top-4 left-4">
-                  <span className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-900 shadow-sm">
+                  <Badge variant="default" className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-900 shadow-sm">
                     {project.category}
-                  </span>
+                  </Badge>
                 </div>
               </div>
 
@@ -94,20 +125,21 @@ export function Portfolio() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag: string, i: number) => (
+                  {project.tags.map((tag, i) => (
                     <Badge key={i} variant="secondary">{tag}</Badge>
                   ))}
                 </div>
 
                 {/* Footer Links - Visible on mobile */}
                 <div className="flex gap-3 pt-4 md:hidden">
-                  <button
+                  <Button
                     onClick={() => setPreviewProject(project)}
-                    className="flex-1 border-2 border-slate-200 text-slate-900 px-4 py-2 rounded-xl text-sm font-medium hover:border-slate-900 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+                    variant="outline"
+                    className="flex-1"
                   >
                     <Eye className="w-4 h-4" />
                     <span>Preview</span>
-                  </button>
+                  </Button>
                   <a
                     href={project.url}
                     target="_blank"
@@ -152,13 +184,13 @@ export function Portfolio() {
             <div className="flex items-center justify-between p-6 border-b border-slate-200">
               <div>
                 <h3 className="text-xl font-semibold text-slate-900">
-                  {(previewProject as any).title}
+                  {previewProject.title}
                 </h3>
                 <p className="text-sm text-slate-500 mt-1">Live Preview</p>
               </div>
               <div className="flex items-center gap-3">
                 <a
-                  href={(previewProject as any).url}
+                  href={previewProject.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all"
@@ -166,23 +198,25 @@ export function Portfolio() {
                   <span>Open Site</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setPreviewProject(null)}
-                  className="text-slate-400 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 transition-colors"
                 >
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                    <span className="sr-only">Close</span>
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </Button>
               </div>
             </div>
 
             {/* iFrame */}
             <div className="flex-1 overflow-hidden">
               <iframe
-                src={(previewProject as any).url}
+                src={previewProject.url}
                 className="w-full h-full border-0"
-                title={(previewProject as any).title}
+                title={previewProject.title}
               />
             </div>
           </div>
