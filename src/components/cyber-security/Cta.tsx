@@ -20,7 +20,7 @@ export function Cta() {
               className="bg-white text-primary hover:bg-white/90 transition-colors"
               asChild
             >
-              <Link href="/contact">Schedule a Free Consultation <ArrowRight className="ml-2" /></Link>
+              <Link href="/book-consultation">Schedule a Free Consultation <ArrowRight className="ml-2" /></Link>
             </Button>
           </div>
         </div>

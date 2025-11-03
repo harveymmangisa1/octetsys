@@ -53,7 +53,7 @@ export function Cta() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Link
-                href="/contact"
+                href="/book-consultation"
                 className="group inline-flex items-center justify-center bg-slate-900 text-white px-8 py-4 rounded-xl font-medium hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-slate-900/20"
               >
                 <span>Get Started</span>
@@ -61,7 +61,7 @@ export function Cta() {
               </Link>
               
               <Link
-                href="/contact"
+                href="/book-consultation"
                 className="inline-flex items-center justify-center border-2 border-slate-200 text-slate-900 px-8 py-4 rounded-xl font-medium hover:border-slate-900 hover:bg-slate-50 transition-all duration-300"
               >
                 Schedule a Call
