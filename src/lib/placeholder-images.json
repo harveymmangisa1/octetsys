@@ -1,0 +1,95 @@
+{
+  "services": [
+    {
+      "id": "networking",
+      "src": "https://picsum.photos/seed/networking/800/600",
+      "hint": "network switch"
+    },
+    {
+      "id": "cybersecurity",
+      "src": "https://picsum.photos/seed/cybersecurity/800/600",
+      "hint": "security shield"
+    },
+    {
+      "id": "support",
+      "src": "https://picsum.photos/seed/support/800/600",
+      "hint": "tech support"
+    },
+    {
+      "id": "training",
+      "src": "https://picsum.photos/seed/training/800/600",
+      "hint": "team training"
+    },
+    {
+      "id": "development",
+      "src": "https://picsum.photos/seed/development/800/600",
+      "hint": "mobile app"
+    },
+    {
+      "id": "software",
+      "src": "https://picsum.photos/seed/software/800/600",
+      "hint": "code on screen"
+    },
+    {
+      "id": "cctv",
+      "src": "https://picsum.photos/seed/cctv/800/600",
+      "hint": "security camera"
+    },
+    {
+      "id": "ai-awareness",
+      "src": "https://picsum.photos/seed/ai/800/600",
+      "hint": "artificial intelligence"
+    }
+  ],
+  "about": {
+    "hero": "https://picsum.photos/seed/abouthero/600/400",
+    "team": [
+      {
+        "name": "Alex Thompson",
+        "src": "https://picsum.photos/seed/team1/400/400",
+        "hint": "professional headshot male"
+      },
+      {
+        "name": "Brenda Smith",
+        "src": "https://picsum.photos/seed/team2/400/400",
+        "hint": "professional headshot female"
+      },
+      {
+        "name": "Chris Johnson",
+        "src": "https://picsum.photos/seed/team3/400/400",
+        "hint": "professional headshot security"
+      },
+      {
+        "name": "Diana Garcia",
+        "src": "https://picsum.photos/seed/team4/400/400",
+        "hint": "professional headshot designer"
+      }
+    ]
+  },
+  "portfolio": [
+    {
+      "title": "MedVet Ltd",
+      "src": "https://picsum.photos/seed/medvet/600/400",
+      "hint": "veterinary medicine"
+    },
+    {
+      "title": "DroneLink Malawi",
+      "src": "https://picsum.photos/seed/dronelink/600/400",
+      "hint": "drone landscape"
+    },
+    {
+      "title": "Joyful Kids",
+      "src": "https://picsum.photos/seed/joyfulkids/600/400",
+      "hint": "children playing"
+    },
+    {
+      "title": "DJ Bubblegum",
+      "src": "https://picsum.photos/seed/dj/600/400",
+      "hint": "dj setup"
+    }
+  ],
+  "home": {
+    "hero": "https://picsum.photos/seed/homehero/1920/1080",
+    "consultation": "https://picsum.photos/seed/consultation/1920/1080"
+  }
+}

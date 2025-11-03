@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import placeholderImages from '@/lib/placeholder-images.json';
 
 export function Hero() {
   return (
