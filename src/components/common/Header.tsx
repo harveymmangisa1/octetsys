@@ -16,7 +16,7 @@ export function Header() {
     { href: "/#portfolio", label: "Portfolio" },
     { href: "/cyber-security", label: "Cyber Security" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" }
+    { href: "/book-consultation", label: "Contact" }
   ];
 
   return (
@@ -52,7 +52,7 @@ export function Header() {
                 className="ml-2 hidden md:inline-flex"
                 size="sm"
             >
-              <Link href="/contact">
+              <Link href="/book-consultation">
                 Book a Consultation <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
@@ -86,7 +86,7 @@ export function Header() {
                 </nav>
                 <div className="pt-4 border-t">
                     <Button asChild className="w-full">
-                        <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Book a Consultation</Link>
+                        <Link href="/book-consultation" onClick={() => setMobileMenuOpen(false)}>Book a Consultation</Link>
                     </Button>
                 </div>
             </div>

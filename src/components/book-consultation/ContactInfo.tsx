@@ -1,7 +1,6 @@
 
 import { Mail, Phone, MapPin } from "lucide-react";
-import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
 const contactDetails = [
@@ -24,19 +23,19 @@ const contactDetails = [
     }
 ];
 
-export function ContactHero() {
+export function ContactInfo() {
   return (
-    <section className="bg-secondary/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
-        <div className="text-center">
-            <h1 className="font-headline text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-              Get In Touch
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-              Have a project in mind, a question about our services, or just want to say hello? We'd love to hear from you.
+    <section className="bg-secondary/50 py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Other Ways to Connect
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
+              We're here to help. Reach out to us through any of the channels below.
             </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {contactDetails.map((detail) => (
                 <Card key={detail.title} className="text-center group hover:bg-background transition-colors">
                     <CardContent className="p-6">
@@ -57,5 +56,3 @@ export function ContactHero() {
     </section>
   );
 }
-
-    

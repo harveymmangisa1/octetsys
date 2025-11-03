@@ -1,5 +1,4 @@
-
-import { Calendar, Clock, Video } from "lucide-react";
+import { CheckCircle2, Clock, MessageCircle } from "lucide-react";
 
 export function ConsultationHero() {
   return (
@@ -13,29 +12,22 @@ export function ConsultationHero() {
               Schedule a free, no-obligation consultation with our IT experts to discuss your challenges and discover how Octet Systems can drive your success.
             </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                    <Calendar className="h-7 w-7" />
+         <div className="mt-16 border-t border-border pt-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span className="font-medium">Expert Assessment</span>
                 </div>
-                <h3 className="font-headline text-xl font-semibold text-foreground">Flexible Scheduling</h3>
-                <p className="mt-2 text-muted-foreground">Choose a time that works best for you and your team.</p>
-            </div>
-            <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                    <Clock className="h-7 w-7" />
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-primary" />
+                  <span className="font-medium">Response within 24 hours</span>
                 </div>
-                <h3 className="font-headline text-xl font-semibold text-foreground">30-Minute Sessions</h3>
-                <p className="mt-2 text-muted-foreground">A quick and efficient way to get expert advice.</p>
-            </div>
-            <div className="flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                    <Video className="h-7 w-7" />
+                <div className="flex items-center gap-3">
+                  <MessageCircle className="w-5 h-5 text-primary" />
+                  <span className="font-medium">No-obligation Consultation</span>
                 </div>
-                <h3 className="font-headline text-xl font-semibold text-foreground">Virtual Meeting</h3>
-                <p className="mt-2 text-muted-foreground">All consultations are held online for your convenience.</p>
+              </div>
             </div>
-        </div>
       </div>
     </section>
   );
