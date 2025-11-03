@@ -69,23 +69,55 @@
   "portfolio": [
     {
       "title": "MedVet Ltd",
-      "src": "https://picsum.photos/seed/medvet/600/400",
-      "hint": "veterinary medicine"
+      "src": "https://picsum.photos/seed/medvet/800/600",
+      "hint": "veterinary medicine",
+      "description": "A comprehensive web portal for a leading veterinary supplier, featuring an e-commerce platform and resource library.",
+      "category": "Web Development",
+      "url": "#",
+      "tags": [
+        "Next.js",
+        "Tailwind",
+        "eCommerce"
+      ]
     },
     {
       "title": "DroneLink Malawi",
-      "src": "https://picsum.photos/seed/dronelink/600/400",
-      "hint": "drone landscape"
+      "src": "https://picsum.photos/seed/dronelink/800/600",
+      "hint": "drone landscape",
+      "description": "An interactive mapping and data visualization platform for drone-based agricultural surveying.",
+      "category": "Software Development",
+      "url": "#",
+      "tags": [
+        "React",
+        "Mapbox",
+        "Data Viz"
+      ]
     },
     {
       "title": "Joyful Kids",
-      "src": "https://picsum.photos/seed/joyfulkids/600/400",
-      "hint": "children playing"
+      "src": "https://picsum.photos/seed/joyfulkids/800/600",
+      "hint": "children playing",
+      "description": "A fun and educational mobile app for a non-profit, designed to teach children about local wildlife.",
+      "category": "Mobile App",
+      "url": "#",
+      "tags": [
+        "React Native",
+        "Gamification",
+        "Education"
+      ]
     },
     {
       "title": "DJ Bubblegum",
-      "src": "https://picsum.photos/seed/dj/600/400",
-      "hint": "dj setup"
+      "src": "https://picsum.photos/seed/dj/800/600",
+      "hint": "dj setup",
+      "description": "A vibrant, media-rich portfolio website for an international music artist, featuring tour dates and an integrated music player.",
+      "category": "Web Design",
+      "url": "#",
+      "tags": [
+        "UI/UX",
+        "Animation",
+        "Branding"
+      ]
     }
   ],
   "home": {
