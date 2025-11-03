@@ -5,84 +5,87 @@ import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center text-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-      {/* Background with subtle gradients */}
+    <section className="relative min-h-[90vh] flex items-center bg-white text-slate-900 overflow-hidden">
+      {/* Clean, minimal background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-white" />
+      
+      {/* Subtle grid pattern */}
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          background: `
-            radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)
-          `
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
         }}
       />
       
-      <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-8 backdrop-blur-sm">
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-          </svg>
-          Enterprise Technology Solutions
-        </div>
+      <div className="relative z-10 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto w-full">
+        <div className="max-w-4xl">
+          {/* Minimal badge */}
+          <div className="inline-flex items-center px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full text-xs font-medium tracking-wide mb-12">
+            ENTERPRISE TECHNOLOGY SOLUTIONS
+          </div>
 
-        {/* Main Heading */}
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight max-w-6xl mx-auto">
-          <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Precision Technology
-          </span>
-          <br />
-          <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-            For Modern Enterprise
-          </span>
-        </h1>
+          {/* Left-aligned headings with proper hierarchy */}
+          <h1 className="font-semibold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1] mb-8">
+            <span className="text-slate-900 block">
+              Precision
+            </span>
+            <span className="text-blue-600 block mt-2">
+              Technology
+            </span>
+          </h1>
 
-        {/* Description */}
-        <p className="mt-8 text-lg sm:text-xl md:text-2xl leading-8 text-gray-300 max-w-4xl mx-auto font-light">
-          Octet Systems delivers enterprise-grade technology solutions, from robust cybersecurity 
-          to custom software development, empowering your business to thrive in the digital age.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button 
-            size="lg" 
-            asChild 
-            className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white px-8 py-6 text-lg font-medium rounded-xl transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 border-0"
-          >
-            <Link href="#services" className="flex items-center gap-2">
-              Explore Services 
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </Button>
-          
-          <Button 
-            size="lg" 
-            variant="outline" 
-            asChild 
-            className="border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-6 text-lg font-medium rounded-xl transition-all duration-200 backdrop-blur-sm"
-          >
-            <Link href="#portfolio">View Case Studies</Link>
-          </Button>
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-16 pt-8 border-t border-white/10">
-          <p className="text-sm text-gray-400 uppercase tracking-wider font-medium mb-6">
-            Trusted by Industry Leaders
+          {/* Clean description */}
+          <p className="text-lg sm:text-xl text-slate-600 leading-8 max-w-2xl font-light tracking-tight mb-12">
+            Enterprise-grade technology solutions, from robust cybersecurity 
+            to custom software development, empowering your business to thrive 
+            in the digital age.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-60">
-            {/* Placeholder for client logos - you would replace these with actual client logos */}
-            <div className="h-8 w-32 bg-white/10 rounded-lg backdrop-blur-sm"></div>
-            <div className="h-8 w-32 bg-white/10 rounded-lg backdrop-blur-sm"></div>
-            <div className="h-8 w-32 bg-white/10 rounded-lg backdrop-blur-sm"></div>
-            <div className="h-8 w-32 bg-white/10 rounded-lg backdrop-blur-sm"></div>
+
+          {/* Clean CTA buttons */}
+          <div className="flex flex-col sm:flex-row items-start gap-4 mb-20">
+            <Button 
+              size="lg" 
+              asChild 
+              className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 rounded-lg font-medium transition-colors duration-200 border-0"
+            >
+              <Link href="#services" className="flex items-center gap-3">
+                Explore Services
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            
+            <Button 
+              size="lg" 
+              variant="outline" 
+              asChild 
+              className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 px-8 py-6 rounded-lg font-medium transition-colors duration-200"
+            >
+              <Link href="#portfolio">View Case Studies</Link>
+            </Button>
+          </div>
+
+          {/* Minimal trust indicators */}
+          <div className="border-t border-slate-200 pt-12">
+            <p className="text-sm text-slate-500 uppercase tracking-wider font-medium mb-8">
+              Trusted by Industry Leaders
+            </p>
+            <div className="flex flex-wrap items-center gap-12 opacity-40">
+              {/* Replace with actual client logos */}
+              <div className="h-6 w-24 bg-slate-300 rounded"></div>
+              <div className="h-6 w-24 bg-slate-300 rounded"></div>
+              <div className="h-6 w-24 bg-slate-300 rounded"></div>
+              <div className="h-6 w-24 bg-slate-300 rounded"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent"></div>
+      {/* Optional: Add a subtle product screenshot or abstract shape on the right */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-3/4 opacity-5">
+        <div className="w-full h-full bg-blue-600 rounded-l-3xl"></div>
+      </div>
     </section>
   );
 }
