@@ -1,7 +1,7 @@
-
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { askQuestion, type FaqState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +35,7 @@ function SubmitButton() {
 }
 
 export function TechFaq() {
-  const [state, formAction] = useFormState(askQuestion, initialState);
+  const [state, formAction] = useActionState(askQuestion, initialState);
   const { toast } = useToast();
 
   useEffect(() => {

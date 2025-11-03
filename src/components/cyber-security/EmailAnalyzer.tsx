@@ -1,7 +1,7 @@
-
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { analyzeEmailContent, type EmailAnalysisState } from '@/app/actions';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,7 @@ import { Bot, Sparkles, AlertTriangle, ShieldCheck } from "lucide-react";
 import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '../ui/progress';
+import { Label } from '../ui/label';
 
 const initialState: EmailAnalysisState = {
   isSuspicious: null,
@@ -54,7 +55,7 @@ const getRiskInfo = (score: number) => {
 }
 
 export function EmailAnalyzer() {
-  const [state, formAction] = useFormState(analyzeEmailContent, initialState);
+  const [state, formAction] = useActionState(analyzeEmailContent, initialState);
   const { toast } = useToast();
 
   useEffect(() => {

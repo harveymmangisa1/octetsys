@@ -1,13 +1,13 @@
-
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { submitFeedback, type FeedbackState } from '@/app/actions';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Sparkles, MessageSquarePlus, CheckCircle2 } from "lucide-react";
+import { Bot, MessageSquarePlus } from "lucide-react";
 import { useEffect, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -36,7 +36,7 @@ function SubmitButton() {
 }
 
 export function Feedback() {
-  const [state, formAction] = useFormState(submitFeedback, initialState);
+  const [state, formAction] = useActionState(submitFeedback, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
