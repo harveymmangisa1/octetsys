@@ -2,6 +2,7 @@
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { Hero } from "@/components/home/Hero";
+import { FlyerMakerCta } from "@/components/home/FlyerMakerCta";
 import { LatestReport } from "@/components/home/LatestReport";
 import { CyberSecurityCta } from "@/components/home/CyberSecurityCta";
 import { Services } from "@/components/home/Services";
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <FlyerMakerCta />
         <LatestReport />
         <CyberSecurityCta />
         <Services />
