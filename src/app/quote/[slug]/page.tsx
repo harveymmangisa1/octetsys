@@ -1,17 +1,17 @@
-
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams, notFound, useRouter } from 'next/navigation';
-import { ArrowLeft, Check } from 'lucide-react';
+import { useSearchParams, notFound, useRouter, useParams } from 'next/navigation';
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { Button } from '@/components/ui/button';
 
-export default function QuoteRequestPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function QuoteRequestPage() {
+  const params = useParams();
+  const slug = params.slug as string;
   const searchParams = useSearchParams();
   const router = useRouter();
   const packageName = searchParams.get('package');

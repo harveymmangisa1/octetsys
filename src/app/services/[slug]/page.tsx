@@ -1,4 +1,3 @@
-
 'use client';
 
 import { ArrowLeft, Check, X, ArrowRight } from 'lucide-react';
@@ -6,11 +5,12 @@ import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function ServiceDetailPage() {
+  const params = useParams();
+  const slug = params.slug as string;
   const service = serviceData[slug as keyof typeof serviceData];
 
   if (!service) {
