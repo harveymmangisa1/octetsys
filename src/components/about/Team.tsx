@@ -52,21 +52,20 @@ export function Team() {
               {selectedMember && selectedMember.name === member.name && (
                 <DialogContent className="sm:max-w-[600px] p-0">
                   <DialogHeader className="p-6 pb-0">
-                    <div className="flex items-center gap-6">
-                        <div className="relative h-24 w-24 rounded-full overflow-hidden shadow-md flex-shrink-0">
+                    <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                        <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-full overflow-hidden shadow-md flex-shrink-0">
                             <Image
                                 src={selectedMember.src}
                                 alt={`Headshot of ${selectedMember.name}`}
                                 data-ai-hint={selectedMember.hint}
-                                width={150}
-                                height={150}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                             />
                         </div>
                         <div>
                             <DialogTitle className="text-2xl font-bold text-slate-900">{selectedMember.name}</DialogTitle>
                             <DialogDescription className="text-blue-600 text-lg font-medium">{selectedMember.role}</DialogDescription>
-                            <div className="mt-4 flex gap-4">
+                            <div className="mt-4 flex gap-4 justify-center sm:justify-start">
                                 <Link href={selectedMember.social.twitter} className="text-slate-500 hover:text-slate-900 transition-colors">
                                     <Twitter size={20} />
                                 </Link>
