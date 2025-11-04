@@ -81,7 +81,7 @@ const services = [
     image: placeholderImages.services[3],
   },
   {
-    id: 'development',
+    id: 'web-development',
     title: 'Web & Mobile Development',
     description:
       'Custom web and mobile applications designed to meet your unique business needs.',
@@ -203,14 +203,14 @@ export function Services() {
 
                   <div className="flex flex-wrap gap-3 pt-4">
                     <Link
-                      href="/#consultation"
+                      href={`/services/${service.id}`}
                       className="inline-flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all duration-300 shadow-sm hover:shadow-md group/btn"
                     >
                       <span>Learn More</span>
                       <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Link>
                     <Link
-                      href="/#consultation"
+                      href={`/quote/${service.id}`}
                       className="inline-flex items-center justify-center border-2 border-slate-200 text-slate-900 px-6 py-3 rounded-xl text-sm font-medium hover:border-slate-900 hover:bg-slate-50 transition-all duration-300"
                     >
                       Get Quote
