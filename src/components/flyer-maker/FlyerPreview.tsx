@@ -11,7 +11,7 @@ export function FlyerPreview() {
   const { image, quote, theme } = useFlyerState();
 
   return (
-    <div className="aspect-[16/9] w-full bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
+    <div className="aspect-square w-full bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
       <div id="flyer-canvas" className="w-full h-full flex flex-col">
         {/* Header */}
         <header className="bg-slate-900 text-white p-4 flex justify-between items-center h-[10%]">
@@ -23,8 +23,8 @@ export function FlyerPreview() {
         </header>
 
         {/* Body */}
-        <main className="flex-1 flex h-[80%]">
-          <div className="w-1/2 h-full bg-slate-200 relative">
+        <main className="flex-1 flex flex-col h-[80%]">
+          <div className="w-full h-1/2 bg-slate-200 relative">
             {image.preview ? (
               <Image src={image.preview} alt="Flyer background" layout="fill" objectFit="cover" />
             ) : (
@@ -33,13 +33,13 @@ export function FlyerPreview() {
                 </div>
             )}
           </div>
-          <div className={cn("w-1/2 h-full p-8 flex flex-col justify-center text-white bg-gradient-to-br", theme.gradient)}>
-            <h2 className="font-bold text-3xl leading-tight mb-4">End Gender-Based Violence</h2>
+          <div className={cn("w-full h-1/2 p-6 flex flex-col justify-center text-white bg-gradient-to-br", theme.gradient)}>
+            <h2 className="font-bold text-2xl leading-tight mb-2">End Gender-Based Violence</h2>
             <blockquote className="border-l-4 border-white/50 pl-4">
-              <p className="italic text-lg">&ldquo;{quote.text}&rdquo;</p>
-              {quote.author && <cite className="block mt-2 not-italic font-medium text-sm">— {quote.author}</cite>}
+              <p className="italic text-base">&ldquo;{quote.text}&rdquo;</p>
+              {quote.author && <cite className="block mt-1 not-italic font-medium text-xs">— {quote.author}</cite>}
             </blockquote>
-            <p className="mt-8 font-semibold">Stand Up. Speak Out. Create Change.</p>
+            <p className="mt-4 font-semibold text-sm">Stand Up. Speak Out. Create Change.</p>
           </div>
         </main>
 

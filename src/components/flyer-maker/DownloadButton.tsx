@@ -55,10 +55,10 @@ export function DownloadButton() {
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => downloadFlyer('png', 1.0, 'flyer-1920x1080.png')}>
+            <DropdownMenuItem onClick={() => downloadFlyer('png', 1.0, 'flyer-1080x1080.png')}>
                 PNG (High Quality)
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => downloadFlyer('jpeg', 0.9, 'flyer-1200x630.jpeg')}>
+            <DropdownMenuItem onClick={() => downloadFlyer('jpeg', 0.9, 'flyer-1080x1080.jpeg')}>
                 JPEG (Social Media)
             </DropdownMenuItem>
         </DropdownMenuContent>
