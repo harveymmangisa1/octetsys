@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "AnonymousReport": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AnonymousReport",
+      "type": "object",
+      "description": "Represents an anonymous report submitted through the campaign portal.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the anonymous report."
+        },
+        "campaignId": {
+          "type": "string",
+          "description": "Reference to the Campaign to which the report belongs. (Relationship: Campaign 1:N AnonymousReport)"
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "Date and time when the report was submitted.",
+          "format": "date-time"
+        },
+        "reportContent": {
+          "type": "string",
+          "description": "The content of the anonymous report."
+        }
+      },
+      "required": [
+        "id",
+        "campaignId",
+        "submissionDate",
+        "reportContent"
+      ]
+    },
+    "Campaign": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Campaign",
+      "type": "object",
+      "description": "Represents an awareness campaign.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the campaign."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the campaign."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the campaign."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date of the campaign.",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of the campaign.",
+          "format": "date-time"
+        },
+        "contentUrl": {
+          "type": "string",
+          "description": "URL for the campaign content, like a flyer or a landing page.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "startDate",
+        "endDate",
+        "contentUrl"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/anonymous_reports/{reportId}",
+        "definition": {
+          "entityName": "AnonymousReport",
+          "schema": {
+            "$ref": "#/backend/entities/AnonymousReport"
+          },
+          "description": "Stores anonymous reports. Includes 'campaignId' to easily identify the campaign the report belongs to, 'submissionDate' to show the latest post, and 'reportContent'.",
+          "params": [
+            {
+              "name": "reportId",
+              "description": "Unique identifier for the anonymous report."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/campaigns/{campaignId}",
+        "definition": {
+          "entityName": "Campaign",
+          "schema": {
+            "$ref": "#/backend/entities/Campaign"
+          },
+          "description": "Stores campaign information. Contains fields such as 'title', 'description', 'startDate', 'endDate', and 'contentUrl'.",
+          "params": [
+            {
+              "name": "campaignId",
+              "description": "Unique identifier for the campaign."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure is designed to support Octet Insights' requirements, emphasizing security, scalability, and maintainability. It leverages structural segregation and denormalization to ensure authorization independence and efficient querying.  The structure separates concerns and data with different access control needs, promoting clarity and simplifying security rules. Anonymous reports, campaigns, and other data are stored in distinct collections. For the anonymous reports, which needs to be displayed on the home page, it is placed directly in the collection called `anonymous_reports`, the latest post is displayed based on a timestamp.  This design promotes security by allowing simpler rules and improves performance by reducing the need for complex queries.  It will ensure that all `list` operations can be secured, fulfilling the QAPs."
+  }
+}

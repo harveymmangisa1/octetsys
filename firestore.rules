@@ -1,0 +1,54 @@
+/**
+ * @file Firestore Security Rules
+ * @description This ruleset enforces a public-read, restricted-write model for awareness campaigns and a create-only model for anonymous reports.
+ *
+ * Data Structure:
+ * - /campaigns/{campaignId}: Publicly readable collection of awareness campaigns. Only authenticated users can create, update, or delete campaigns.
+ * - /anonymous_reports/{reportId}: Collection of anonymous reports. Any user can create a report, but listing, getting, updating, or deleting reports is disallowed.
+ *
+ * Key Security Decisions:
+ * - Campaigns are publicly readable to maximize awareness.
+ * - Anonymous reports are create-only to prevent unauthorized access to sensitive information.
+ * - Data validation is minimal during this prototyping phase, focusing on authorization and relational integrity rather than complete schema enforcement.
+ *
+ * Denormalization for Authorization: N/A
+ * Structural Segregation: Separate collections for campaigns and anonymous reports to allow different access control policies.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Allows public read access to campaigns and restricts write access to authenticated users only.
+     * @path /campaigns/{campaignId}
+     * @allow (get, list): Any user can retrieve campaign information.
+     * @allow (create, update, delete): Only authenticated users can create, update, or delete campaigns.
+     * @deny All other operations are denied.
+     * @principle Public read, authenticated write for campaigns.
+     */
+    match /campaigns/{campaignId} {
+      allow get, list: if true;
+      allow create, update, delete: if isSignedIn();
+    }
+
+    /**
+     * @description Allows anyone to create an anonymous report but restricts all other operations.
+     * @path /anonymous_reports/{reportId}
+     * @allow (create): Any user, authenticated or not, can submit a report.
+     * @deny (get, list, update, delete): No one can retrieve, list, update, or delete anonymous reports.
+     * @principle Create-only access for anonymous reports.
+     */
+    match /anonymous_reports/{reportId} {
+      allow create: if true;
+      allow get, list, update, delete: if false;
+    }
+
+    /**
+     * @description Checks if the request is authenticated.
+     * @returns {boolean} True if the request is authenticated, false otherwise.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+  }
+}
