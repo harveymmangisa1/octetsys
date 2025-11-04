@@ -1,6 +1,7 @@
+
 import { 
   Server, Shield, 
-  Wrench, GraduationCap, Code, Camera, BrainCircuit
+  Headset, GraduationCap, Code, FileCode, Camera, BrainCircuit
 } from 'lucide-react';
 
 export const serviceData = {
@@ -318,7 +319,7 @@ export const serviceData = {
     ]
   },
   'support': {
-    icon: Wrench,
+    icon: Headset,
     title: 'System Support',
     description: 'Reliable remote and on-site support',
     color: 'green',

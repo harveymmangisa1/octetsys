@@ -1,12 +1,13 @@
+
 'use client';
 
-import { useState } from 'react';
 import { ArrowLeft, Check, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { notFound } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -21,7 +22,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50">
       <Header />
-      <div className={`bg-gradient-to-br from-${service.color}-500 to-${service.color}-700 text-white`}>
+      <div className={`bg-gradient-to-br from-slate-900 to-slate-800 text-white`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-12">
           <Link
             href="/#services"
@@ -32,8 +33,8 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
           </Link>
           
           <div className="flex items-center gap-4 mb-4">
-            <div className={`w-16 h-16 bg-${service.color}-100 rounded-2xl flex items-center justify-center`}>
-              <Icon className={`w-8 h-8 text-${service.color}-600`} />
+            <div className={`w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center`}>
+              <Icon className={`w-8 h-8 text-white`} />
             </div>
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold">{service.title}</h1>
@@ -91,7 +92,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
                         )}
                       </div>
                       <span className={`text-sm ${
-                        feature.included ? 'text-slate-700' : 'text-slate-400 line-through'
+                        feature.included ? 'text-slate-700' : 'text-slate-500 line-through'
                       }`}>
                         {feature.text}
                       </span>
@@ -99,16 +100,20 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
                   ))}
                 </div>
 
-                <Link
-                  href={`/quote/${serviceId}?package=${pkg.name}`}
+                <Button
+                  asChild
                   className={`w-full py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center ${
                     pkg.popular
                       ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md hover:shadow-lg'
                       : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
                   }`}
                 >
-                  Get Started
-                </Link>
+                  <Link
+                    href={`/quote/${slug}?package=${encodeURIComponent(pkg.name)}`}
+                  >
+                    Get Started
+                  </Link>
+                </Button>
               </div>
             </div>
           ))}
@@ -120,13 +125,14 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             Our team is here to help you choose the perfect solution for your needs. Schedule a free consultation 
             to discuss your requirements and get a custom quote.
           </p>
-          <Link
-            href={`/quote/${serviceId}`}
-            className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-all"
-          >
-            <span>Schedule Free Consultation</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <Button asChild className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-all">
+            <Link
+              href={`/quote/${slug}`}
+            >
+              <span>Schedule Free Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </div>
       <Footer />

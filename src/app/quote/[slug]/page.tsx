@@ -1,8 +1,9 @@
+
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams, notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useSearchParams, notFound, useRouter } from 'next/navigation';
+import { ArrowLeft, Check } from 'lucide-react';
 import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
 import { Header } from '@/components/common/Header';
@@ -12,6 +13,7 @@ import { Button } from '@/components/ui/button';
 export default function QuoteRequestPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const searchParams = useSearchParams();
+  const router = useRouter();
   const packageName = searchParams.get('package');
 
   const service = serviceData[slug as keyof typeof serviceData];
@@ -33,6 +35,12 @@ export default function QuoteRequestPage({ params }: { params: { slug: string } 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log({
+      service: service.title,
+      package: selectedPackage?.name,
+      ...formData
+    });
     setSubmitted(true);
   };
 
@@ -51,12 +59,10 @@ export default function QuoteRequestPage({ params }: { params: { slug: string } 
                     <p className="text-lg text-slate-600 leading-8 mb-8 font-light">
                         Thank you, {formData.name}. We've received your request for the <strong>{service.title}{selectedPackage && ` - ${selectedPackage.name}`}</strong> package. Our team will review your requirements and get back to you at <strong>{formData.email}</strong> within 24 hours.
                     </p>
-                    <Link href="/#services">
-                        <Button variant="outline">
-                            <ArrowLeft className="w-4 h-4 mr-2" />
-                            Back to Services
-                        </Button>
-                    </Link>
+                    <Button onClick={() => router.push('/#services')} variant="outline">
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back to Services
+                    </Button>
                 </div>
             </div>
             <Footer />
@@ -69,13 +75,14 @@ export default function QuoteRequestPage({ params }: { params: { slug: string } 
       <Header />
       <div className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <Link
-            href={`/services/${slug}`}
+          <Button
+            variant="ghost"
+            onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Packages</span>
-          </Link>
+          </Button>
 
           <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
             <div className="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-8">
@@ -130,11 +137,10 @@ export default function QuoteRequestPage({ params }: { params: { slug: string } 
 
                   <div>
                     <label className="block text-sm font-medium text-slate-900 mb-2">
-                      Phone Number *
+                      Phone Number
                     </label>
                     <input
                       type="tel"
-                      required
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
