@@ -42,27 +42,54 @@
     }
   ],
   "about": {
-    "hero": "https://picsum.photos/seed/abouthero/600/400",
+    "hero": {
+      "src": "https://picsum.photos/seed/abouthero/600/400",
+      "hint": "diverse team meeting"
+    },
     "team": [
       {
         "name": "Alex Thompson",
+        "role": "Founder & CEO",
         "src": "https://picsum.photos/seed/team1/400/400",
-        "hint": "professional headshot male"
+        "hint": "professional headshot male",
+        "bio": "Visionary leader with a passion for technology and a drive to help businesses succeed.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
       },
       {
         "name": "Brenda Smith",
+        "role": "Lead Developer",
         "src": "https://picsum.photos/seed/team2/400/400",
-        "hint": "professional headshot female"
+        "hint": "professional headshot female",
+        "bio": "Expert coder and problem-solver, turning complex challenges into elegant software solutions.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
       },
       {
         "name": "Chris Johnson",
+        "role": "Cybersecurity Expert",
         "src": "https://picsum.photos/seed/team3/400/400",
-        "hint": "professional headshot security"
+        "hint": "professional headshot security",
+        "bio": "Dedicated to protecting digital assets and staying ahead of emerging cyber threats.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
       },
       {
         "name": "Diana Garcia",
+        "role": "UI/UX Designer",
         "src": "https://picsum.photos/seed/team4/400/400",
-        "hint": "professional headshot designer"
+        "hint": "professional headshot designer",
+        "bio": "Crafting intuitive and beautiful user experiences that delight and engage.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
       }
     ]
   },

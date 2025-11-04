@@ -22,26 +22,20 @@ const values = [
 
 export function Mission() {
     return (
-        <section className="py-16 sm:py-24 bg-background">
+        <section className="py-24 bg-slate-50 border-y border-slate-200">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {values.map((value) => (
-                        <Card key={value.title} className="text-center border-transparent shadow-lg hover:shadow-primary/20 hover:-translate-y-1 transition-all">
-                            <CardHeader>
-                                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                    <value.icon className="h-7 w-7" />
-                                </div>
-                                <CardTitle className="mt-4 font-headline text-xl">{value.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-muted-foreground">{value.description}</p>
-                            </CardContent>
-                        </Card>
+                        <div key={value.title} className="text-center">
+                            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white">
+                                <value.icon className="h-7 w-7" />
+                            </div>
+                            <h3 className="mt-6 text-xl font-semibold text-slate-900">{value.title}</h3>
+                            <p className="mt-2 text-slate-600 font-light">{value.description}</p>
+                        </div>
                     ))}
                 </div>
             </div>
         </section>
     )
 }
-
-    

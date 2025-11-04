@@ -4,7 +4,7 @@ import { Footer } from "@/components/common/Footer";
 import { AboutHero } from "@/components/about/AboutHero";
 import { Mission } from "@/components/about/Mission";
 import { Team } from "@/components/about/Team";
-import { Cta } from "@/components/cyber-security/Cta";
+import { Cta } from "@/components/home/Cta";
 
 
 export default function AboutPage() {
@@ -21,5 +21,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-    
