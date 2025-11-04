@@ -130,7 +130,7 @@ export function ThreatSubmission() {
     <section id="threat-submission" className="py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Tabs defaultValue="report" className="w-full">
-            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-4 lg:grid-cols-7">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
               <TabsTrigger value="report"><ShieldAlert className="mr-2" /> Report</TabsTrigger>
               <TabsTrigger value="abuse"><IncognitoIcon className="mr-2" /> Anonymous</TabsTrigger>
               <TabsTrigger value="phishing"><Link2 className="mr-2" /> Phishing</TabsTrigger>

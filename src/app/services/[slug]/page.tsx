@@ -54,9 +54,9 @@ export default function ServiceDetailPage() {
           {service.packages.map((pkg, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-3xl border-2 transition-all duration-300 hover:shadow-2xl ${
+              className={`relative bg-white rounded-3xl border-2 transition-all duration-300 hover:shadow-2xl flex flex-col ${
                 pkg.popular 
-                  ? 'border-slate-900 shadow-xl scale-105' 
+                  ? 'border-slate-900 shadow-xl lg:scale-105' 
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
@@ -68,18 +68,19 @@ export default function ServiceDetailPage() {
                 </div>
               )}
 
-              <div className="p-8">
+              <div className="p-8 flex flex-col flex-grow">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">{pkg.name}</h3>
-                  <p className="text-slate-600 text-sm mb-4">{pkg.description}</p>
+                  <p className="text-slate-600 text-sm mb-4 min-h-[40px]">{pkg.description}</p>
                   <div className="flex items-baseline justify-center gap-2">
                     <span className="text-4xl font-bold text-slate-900">${pkg.price}</span>
-                    {pkg.period !== 'one-time' && <span className="text-slate-500">/ {pkg.period.replace('per ','')}</span>}
+                    {pkg.period && pkg.period !== 'one-time' && <span className="text-slate-500">/ {pkg.period.replace('per ','')}</span>}
                   </div>
                    {pkg.period === 'starting at' && <span className="text-xs text-slate-500">for basic setup</span>}
+                   {pkg.period === 'one-time' && <span className="text-xs text-slate-500">one-time payment</span>}
                 </div>
 
-                <div className="space-y-3 mb-8">
+                <div className="space-y-3 mb-8 flex-grow">
                   {pkg.features.map((feature, fIndex) => (
                     <div key={fIndex} className="flex items-start gap-3">
                       <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
@@ -102,7 +103,7 @@ export default function ServiceDetailPage() {
 
                 <Button
                   asChild
-                  className={`w-full py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center ${
+                  className={`w-full py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center mt-auto ${
                     pkg.popular
                       ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md hover:shadow-lg'
                       : 'bg-slate-100 text-slate-900 hover:bg-slate-200'

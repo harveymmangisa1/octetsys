@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-6 lg:px-12 py-20 max-w-7xl">
         
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
           {/* Company Info */}
           <div className="lg:col-span-1 space-y-6">
@@ -53,54 +53,44 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6">
             <h4 className="text-sm font-semibold text-slate-900 tracking-wide uppercase">Services</h4>
             <ul className="space-y-3 text-sm text-slate-600 font-light">
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                Cybersecurity Consulting
+                <Link href="/services/cybersecurity">Cybersecurity Consulting</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                Networks & Infrastructure
+                <Link href="/services/networking">Networks & Infrastructure</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                Software Development
+                <Link href="/services/software">Software Development</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                IT Training & Consultancy
+                <Link href="/services/training">IT Training</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                AI Solutions
+                <Link href="/services/ai-awareness">AI Solutions</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                Systems Support
+                <Link href="/services/support">Systems Support</Link>
               </li>
             </ul>
           </div>
 
           {/* Quick Links */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6">
             <h4 className="text-sm font-semibold text-slate-900 tracking-wide uppercase">Quick Links</h4>
             <ul className="space-y-3 text-sm text-slate-600 font-light">
-              <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/#services">Our Services</Link>
-              </li>
-              <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/#portfolio">Portfolio</Link>
-              </li>
-              <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/about">About Us</Link>
-              </li>
-              <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/cyber-security">Cyber Security</Link>
-              </li>
-              <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/book-consultation">Book Consultation</Link>
-              </li>
+              <li><Link href="/#services" className="hover:text-slate-900 transition-colors duration-200">Our Services</Link></li>
+              <li><Link href="/#portfolio" className="hover:text-slate-900 transition-colors duration-200">Portfolio</Link></li>
+              <li><Link href="/about" className="hover:text-slate-900 transition-colors duration-200">About Us</Link></li>
+              <li><Link href="/cyber-security" className="hover:text-slate-900 transition-colors duration-200">Cyber Security</Link></li>
+              <li><Link href="/book-consultation" className="hover:text-slate-900 transition-colors duration-200">Book Consultation</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6">
             <h4 className="text-sm font-semibold text-slate-900 tracking-wide uppercase">Contact</h4>
             <ul className="space-y-4 text-sm text-slate-600 font-light">
               <li className="flex items-start gap-3">
@@ -120,15 +110,6 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-
-            {/* CTA Button */}
-            <Link 
-              href="/book-consultation"
-              className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all duration-300 mt-6 group"
-            >
-              <span>Get Started</span>
-              <ArrowRight className="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
           </div>
 
         </div>

@@ -33,14 +33,14 @@ export function Services() {
               return (
                 <div key={service.id} className="group bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
                   <div className="p-8">
-                    <div className={`w-14 h-14 bg-${service.color}-100 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
-                        <Icon className={`w-7 h-7 text-${service.color}-600`} />
+                    <div className={`w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                        <Icon className={`w-7 h-7 text-slate-700`} />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">{service.title}</h3>
                     <p className="text-slate-600 leading-relaxed text-sm flex-grow">{service.description}</p>
                   </div>
                   <div className="p-8 pt-0 mt-auto">
-                    <Button asChild variant="ghost" className="p-0 h-auto text-slate-800 font-semibold group-hover:text-slate-900">
+                    <Button asChild variant="link" className="p-0 h-auto text-slate-800 font-semibold group-hover:text-slate-900">
                       <Link href={`/services/${service.id}`}>
                         Learn More <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                       </Link>
