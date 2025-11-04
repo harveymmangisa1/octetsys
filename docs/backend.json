@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "AnonymousReport": {
@@ -73,6 +74,32 @@
         "endDate",
         "contentUrl"
       ]
+    },
+    "AbuseReport": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AbuseReport",
+      "type": "object",
+      "description": "Represents an anonymous abuse report.",
+      "properties": {
+        "abuseType": {
+          "type": "string",
+          "description": "The type of abuse being reported."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the abusive behavior."
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "The timestamp when the report was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "abuseType",
+        "description",
+        "submittedAt"
+      ]
     }
   },
   "auth": {
@@ -82,40 +109,23 @@
     ]
   },
   "firestore": {
-    "structure": [
-      {
-        "path": "/anonymous_reports/{reportId}",
-        "definition": {
-          "entityName": "AnonymousReport",
-          "schema": {
-            "$ref": "#/backend/entities/AnonymousReport"
-          },
-          "description": "Stores anonymous reports. Includes 'campaignId' to easily identify the campaign the report belongs to, 'submissionDate' to show the latest post, and 'reportContent'.",
-          "params": [
-            {
-              "name": "reportId",
-              "description": "Unique identifier for the anonymous report."
-            }
-          ]
-        }
+    "/campaigns/{campaignId}": {
+      "schema": {
+        "$ref": "#/entities/Campaign"
       },
-      {
-        "path": "/campaigns/{campaignId}",
-        "definition": {
-          "entityName": "Campaign",
-          "schema": {
-            "$ref": "#/backend/entities/Campaign"
-          },
-          "description": "Stores campaign information. Contains fields such as 'title', 'description', 'startDate', 'endDate', and 'contentUrl'.",
-          "params": [
-            {
-              "name": "campaignId",
-              "description": "Unique identifier for the campaign."
-            }
-          ]
-        }
-      }
-    ],
-    "reasoning": "This Firestore structure is designed to support Octet Insights' requirements, emphasizing security, scalability, and maintainability. It leverages structural segregation and denormalization to ensure authorization independence and efficient querying.  The structure separates concerns and data with different access control needs, promoting clarity and simplifying security rules. Anonymous reports, campaigns, and other data are stored in distinct collections. For the anonymous reports, which needs to be displayed on the home page, it is placed directly in the collection called `anonymous_reports`, the latest post is displayed based on a timestamp.  This design promotes security by allowing simpler rules and improves performance by reducing the need for complex queries.  It will ensure that all `list` operations can be secured, fulfilling the QAPs."
+      "description": "Stores campaign information."
+    },
+    "/anonymous_reports/{reportId}": {
+      "schema": {
+        "$ref": "#/entities/AnonymousReport"
+      },
+      "description": "Stores anonymous reports submitted through the campaign portal."
+    },
+    "/abuseReports/{reportId}": {
+      "schema": {
+        "$ref": "#/entities/AbuseReport"
+      },
+      "description": "Stores anonymous abuse reports submitted from the cybersecurity page."
+    }
   }
 }

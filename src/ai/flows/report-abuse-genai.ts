@@ -1,7 +1,7 @@
 
 'use server';
 /**
- * @fileOverview A Genkit flow to handle anonymous abuse reports.
+ * @fileOverview A Genkit flow to handle anonymous abuse reports and save them to Firestore.
  *
  * - reportAbuse - A function that processes an anonymous abuse report.
  * - ReportAbuseInput - The input type for the reportAbuse function.
@@ -10,6 +10,8 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { initializeFirebase } from '@/firebase';
 
 const ReportAbuseInputSchema = z.object({
   abuseType: z.string().describe('The type of abuse being reported (e.g., Harassment, Hate Speech).'),
@@ -27,6 +29,20 @@ export type ReportAbuseOutput = z.infer<typeof ReportAbuseOutputSchema>;
 export async function reportAbuse(input: ReportAbuseInput): Promise<ReportAbuseOutput> {
   return reportAbuseFlow(input);
 }
+
+const saveReportToFirestore = async (report: ReportAbuseInput) => {
+    try {
+        const { firestore } = initializeFirebase();
+        const reportsCollection = collection(firestore, 'abuseReports');
+        await addDoc(reportsCollection, {
+            ...report,
+            submittedAt: serverTimestamp()
+        });
+    } catch (error) {
+        console.error("Error saving abuse report to Firestore:", error);
+        // We don't want to block the user response if Firestore fails
+    }
+};
 
 const prompt = ai.definePrompt({
   name: 'reportAbusePrompt',
@@ -48,7 +64,9 @@ const reportAbuseFlow = ai.defineFlow(
     outputSchema: ReportAbuseOutputSchema,
   },
   async (input) => {
-    // In a real application, you would log this report to a secure database.
+    // Save the report to Firestore in the background, don't wait for it
+    saveReportToFirestore(input);
+
     const {output} = await prompt(input);
     return output!;
   }

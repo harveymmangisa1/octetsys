@@ -4,7 +4,7 @@
 import { techFaq, type TechFaqInput } from '@/ai/flows/tech-faq-genai';
 import { assessLink as assessLinkFlow, type LinkAssessmentInput } from '@/ai/flows/link-assessment-genai';
 import { reportIncident as reportIncidentFlow, type ReportIncidentInput } from '@/ai/flows/report-incident-genai';
-import { reportAbuse as reportAbuseFlow, type ReportAbuseInput } from '@/ai/flows/report-abuse-genai';
+import { reportAbuse as reportAbuseFlow, type ReportAbuseInput, type ReportAbuseOutput } from '@/ai/flows/report-abuse-genai';
 import { analyzeEmail as analyzeEmailFlow, type EmailAnalysisInput, type EmailAnalysisOutput } from '@/ai/flows/email-analyzer-genai';
 import { submitFeedback as submitFeedbackFlow, type SubmitFeedbackInput } from '@/ai/flows/submit-feedback-genai';
 import { submitContactForm as submitContactFormFlow, type ContactFormInput } from '@/ai/flows/contact-form-genai';
@@ -147,7 +147,7 @@ export async function submitAbuseReport(
     }
     
     try {
-        const result = await reportAbuseFlow(validatedFields.data);
+        const result: ReportAbuseOutput = await reportAbuseFlow(validatedFields.data);
         return { ...result, error: null };
     } catch (e) {
         console.error(e);

@@ -1,3 +1,4 @@
+
 /**
  * @file Firestore Security Rules
  * @description This ruleset enforces a public-read, restricted-write model for awareness campaigns and a create-only model for anonymous reports.
@@ -5,14 +6,6 @@
  * Data Structure:
  * - /campaigns/{campaignId}: Publicly readable collection of awareness campaigns. Only authenticated users can create, update, or delete campaigns.
  * - /anonymous_reports/{reportId}: Collection of anonymous reports. Any user can create a report, but listing, getting, updating, or deleting reports is disallowed.
- *
- * Key Security Decisions:
- * - Campaigns are publicly readable to maximize awareness.
- * - Anonymous reports are create-only to prevent unauthorized access to sensitive information.
- * - Data validation is minimal during this prototyping phase, focusing on authorization and relational integrity rather than complete schema enforcement.
- *
- * Denormalization for Authorization: N/A
- * Structural Segregation: Separate collections for campaigns and anonymous reports to allow different access control policies.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -41,6 +34,12 @@ service cloud.firestore {
     match /anonymous_reports/{reportId} {
       allow create: if true;
       allow get, list, update, delete: if false;
+    }
+
+    match /abuseReports/{reportId} {
+      allow create: if true;
+      allow get, list: if true;
+      allow update, delete: if false;
     }
 
     /**
