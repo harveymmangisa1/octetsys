@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -26,23 +27,26 @@ export function Header() {
     { href: "/#services", label: "Services" },
     { href: "/#portfolio", label: "Portfolio" },
     { href: "/cyber-security", label: "Cyber Security" },
+    { href: "/flyer-maker", label: "Activism" },
     { href: "/about", label: "About" },
     { href: "/book-consultation", label: "Contact" }
   ];
 
   const isActiveLink = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href.replace('/#', '/'));
+    if (href.includes('#')) {
+        return false;
+    }
+    return pathname.startsWith(href);
   };
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${
       scrolled 
         ? 'bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm' 
-        : 'bg-white/70 backdrop-blur-sm border-b border-slate-200/50'
+        : 'bg-transparent border-b border-transparent'
     }`}>
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link 
             href="/" 
@@ -58,14 +62,14 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1 bg-white/70 shadow-sm ring-1 ring-slate-200/80 p-2 rounded-2xl backdrop-blur-md">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActiveLink(link.href)
-                    ? 'text-slate-900 bg-slate-100'
+                    ? 'text-slate-900 bg-slate-100 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -78,7 +82,7 @@ export function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <Button 
               asChild 
-              className="bg-slate-900 hover:bg-slate-800 text-white px-6 rounded-xl transition-all duration-200 group/btn shadow-sm hover:shadow-md"
+              className="bg-slate-900 hover:bg-slate-800 text-white px-6 rounded-xl transition-all duration-200 group/btn shadow-md hover:shadow-lg"
               size="sm"
             >
               <Link href="/book-consultation" className="flex items-center">
@@ -91,7 +95,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors duration-200"
+            className="lg:hidden p-2 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm ring-1 ring-slate-200/80"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6 text-slate-700" />
@@ -103,8 +107,8 @@ export function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-lg animate-in slide-in-from-top-5 duration-300">
-            <div className="container mx-auto px-6 sm:px-8 py-6">
+          <div className="lg:hidden absolute top-[calc(100%_+_0.5rem)] left-0 right-0 mx-4 animate-in slide-in-from-top-5 duration-300">
+            <div className="bg-white/95 backdrop-blur-lg border border-slate-200 rounded-2xl shadow-xl p-4">
               <nav className="grid gap-1">
                 {navLinks.map((link) => (
                   <Link
@@ -123,7 +127,7 @@ export function Header() {
                 ))}
               </nav>
               
-              <div className="mt-6 pt-6 border-t border-slate-200">
+              <div className="mt-4 pt-4 border-t border-slate-200">
                 <Button 
                   asChild 
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl transition-all duration-200 shadow-sm"
