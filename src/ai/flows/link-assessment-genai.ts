@@ -24,50 +24,61 @@ const LinkAssessmentOutputSchema = z.object({
 export type LinkAssessmentOutput = z.infer<typeof LinkAssessmentOutputSchema>;
 
 
-const checkPhishTank = ai.defineTool(
+const checkVirusTotal = ai.defineTool(
     {
-        name: 'checkPhishTank',
-        description: 'Checks a URL against the PhishTank database of known phishing sites.',
+        name: 'checkVirusTotal',
+        description: 'Checks a URL against the VirusTotal database of known malicious sites.',
         inputSchema: z.object({ url: z.string().url() }),
         outputSchema: z.object({
-            isKnownPhishing: z.boolean(),
-            verified: z.boolean(),
-            phish_detail_url: z.string().url().optional(),
+            isKnownMalicious: z.boolean(),
+            positives: z.number(),
+            total: z.number(),
+            scan_date: z.string().optional(),
         }),
     },
     async ({ url }) => {
-        if (!process.env.PHISHTANK_API_KEY) {
-            console.log("PhishTank API key not configured. Skipping check.");
-            return { isKnownPhishing: false, verified: false };
+        const apiKey = process.env.VIRUSTOTAL_API_KEY;
+        if (!apiKey) {
+            console.log("VirusTotal API key not configured. Skipping check.");
+            return { isKnownMalicious: false, positives: 0, total: 0 };
         }
 
-        const apiUrl = 'https://checkurl.phishtank.com/checkurl/';
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'User-Agent': 'genkit-phishtank-tool/1.0',
-            },
-            body: new URLSearchParams({
-                url: url,
-                format: 'json',
-                app_key: process.env.PHISHTANK_API_KEY,
-            }),
-        });
+        const apiUrl = `https://www.virustotal.com/api/v3/urls/${Buffer.from(url).toString('base64')}`;
+        
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'x-apikey': apiKey,
+                    'User-Agent': 'genkit-virustotal-tool/1.0',
+                },
+            });
 
-        if (!response.ok) {
-            console.error(`PhishTank API request failed with status: ${response.status}`);
-            return { isKnownPhishing: false, verified: false };
+            if (!response.ok) {
+                 if (response.status === 404) {
+                    // URL not found in VirusTotal DB, which is not an error for our use case.
+                    return { isKnownMalicious: false, positives: 0, total: 0 };
+                 }
+                console.error(`VirusTotal API request failed with status: ${response.status}`);
+                return { isKnownMalicious: false, positives: 0, total: 0 };
+            }
+
+            const data: any = await response.json();
+            const stats = data.data.attributes.last_analysis_stats;
+            const positives = stats.malicious + stats.suspicious;
+            const total = stats.harmless + stats.malicious + stats.suspicious + stats.undetected;
+
+            return {
+                isKnownMalicious: positives > 0,
+                positives: positives,
+                total: total,
+                scan_date: data.data.attributes.last_analysis_date ? new Date(data.data.attributes.last_analysis_date * 1000).toDateString() : undefined,
+            };
+
+        } catch (error) {
+            console.error('Error calling VirusTotal API:', error);
+            return { isKnownMalicious: false, positives: 0, total: 0 };
         }
-
-        const data: any = await response.json();
-
-        const results = data.results;
-        return {
-            isKnownPhishing: results.in_database,
-            verified: results.verified,
-            phish_detail_url: results.phish_detail_url,
-        };
     }
 );
 
@@ -80,16 +91,16 @@ const prompt = ai.definePrompt({
   name: 'linkAssessmentPrompt',
   input: {schema: LinkAssessmentInputSchema},
   output: {schema: LinkAssessmentOutputSchema},
-  tools: [checkPhishTank],
+  tools: [checkVirusTotal],
   prompt: `You are a cybersecurity expert specializing in identifying phishing attempts. Your primary task is to analyze the given URL.
 
 URL: {{{url}}}
 
-First, use the checkPhishTank tool to see if the URL is a known phishing link.
-- If the tool confirms it is a verified phishing link, your response must be that it IS a phishing attempt. State that it was verified by PhishTank.
-- If the tool indicates it's in the database but not verified, treat it as highly suspicious.
+First, use the checkVirusTotal tool to see if the URL is a known malicious link.
+- If the tool reports that the link is known malicious (positives > 0), your response must be that it IS a phishing attempt. State that it was identified by VirusTotal as malicious.
+- If the tool reports 0 positive detections, proceed with your own analysis.
 
-If the URL is not in the PhishTank database, then perform your own analysis. Consider the domain name, subdomains, URL path, and any query parameters. Look for signs of impersonation, suspicious TLDs, and common phishing patterns.
+If the URL is not flagged by VirusTotal, then perform your own analysis. Consider the domain name, subdomains, URL path, and any query parameters. Look for signs of impersonation, suspicious TLDs, and common phishing patterns.
 
 Based on all available information (tool output and your own analysis), provide a final boolean response for 'isPhishing' and a concise, user-friendly explanation for your assessment. If it is phishing, briefly state the most suspicious element. If it seems safe, briefly state why.`,
 });
