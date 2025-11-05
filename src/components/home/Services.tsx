@@ -2,12 +2,20 @@
 'use client';
 import { serviceData } from '@/lib/service-data';
 import Link from 'next/link';
-import { ArrowRight, Code, Server, GraduationCap, Camera, BrainCircuit, Headset } from 'lucide-react';
+import { ArrowRight, Code, Server, GraduationCap, Camera, BrainCircuit, Headset, Shield } from 'lucide-react';
 import { Button } from '../ui/button';
 
 export function Services() {
   // A curated list of general services for the homepage
   const generalServices = [
+    {
+      id: "cybersecurity",
+      icon: Shield,
+      title: "Cybersecurity Services",
+      description: "Comprehensive protection from modern threats with our advanced cybersecurity solutions and expert consulting.",
+      href: "/cyber-security#services",
+      linkText: "Learn More",
+    },
     {
       id: "networking",
       icon: Server,
@@ -38,12 +46,6 @@ export function Services() {
       title: "CCTV & Biometrics",
       description: "Advanced physical security solutions, including high-definition surveillance and biometric access control systems."
     },
-    {
-      id: "ai-awareness",
-      icon: BrainCircuit,
-      title: "AI Solutions",
-      description: "Leverage the power of AI with custom solutions and awareness training to drive innovation and efficiency."
-    }
   ];
 
   return (
@@ -78,8 +80,8 @@ export function Services() {
                 </div>
                 <div className="p-8 pt-0 mt-auto">
                    <Button asChild variant="link" className="p-0 h-auto text-slate-800 font-semibold group-hover:text-slate-900">
-                        <Link href={`/book-consultation`}>
-                          Request a Quote <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                        <Link href={service.href || '/book-consultation'}>
+                          {service.linkText || 'Request a Quote'} <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                         </Link>
                       </Button>
                 </div>
