@@ -7,6 +7,7 @@ import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { notFound, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export default function ServiceDetailPage() {
   const params = useParams();
@@ -32,19 +33,37 @@ export default function ServiceDetailPage() {
             <span>Back to Services</span>
           </Link>
           
-          <div className="flex items-center gap-4 mb-4">
-            <div className={`w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center`}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+            <div className={`w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0`}>
               <Icon className={`w-8 h-8 text-white`} />
             </div>
             <div>
-              <h1 className="text-4xl lg:text-5xl font-bold">{service.title}</h1>
-              <p className="text-xl text-white/80 mt-2">{service.description}</p>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">{service.title}</h1>
+              <p className="text-lg sm:text-xl text-white/80 mt-2">{service.description}</p>
             </div>
           </div>
         </div>
       </div>
 
+      {service.image && (
+        <div className="relative w-full h-64 sm:h-96">
+          <Image
+            src={service.image}
+            alt={service.title}
+            layout="fill"
+            objectFit="cover"
+            className="absolute inset-0"
+          />
+        </div>
+      )}
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16">
+        {service.content && (
+          <div className="prose prose-lg max-w-none mb-16 text-slate-700">
+            <div dangerouslySetInnerHTML={{ __html: service.content }} />
+          </div>
+        )}
+
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">Choose Your Package</h2>
           <p className="text-lg text-slate-600">Select the plan that fits your needs and budget</p>

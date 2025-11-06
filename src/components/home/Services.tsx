@@ -1,6 +1,6 @@
 
 'use client';
-import { serviceData } from '@/lib/service-data';
+import { serviceData } from '@/lib/service-data.tsx';
 import Link from 'next/link';
 import { ArrowRight, Code, Server, GraduationCap, Camera, BrainCircuit, Headset, Shield } from 'lucide-react';
 import { Button } from '../ui/button';
