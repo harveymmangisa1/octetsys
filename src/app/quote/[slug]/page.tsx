@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSearchParams, notFound, useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
-import { serviceData } from '@/lib/service-data.ts';
+import { serviceData } from '@/lib/service-data.tsx';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { Button } from '@/components/ui/button';

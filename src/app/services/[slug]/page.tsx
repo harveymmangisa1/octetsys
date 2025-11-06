@@ -2,7 +2,7 @@
 
 import { ArrowLeft, Check, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { serviceData } from '@/lib/service-data';
+import { serviceData } from '@/lib/service-data.tsx';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { notFound, useParams } from 'next/navigation';
