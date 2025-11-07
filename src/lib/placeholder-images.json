@@ -100,7 +100,7 @@
       "hint": "veterinary medicine",
       "description": "A comprehensive web portal for a leading veterinary supplier, featuring an e-commerce platform and resource library.",
       "category": "Web Development",
-      "url": "#",
+      "url": "https://medvetltd.com",
       "tags": [
         "Next.js",
         "Tailwind",
@@ -113,7 +113,7 @@
       "hint": "drone landscape",
       "description": "An interactive mapping and data visualization platform for drone-based agricultural surveying.",
       "category": "Software Development",
-      "url": "#",
+      "url": "https://dronelinkmw.com",
       "tags": [
         "React",
         "Mapbox",
@@ -126,7 +126,7 @@
       "hint": "children playing",
       "description": "A fun and educational mobile app for a non-profit, designed to teach children about local wildlife.",
       "category": "Mobile App",
-      "url": "#",
+      "url": "https://joyfulkidsmw.org",
       "tags": [
         "React Native",
         "Gamification",
@@ -139,7 +139,7 @@
       "hint": "dj setup",
       "description": "A vibrant, media-rich portfolio website for an international music artist, featuring tour dates and an integrated music player.",
       "category": "Web Design",
-      "url": "#",
+      "url": "/cyber-security",
       "tags": [
         "UI/UX",
         "Animation",
