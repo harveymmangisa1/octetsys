@@ -68,53 +68,14 @@ export function Portfolio() {
           {filteredProjects.map((project, index) => (
             <div
               key={project.title}
-              className="group bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+              className="group bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
             >
-              {/* Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-                <Image
-                  src={project.src}
-                  alt={project.title}
-                  data-ai-hint={project.hint}
-                  width={800}
-                  height={600}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 flex items-center justify-center gap-3">
-                    <Button
-                      onClick={() => setPreviewProject(project)}
-                      className="bg-white text-slate-900 px-4 py-2 rounded-xl font-medium hover:bg-slate-100 transition-all transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 delay-75 flex items-center gap-2"
-                    >
-                      <Eye className="w-4 h-4" />
-                      <span>Preview</span>
-                    </Button>
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-slate-900 text-white px-4 py-2 rounded-xl font-medium hover:bg-slate-800 transition-all transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 delay-100 flex items-center gap-2"
-                    >
-                      <span>Visit</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Category badge */}
-                <div className="absolute top-4 left-4">
-                  <Badge variant="default" className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-900 shadow-sm">
+              <div className="p-8 space-y-4 flex-grow">
+                <Badge variant="default" className="bg-slate-100/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-900 shadow-sm">
                     {project.category}
-                  </Badge>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8 space-y-4">
+                </Badge>
                 {/* Title */}
-                <h3 className="text-2xl font-semibold text-slate-900 tracking-tight">
+                <h3 className="text-2xl font-semibold text-slate-900 tracking-tight pt-2">
                   {project.title}
                 </h3>
 
@@ -129,27 +90,28 @@ export function Portfolio() {
                     <Badge key={i} variant="secondary">{tag}</Badge>
                   ))}
                 </div>
-
-                {/* Footer Links - Visible on mobile */}
-                <div className="flex gap-3 pt-4 md:hidden">
-                  <Button
-                    onClick={() => setPreviewProject(project)}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>Preview</span>
-                  </Button>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
-                  >
-                    <span>Visit Site</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
+              </div>
+              {/* Footer Links */}
+              <div className="p-8 pt-0">
+                  <div className="flex gap-3 pt-4 border-t border-slate-100">
+                    <Button
+                        onClick={() => setPreviewProject(project)}
+                        variant="outline"
+                        className="flex-1"
+                    >
+                        <Eye className="w-4 h-4" />
+                        <span>Preview</span>
+                    </Button>
+                    <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                    >
+                        <span>Visit Site</span>
+                        <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
               </div>
             </div>
           ))}
