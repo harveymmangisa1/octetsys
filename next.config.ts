@@ -1,13 +1,14 @@
-
 import type {NextConfig} from 'next';
+
+const enforceStrict = process.env.ENFORCE_STRICT_BUILD === 'true';
 
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: !enforceStrict,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: !enforceStrict,
   },
   images: {
     remotePatterns: [

@@ -28,8 +28,8 @@ export function ThemeSelector() {
                 >
                     <div
                         className={cn(
-                            "relative w-full h-24 rounded-lg border-2 transition-all",
-                            isSelected ? 'border-slate-900' : 'border-transparent hover:border-slate-400'
+                            "relative w-full h-24 rounded-xl ring-1 transition-all",
+                            isSelected ? 'ring-slate-900 shadow-lg scale-[1.01]' : 'ring-slate-200 hover:ring-slate-400'
                         )}
                         style={{ background: t.preview }}
                     >

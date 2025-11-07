@@ -10,8 +10,8 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { initializeFirebase } from '@/firebase';
+// import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+// import { initializeFirebase } from '@/firebase';
 
 const ReportAbuseInputSchema = z.object({
   abuseType: z.string().describe('The type of abuse being reported (e.g., Harassment, Hate Speech).'),

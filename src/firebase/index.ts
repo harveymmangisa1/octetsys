@@ -1,5 +1,7 @@
 'use client';
 
+// Firebase disabled currently
+/*
 import { firebaseConfig } from '@/firebase/config';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
@@ -16,11 +18,17 @@ export function initializeFirebase() {
     try {
       // Attempt to initialize via Firebase App Hosting environment variables
       firebaseApp = initializeApp();
-    } catch (e) {
-      // Only warn in production because it's normal to use the firebaseConfig to initialize
-      // during development
-      if (process.env.NODE_ENV === "production") {
-        console.warn('Automatic initialization failed. Falling back to firebase config object.', e);
+      if (process.env.NODE_ENV !== 'production') {
+        // Helpful log to know which init path succeeded in dev
+        console.debug('[Firebase] Initialized via App Hosting env vars');
+      }
+    } catch (e: any) {
+      const msg = typeof e?.message === 'string' ? e.message : String(e);
+      const expectedEnvError = msg.includes('missing FirebaseOptions') || msg.includes('No Firebase App') || msg.includes('Firebase: No Firebase App');
+      if (process.env.NODE_ENV === 'production' && !expectedEnvError) {
+        console.error('[Firebase] Unexpected initialization error; falling back to manual config.', e);
+      } else if (process.env.NODE_ENV !== 'production') {
+        console.debug('[Firebase] Env init failed; falling back to config:', msg);
       }
       firebaseApp = initializeApp(firebaseConfig);
     }
@@ -39,7 +47,9 @@ export function getSdks(firebaseApp: FirebaseApp) {
     firestore: getFirestore(firebaseApp)
   };
 }
-
+*/
+// Export stubs to avoid import errors
+export const initializeFirebase = () => ({ firebaseApp: null as any, auth: null as any, firestore: null as any });
 export * from './provider';
 export * from './client-provider';
 export * from './firestore/use-collection';

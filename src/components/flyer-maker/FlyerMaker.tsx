@@ -12,13 +12,13 @@ export function FlyerMaker() {
     const { step } = useFlyerState();
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <InfoBanner />
                 
-                {/* Clean Minimal Header */}
+                {/* Header */}
                 <div className="text-center mb-10 mt-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 tracking-tight">
                         Social Media Flyer Creator
                     </h1>
                     <p className="text-base text-slate-600 max-w-2xl mx-auto">
@@ -30,7 +30,7 @@ export function FlyerMaker() {
                     {/* Preview - Left side */}
                     <div className="xl:col-span-5">
                         <div className="sticky top-8">
-                            <div className="bg-white rounded-lg p-6 shadow-sm border border-slate-200">
+                            <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white/70 backdrop-blur-[2px] shadow-sm">
                                 <FlyerPreview />
                             </div>
                         </div>
@@ -38,11 +38,11 @@ export function FlyerMaker() {
 
                     {/* Steps - Right side */}
                     <div className="xl:col-span-7 space-y-6">
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-slate-200">
+                        <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white shadow-sm">
                             <ProgressSteps />
                         </div>
                         
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-slate-200">
+                        <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white shadow-sm">
                             {step === 1 && <UploadSection />}
                             {step === 2 && <QuoteSelector />}
                             {step === 3 && <ThemeSelector />}

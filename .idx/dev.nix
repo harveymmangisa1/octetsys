@@ -7,6 +7,7 @@
   packages = [
     pkgs.nodejs_20
     pkgs.zulu
+    pkgs.postgresql
   ];
   # Sets environment variables in the workspace
   env = {};
@@ -25,6 +26,7 @@
     ];
     workspace = {
       onCreate = {
+        disableipv6 = "sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1";
         default.openFiles = [
           "src/app/page.tsx"
         ];

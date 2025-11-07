@@ -49,12 +49,12 @@ export function QuoteSelector() {
             <RadioGroup
               value={quote.selectedIndex?.toString() ?? '0'}
               onValueChange={handlePredefinedSelect}
-              className="space-y-2"
+              className="space-y-3"
             >
               {GBV_QUOTES.map((q, index) => (
                 <Label
                   key={index}
-                  className="flex items-start gap-4 p-4 rounded-lg border border-slate-200 has-[:checked]:bg-slate-100 has-[:checked]:border-slate-400 transition-colors"
+                  className="flex items-start gap-4 p-4 rounded-xl ring-1 ring-slate-200 has-[:checked]:bg-slate-100 has-[:checked]:ring-slate-400 transition-all hover:bg-slate-50"
                 >
                   <RadioGroupItem value={index.toString()} id={`q-${index}`} />
                   <div className="grid gap-1.5">

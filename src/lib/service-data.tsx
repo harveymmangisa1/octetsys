@@ -38,6 +38,17 @@ export interface IService {
   subtitle?: string;
   features?: IFeature[];
   metrics?: IMetric[];
+  // New optional fields to power detail pages
+  category?: string;
+  highlights?: string[];
+  overview?: string;
+  benefits?: string[];
+  methodology?: string[];
+  deliverables?: string[];
+  outcomes?: string[];
+  complianceAlignment?: string[];
+  pricing?: { tier: string; summary: string; startingAt?: string }[];
+  faqs?: { q: string; a: string }[];
 }
 
 export interface IServiceData {
@@ -50,6 +61,46 @@ export const serviceData: IServiceData = {
         title: 'SOC Services',
         description: '24/7 security monitoring, threat intelligence, and incident response to protect your organization around the clock.',
         image: '/placeholder-images/soc-services.jpg',
+        category: 'Core Security',
+        highlights: [
+          '24/7 monitoring and response',
+          'MITRE ATT&CK-informed playbooks',
+          'Executive-ready reporting & SLAs'
+        ],
+        overview: 'Our SOC delivers continuous detection and response with human-led investigation, automation, and intelligence fusion. We integrate with your SIEM/XDR and tools to provide triage, containment and improvement cycles.',
+        benefits: [
+          'Reduced MTTD/MTTR with 24/7 triage and response',
+          'Threat hunting and incident investigation included',
+          'Coverage across endpoints, network and cloud',
+          'Board-ready weekly and monthly reports'
+        ],
+        methodology: [
+          'Onboarding & Use-Case Mapping',
+          'Integrations & Data Onboarding (SIEM/XDR/CSPM)',
+          'Detection Engineering & Runbooks',
+          '24/7 Monitoring, Triage, Response, Review'
+        ],
+        deliverables: [
+          'Runbooks & Detection Catalog',
+          'Incident Reports and Postmortems',
+          'Threat Intel Briefings',
+          'Weekly/Monthly KPI & Trends'
+        ],
+        outcomes: [
+          'Measured reduction in dwell time',
+          'Higher detection fidelity and lower false positives',
+          'Audit-ready evidence trails'
+        ],
+        complianceAlignment: ['NIST CSF, ISO 27001', 'CIS Controls v8', 'MITRE ATT&CK'],
+        pricing: [
+          { tier: 'Foundation', summary: 'Core monitoring & alerting', startingAt: 'From $X,XXX' },
+          { tier: 'Managed', summary: 'Co-managed SOC with SLAs', startingAt: 'From $X,XXX/mo' },
+          { tier: 'Enterprise', summary: 'Custom 24/7 SOC-as-a-Service', startingAt: 'Custom' }
+        ],
+        faqs: [
+          { q: 'Do you integrate with our current SIEM/XDR?', a: 'Yes. We integrate with common stacks and can operate bring-your-own-license models.' },
+          { q: 'What response SLAs do you offer?', a: 'Typical triage within 15 minutes and containment guidance within agreed windows.' }
+        ],
         content: `
 ### Proactive Defense with 24/7 SOC Services
 
@@ -75,6 +126,19 @@ Our SOC team acts as an extension of your own, providing peace of mind and robus
         title: 'Managed Detection & Response',
         description: 'Advanced EDR, NDR, and XDR solutions with automated response playbooks and forensic investigation.',
         image: '/placeholder-images/mdr.jpg',
+        category: 'Core Security',
+        highlights: ['24/7 eyes-on-glass', 'ATT&CK-informed hunting', '15-min triage SLA'],
+        overview: 'MDR that pairs expert analysts with automation to detect, triage, and contain threats quickly across endpoints, network, and cloud.',
+        benefits: ['Reduced MTTD/MTTR', 'Lower false positives', 'Continuous threat hunting'],
+        methodology: ['Deploy & Integrate EDR/XDR', 'Tune detections', 'Hunt, Triage, Respond', 'Report & Improve'],
+        deliverables: ['Runbooks', 'Incident Reports', 'Hunting Findings', 'Weekly Trends'],
+        outcomes: ['Containment within SLA', 'Improved detection coverage'],
+        complianceAlignment: ['NIST CSF', 'MITRE ATT&CK'],
+        pricing: [
+          { tier: 'Foundation', summary: 'Core MDR coverage', startingAt: 'From $X,XXX' },
+          { tier: 'Managed', summary: '24/7 MDR with SLAs', startingAt: 'From $X,XXX/mo' }
+        ],
+        faqs: [{ q: 'Do you replace our SOC?', a: 'We can augment or operate co-managed with your SOC.' }],
         content: `
 ### Proactive Threat Hunting with Managed Detection & Response (MDR)
 
@@ -96,6 +160,16 @@ With MDR, you gain a dedicated team of security experts working tirelessly to pr
         title: 'Identity & Access Management',
         description: 'Secure your organization with PAM, MFA, SSO, and Zero Trust architecture implementation.',
         image: '/placeholder-images/iam.jpg',
+        category: 'Core Security',
+        highlights: ['Zero Trust-first', 'Lifecycle automation', 'Least privilege by design'],
+        overview: 'Identity-first security with modern IAM patterns: SSO/MFA, PAM, IGA and JML automation across cloud and on-prem.',
+        benefits: ['Reduced credential abuse risk', 'Faster onboarding/offboarding', 'Audit-ready access trails'],
+        methodology: ['Discovery & Role Modeling', 'SSO/MFA rollout', 'IGA automation', 'PAM hardening'],
+        deliverables: ['Access control blueprints', 'Role/Policy catalog', 'Automation playbooks'],
+        outcomes: ['Reduced standing privilege', 'Higher access accuracy'],
+        complianceAlignment: ['NIST 800-63', 'ISO 27001 A.9'],
+        pricing: [{ tier: 'Foundation', summary: 'SSO/MFA baseline' }, { tier: 'Managed', summary: 'IGA & PAM with automation' }],
+        faqs: [{ q: 'Can you integrate with HR systems?', a: 'Yes, to drive lifecycle automation and JML flows.' }],
         content: `
 ### Robust Security with Identity & Access Management (IAM)
 
@@ -116,12 +190,32 @@ By establishing a strong IAM framework, we help you enhance security, improve op
         icon: Cloud,
         title: 'Cloud Security Services',
         description: 'Secure your cloud environments (AWS, Azure, GCP) with CSPM, workload protection, and DevSecOps integration.',
+        category: 'Advanced Security',
+        highlights: ['Secure landing zones', 'Policy-as-code', 'CSPM & workload hardening'],
+        overview: 'Cloud security engineered with guardrails: landing zones, identity-first controls, CSPM baselines, and DevSecOps integrations.',
+        benefits: ['Fewer misconfigurations', 'Faster compliant deployments', 'Shift-left security'],
+        methodology: ['Assess & Baseline', 'Landing Zone Design', 'Guardrails & Policies', 'CSPM & CWPP rollout'],
+        deliverables: ['Landing zone templates', 'Policy libraries', 'Hardened baselines'],
+        outcomes: ['Reduced critical findings', 'Automated remediation pipelines'],
+        complianceAlignment: ['CIS Benchmarks', 'NIST CSF'],
+        pricing: [{ tier: 'Foundation', summary: 'Cloud baseline hardening' }, { tier: 'Managed', summary: 'Guardrails & CSPM ops' }],
+        faqs: [{ q: 'Do you support multi-cloud?', a: 'Yes, AWS/Azure/GCP with common guardrail patterns.' }],
         packages: []
     },
     'application-security': {
         icon: FileCode,
         title: 'Application Security',
         description: 'Protect your applications with secure code review, WAF, API security, and mobile app testing.',
+        category: 'Advanced Security',
+        highlights: ['SDLC security', 'SAST/DAST/IAST', 'Threat modeling & SBOM'],
+        overview: 'Developer-first AppSec: tooling, training, and governance embedded into your SDLC and CI/CD.',
+        benefits: ['Fewer vulns in prod', 'Faster developer feedback', 'Supply-chain assurance'],
+        methodology: ['Threat modeling', 'Toolchain integration', 'Policy gates in CI/CD', 'Secure coding enablement'],
+        deliverables: ['Threat models', 'Findings backlog', 'AppSec playbooks'],
+        outcomes: ['Vuln reduction rate', 'Lead-time-to-remediation improvements'],
+        complianceAlignment: ['OWASP ASVS/SAMM'],
+        pricing: [{ tier: 'Foundation', summary: 'SAST/DAST baseline' }, { tier: 'Managed', summary: 'AppSec program with training' }],
+        faqs: [{ q: 'Do you offer secure SDLC training?', a: 'Yes, for developers and architects.' }],
         packages: []
     },
     'threat-intelligence': {
@@ -188,12 +282,32 @@ By establishing a strong IAM framework, we help you enhance security, improve op
         icon: Briefcase,
         title: 'Virtual CISO (vCISO)',
         description: 'Fractional CISO services for security strategy, board reporting, and program maturity.',
+        category: 'Consulting & Managed',
+        highlights: ['Board-ready reporting', 'Strategy & roadmap', 'Budget & vendor governance'],
+        overview: 'Executive-grade cyber leadership on-demand. Strategy, roadmap, governance, and measurable KPIs.',
+        benefits: ['Aligned cyber & business goals', 'Audit readiness', 'Right-sized budgets'],
+        methodology: ['Baseline maturity & risks', 'Roadmap & budget planning', 'Quarterly OKRs', 'Board reporting'],
+        deliverables: ['Cyber strategy', 'Board pack', 'KPI dashboard'],
+        outcomes: ['Improved audit pass rates', 'Program maturity uplift'],
+        complianceAlignment: ['NIST CSF', 'ISO 27001'],
+        pricing: [{ tier: 'Part-time', summary: 'Monthly fractional CISO' }, { tier: 'On-demand', summary: 'Project-based leadership' }],
+        faqs: [{ q: 'Can you present to our board?', a: 'Yes. We tailor materials for executives and regulators.' }],
         packages: []
     },
     'pen-testing': {
         icon: TestTube,
         title: 'Penetration Testing & Red Teaming',
         description: 'Simulate real-world attacks to identify and remediate vulnerabilities in your systems.',
+        category: 'Consulting & Managed',
+        highlights: ['Real-world attack simulation', 'ATT&CK mapping', 'Actionable remediation'],
+        overview: 'Pen testing and adversary emulation to validate controls and reduce exploitable risk.',
+        benefits: ['Prioritized findings', 'Improved defenses', 'Executive & technical reporting'],
+        methodology: ['Scoping', 'Recon & Exploitation', 'Post-exploitation', 'Reporting & Retest'],
+        deliverables: ['Exec summary', 'Detailed report', 'Retest results'],
+        outcomes: ['Reduced critical vulns', 'Improved detection & response'],
+        complianceAlignment: ['PCI DSS', 'SOC2'],
+        pricing: [{ tier: 'Web/API', summary: 'App/Api penetration test' }, { tier: 'Internal/External', summary: 'Network pen test' }],
+        faqs: [{ q: 'Do you provide retesting?', a: 'Yes, included in most engagements.' }],
         packages: []
     },
     'security-transformation': {

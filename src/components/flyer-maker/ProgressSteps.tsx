@@ -37,15 +37,15 @@ export function ProgressSteps() {
                 disabled={!isClickable}
                 onClick={() => dispatch({ type: 'SET_STEP', payload: step })}
                 className={cn(
-                  "flex items-center gap-3 p-2 rounded-lg transition-colors duration-200",
-                  isClickable ? "cursor-pointer hover:bg-slate-100" : "cursor-not-allowed"
+                  "flex items-center gap-3 p-2 rounded-xl transition-all duration-200",
+                  isClickable ? "cursor-pointer hover:bg-slate-50" : "cursor-not-allowed"
                 )}
               >
                 <div
                   className={cn(
                     'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
-                    isActive ? 'bg-slate-800 text-white scale-110 shadow-lg' :
-                    isCompleted ? 'bg-green-500 text-white' : 'bg-slate-200 text-slate-500'
+                    isActive ? 'bg-slate-900 text-white scale-110 shadow-lg' :
+                    isCompleted ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'
                   )}
                 >
                   <Icon className="w-5 h-5" />

@@ -39,9 +39,9 @@ export function UploadSection() {
                 <CardDescription>This photo will be featured on your flyer.</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="relative group aspect-video rounded-lg overflow-hidden">
-                    <Image src={image.preview} alt="Uploaded preview" layout="fill" objectFit="cover" />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="relative group aspect-[4/5] rounded-xl overflow-hidden ring-1 ring-slate-200">
+                    <Image src={image.preview} alt="Uploaded preview" fill className="object-cover" />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                          <Button variant="destructive" onClick={() => dispatch({ type: 'CLEAR_IMAGE'})}>
                             <X className="mr-2 h-4 w-4"/> Remove
                         </Button>
@@ -61,13 +61,13 @@ export function UploadSection() {
         <CardContent>
             <div
                 {...getRootProps()}
-                className={`p-10 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${
-                isDragActive ? 'border-slate-800 bg-slate-100' : 'border-slate-300 bg-slate-50'
+                className={`p-10 rounded-2xl text-center cursor-pointer transition-all border-2 border-dashed ${
+                isDragActive ? 'border-slate-900 bg-slate-100' : 'border-slate-300 bg-slate-50 hover:bg-slate-100'
                 }`}
             >
                 <input {...getInputProps()} />
                 <div className="flex flex-col items-center gap-4 text-slate-600">
-                    <UploadCloud className="w-12 h-12" />
+                    <UploadCloud className="w-12 h-12 text-slate-700" />
                     {isDragActive ? (
                         <p className="font-semibold text-lg">Drop the photo here ...</p>
                     ) : (

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useMemo } from 'react';
 import { useFlyerState } from '@/lib/hooks/useFlyerState';
 import { Logo } from '../common/Logo';
 import { Badge } from '../ui/badge';
@@ -7,10 +8,18 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 export function FlyerPreview() {
-  const { image, quote, theme } = useFlyerState();
+  const { image, quote, theme, isGenerating } = useFlyerState();
+  const [showSafeArea, setShowSafeArea] = useState(false);
+  const [textPos, setTextPos] = useState<'bottom' | 'center' | 'top'>('bottom');
+
+  // Simple contrast heuristic based on presence of image and gradient
+  const contrastHint = useMemo(() => {
+    if (!image.preview) return 'good';
+    return 'ok';
+  }, [image.preview]);
 
   return (
-    <div className="aspect-[4/5] w-full max-w-md mx-auto bg-white rounded-lg shadow-xl overflow-hidden relative">
+    <div className="aspect-[4/5] w-full max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden relative">
       <div id="flyer-canvas" className="w-full h-full flex flex-col relative">
         {/* Minimal Corporate Header */}
         <header className="bg-white text-slate-900 px-6 py-4 flex justify-between items-center h-[10%] relative border-b border-slate-100">
@@ -30,6 +39,17 @@ export function FlyerPreview() {
 
         {/* Main Content Area - Image with gradient overlay */}
         <main className="flex-1 relative h-[80%]">
+          {/* Safe area toggle - hidden during generation */}
+          {!isGenerating && (
+            <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
+              <button onClick={() => setShowSafeArea(v => !v)} className="text-[10px] bg-white/80 text-slate-700 px-2 py-1 rounded border border-slate-200">
+                {showSafeArea ? 'Hide' : 'Show'} Safe Area
+              </button>
+              {contrastHint !== 'good' && (
+                <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-1 rounded border border-amber-200">Low contrast</span>
+              )}
+            </div>
+          )}
           {/* Full-size Image Container */}
           <div className="w-full h-full relative">
             {image.preview ? (
@@ -61,9 +81,28 @@ export function FlyerPreview() {
             )}
           </div>
 
-          {/* Text Content Overlay - Bottom section only */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-white pointer-events-none">
+          {/* Safe area overlay */}
+          {showSafeArea && !isGenerating && (
+            <div className="absolute inset-6 border-2 border-white/50 rounded-xl pointer-events-none" />
+          )}
+
+          {/* Text Content Overlay - position adjustable */}
+          <div className={cn(
+            'absolute left-0 right-0 p-6 text-white pointer-events-none',
+            textPos === 'bottom' && 'bottom-0',
+            textPos === 'center' && 'top-1/2 -translate-y-1/2',
+            textPos === 'top' && 'top-0'
+          )}>
             <div className="space-y-4 pointer-events-auto">
+              {/* Controls - hidden during generation */}
+              {!isGenerating && (
+                <div className="flex gap-2 text-[10px]">
+                  <button onClick={() => setTextPos('top')} className={cn('px-2 py-1 rounded border', textPos==='top' ? 'bg-white/90 text-slate-800' : 'bg-white/40 text-white border-white/60')}>Top</button>
+                  <button onClick={() => setTextPos('center')} className={cn('px-2 py-1 rounded border', textPos==='center' ? 'bg-white/90 text-slate-800' : 'bg-white/40 text-white border-white/60')}>Center</button>
+                  <button onClick={() => setTextPos('bottom')} className={cn('px-2 py-1 rounded border', textPos==='bottom' ? 'bg-white/90 text-slate-800' : 'bg-white/40 text-white border-white/60')}>Bottom</button>
+                </div>
+              )}
+
               {/* Main Call to Action */}
               <h2 className="font-bold text-2xl leading-tight tracking-tight">
                 End Gender-Based Violence

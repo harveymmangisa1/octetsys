@@ -57,22 +57,22 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-slate-900 tracking-wide uppercase">Services</h4>
             <ul className="space-y-3 text-sm text-slate-600 font-light">
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/cybersecurity">Cybersecurity Consulting</Link>
+                <Link href="/services/soc-services">Cybersecurity Consulting</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/networking">Networks & Infrastructure</Link>
+                <Link href="/services/security-architecture">Networks & Infrastructure</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/software">Software Development</Link>
+                <Link href="/services/application-security">Software Security</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/training">IT Training</Link>
+                <Link href="/services/security-awareness-training">Security Training</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/ai-awareness">AI Solutions</Link>
+                <Link href="/services/ai-security">AI Security</Link>
               </li>
               <li className="hover:text-slate-900 transition-colors duration-200 cursor-pointer">
-                <Link href="/services/support">Systems Support</Link>
+                <Link href="/services/managed-security-services">Managed Security Services</Link>
               </li>
             </ul>
           </div>

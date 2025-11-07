@@ -3,7 +3,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/common/ThemeProvider';
-import { FirebaseClientProvider } from '@/firebase';
+// import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
   title: 'Octet Systems',
@@ -28,10 +28,9 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-        >
-          <FirebaseClientProvider>
-            {children}
-          </FirebaseClientProvider>
+> 
+          {/* Firebase disabled for now */}
+          {children}
           <Toaster />
         </ThemeProvider>
       </body>

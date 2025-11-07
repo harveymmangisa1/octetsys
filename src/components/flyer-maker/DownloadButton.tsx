@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function DownloadButton() {
+export function DownloadButton({ format = 'png', variant = 'primary' }: { format?: 'png' | 'jpg'; variant?: 'primary' | 'secondary' }) {
   const dispatch = useFlyerDispatch();
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -51,15 +51,21 @@ export function DownloadButton() {
                 ) : (
                     <Download className="mr-2 h-4 w-4" />
                 )}
-                {isGenerating ? 'Generating...' : 'Download Flyer'}
+                {isGenerating ? 'Generating...' : 'Download PNG (1080x1080)'}
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
             <DropdownMenuItem onClick={() => downloadFlyer('png', 1.0, 'flyer-1080x1080.png')}>
-                PNG (High Quality)
+                PNG (1080x1080)
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => downloadFlyer('jpeg', 0.9, 'flyer-1080x1080.jpeg')}>
-                JPEG (Social Media)
+                JPEG (1080x1080)
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => downloadFlyer('png', 1.0, 'flyer-1080x1920.png')}>
+                PNG (Story 1080x1920)
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => downloadFlyer('jpeg', 0.9, 'flyer-1080x1920.jpeg')}>
+                JPEG (Story 1080x1920)
             </DropdownMenuItem>
         </DropdownMenuContent>
     </DropdownMenu>
