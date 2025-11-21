@@ -39,7 +39,7 @@ export function BwenziFAB() {
     setIsOpen(true);
   };
 
-  const handleDismissPopup = (e) => {
+  const handleDismissPopup = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowPopup(false);
   };

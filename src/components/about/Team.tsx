@@ -2,12 +2,26 @@
 
 import { useState } from 'react';
 import Image from "next/image";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Twitter, Mail, Phone, MapPin, Calendar, Award } from "lucide-react";
 import Link from "next/link";
 import placeholderImages from "@/lib/placeholder-images.json";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 type TeamMember = typeof placeholderImages.about.team[0];
+
+// Helper function to get skills based on role
+function getSkillsForRole(role: string): string[] {
+  const skillsMap: Record<string, string[]> = {
+    'Founder & CEO': ['Leadership', 'Strategy', 'Business Development', 'Innovation', 'Team Building'],
+    'Lead Developer': ['Full-Stack Development', 'System Architecture', 'Code Review', 'Mentoring', 'Agile'],
+    'Cybersecurity Expert': ['Security Audits', 'Risk Assessment', 'Compliance', 'Incident Response', 'Penetration Testing'],
+    'UI/UX Designer': ['User Research', 'Prototyping', 'Visual Design', 'Interaction Design', 'Design Systems']
+  };
+  
+  return skillsMap[role] || ['Problem Solving', 'Communication', 'Teamwork', 'Innovation', 'Project Management'];
+}
 
 export function Team() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
@@ -28,59 +42,148 @@ export function Team() {
           {placeholderImages.about.team.map((member) => (
             <Dialog key={member.name} onOpenChange={(isOpen) => !isOpen && setSelectedMember(null)}>
               <DialogTrigger asChild>
-                <div 
-                  className="group text-center cursor-pointer"
-                  onClick={() => setSelectedMember(member)}
-                >
-                  <div className="relative h-64 w-64 mx-auto rounded-2xl overflow-hidden shadow-lg transform transition-transform duration-500 group-hover:scale-105">
-                    <Image
-                      src={member.src}
-                      alt={`Headshot of ${member.name}`}
-                      data-ai-hint={member.hint}
-                      width={400}
-                      height={400}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
-                  </div>
-                  <div className="mt-6">
-                    <h3 className="text-xl font-semibold text-slate-900">{member.name}</h3>
-                    <p className="text-blue-600 font-medium">{member.role}</p>
-                  </div>
-                </div>
+                 <div 
+                   className="group text-center cursor-pointer transform transition-all duration-300 hover:-translate-y-2"
+                   onClick={() => setSelectedMember(member)}
+                 >
+                   <div className="relative h-64 w-64 mx-auto rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                     <Image
+                       src={member.src}
+                       alt={`Headshot of ${member.name}`}
+                       data-ai-hint={member.hint}
+                       width={400}
+                       height={400}
+                       className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                     <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                       <p className="text-white text-sm font-medium">View Profile</p>
+                     </div>
+                   </div>
+                   <div className="mt-6 space-y-2">
+                     <h3 className="text-xl font-semibold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">{member.name}</h3>
+                     <p className="text-blue-600 font-medium">{member.role}</p>
+                   </div>
+                 </div>
               </DialogTrigger>
               {selectedMember && selectedMember.name === member.name && (
-                <DialogContent className="sm:max-w-[600px] p-0">
-                  <DialogHeader className="p-6 pb-0">
-                    <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-                        <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-full overflow-hidden shadow-md flex-shrink-0">
+                <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto p-0">
+                  <div className="relative">
+                    {/* Background gradient header */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-10"></div>
+                    
+                    <DialogHeader className="relative p-6 sm:p-8 pb-0">
+                      <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                        {/* Profile image with enhanced styling */}
+                        <div className="relative group">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+                          <div className="relative h-32 w-32 sm:h-40 sm:w-40 rounded-full overflow-hidden shadow-2xl ring-4 ring-white/80">
                             <Image
-                                src={selectedMember.src}
-                                alt={`Headshot of ${selectedMember.name}`}
-                                data-ai-hint={selectedMember.hint}
-                                fill
-                                className="object-cover"
+                              src={selectedMember.src}
+                              alt={`Headshot of ${selectedMember.name}`}
+                              data-ai-hint={selectedMember.hint}
+                              fill
+                              className="object-cover transform transition-transform duration-300 group-hover:scale-105"
                             />
+                          </div>
                         </div>
-                        <div>
-                            <DialogTitle className="text-2xl font-bold text-slate-900">{selectedMember.name}</DialogTitle>
-                            <DialogDescription className="text-blue-600 text-lg font-medium">{selectedMember.role}</DialogDescription>
-                            <div className="mt-4 flex gap-4 justify-center sm:justify-start">
-                                <Link href={selectedMember.social.twitter} className="text-slate-500 hover:text-slate-900 transition-colors">
-                                    <Twitter size={20} />
-                                </Link>
-                                <Link href={selectedMember.social.linkedin} className="text-slate-500 hover:text-slate-900 transition-colors">
-                                    <Linkedin size={20} />
-                                </Link>
-                            </div>
+                        
+                        {/* Name and role section */}
+                        <div className="flex-1 space-y-3">
+                          <DialogTitle className="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+                            {selectedMember.name}
+                          </DialogTitle>
+                          <DialogDescription className="text-lg sm:text-xl font-medium text-blue-600">
+                            {selectedMember.role}
+                          </DialogDescription>
+                          
+                          {/* Social links with improved styling */}
+                          <div className="flex gap-3 justify-center sm:justify-start">
+                            <Link 
+                              href={selectedMember.social.twitter} 
+                              className="group relative p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 border border-slate-200"
+                              aria-label={`${selectedMember.name}'s Twitter`}
+                            >
+                              <Twitter size={18} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
+                            </Link>
+                            <Link 
+                              href={selectedMember.social.linkedin} 
+                              className="group relative p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 border border-slate-200"
+                              aria-label={`${selectedMember.name}'s LinkedIn`}
+                            >
+                              <Linkedin size={18} className="text-slate-600 group-hover:text-blue-700 transition-colors" />
+                            </Link>
+                          </div>
                         </div>
+                      </div>
+                    </DialogHeader>
+                    
+                    {/* Content section */}
+                    <div className="relative p-6 sm:p-8 pt-4 space-y-6">
+                      {/* Bio section */}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px bg-gradient-to-r from-blue-600 to-purple-600 flex-1"></div>
+                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">About</span>
+                          <div className="h-px bg-gradient-to-r from-purple-600 to-pink-600 flex-1"></div>
+                        </div>
+                        <p className="text-slate-700 leading-relaxed text-base font-light">
+                          {selectedMember.bio}
+                        </p>
+                      </div>
+                      
+                      <Separator className="opacity-30" />
+                      
+                      {/* Expertise section */}
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2">
+                          <Award className="w-5 h-5 text-blue-600" />
+                          <h3 className="text-lg font-semibold text-slate-900">Expertise & Impact</h3>
+                        </div>
+                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+                          <p className="text-slate-700 leading-relaxed text-base font-light">
+                            With extensive experience in the tech industry, {selectedMember.name.split(' ')[0]} has been instrumental in shaping our success. Their expertise in {selectedMember.role.toLowerCase()} ensures that our clients receive innovative and reliable solutions that drive real business value.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Skills/Tags section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-slate-900">Core Competencies</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {getSkillsForRole(selectedMember.role).map((skill, index) => (
+                            <Badge 
+                              key={index} 
+                              variant="secondary" 
+                              className="px-3 py-1 text-sm font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Contact CTA */}
+                      <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl p-6 border border-slate-200">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="font-semibold text-slate-900 mb-1">Get in Touch</h4>
+                            <p className="text-sm text-slate-600">Interested in collaborating? Let's connect!</p>
+                          </div>
+                          <div className="flex gap-2">
+                            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium shadow-md hover:shadow-lg">
+                              <Mail className="w-4 h-4 inline mr-2" />
+                              Email
+                            </button>
+                            <button className="px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium border border-slate-300">
+                              <Calendar className="w-4 h-4 inline mr-2" />
+                              Schedule
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </DialogHeader>
-                  <div className="p-6 pt-4 text-slate-600 font-light">
-                    <p>{selectedMember.bio}</p>
-                    <p className="mt-4">
-                      With over a decade of experience in the tech industry, {selectedMember.name.split(' ')[0]} has been instrumental in shaping Octet Systems' success. Their expertise in {member.role.toLowerCase()} ensures that our clients receive innovative and reliable solutions.
-                    </p>
                   </div>
                 </DialogContent>
               )}

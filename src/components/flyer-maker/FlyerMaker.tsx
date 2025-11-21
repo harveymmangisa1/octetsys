@@ -26,7 +26,7 @@ export function FlyerMaker() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 mt-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mt-8">
                     {/* Preview - Left side */}
                     <div className="xl:col-span-5">
                         <div className="sticky top-8">
@@ -95,12 +95,8 @@ function DownloadSection() {
             {/* Download buttons */}
             <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <DownloadButton format="png" variant="primary">
-                        Download PNG
-                    </DownloadButton>
-                    <DownloadButton format="jpg" variant="secondary">
-                        Download JPG
-                    </DownloadButton>
+                    <DownloadButton format="png" variant="primary" />
+                    <DownloadButton format="jpg" variant="secondary" />
                 </div>
                 
                 {/* Posting tips */}

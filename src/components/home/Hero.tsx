@@ -29,7 +29,7 @@ export function Hero() {
           </div>
 
           {/* Left-aligned headings with proper hierarchy */}
-          <h1 className="font-semibold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.1] mb-8">
+          <h1 className="font-semibold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.1] mb-6 sm:mb-8">
             <span className="text-slate-900 block">
               Precision
             </span>

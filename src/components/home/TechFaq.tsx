@@ -14,10 +14,10 @@ const initialState: FaqState = {
 };
 
 function SubmitButton() {
-    const { pending } = useActionState(askQuestion, initialState);
+    const [state, formAction, isPending] = useActionState(askQuestion, initialState);
   return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? (
+    <Button type="submit" disabled={isPending} className="w-full">
+      {isPending ? (
         <>
           <Bot className="mr-2 h-4 w-4 animate-spin" />
           Thinking...

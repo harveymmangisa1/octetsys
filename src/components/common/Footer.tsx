@@ -5,10 +5,10 @@ import { Logo } from "./Logo"
 export function Footer() {
   return (
     <footer className="bg-white border-t border-slate-200 mt-24">
-      <div className="container mx-auto px-6 lg:px-12 py-20 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 max-w-7xl">
         
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-16">
           
           {/* Company Info */}
           <div className="lg:col-span-1 space-y-6">
@@ -95,7 +95,7 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-slate-600 font-light">
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                <span>Area 48, Bingu National Stadium, Corporate Box E14, Lilongwe</span>
+                <span className="text-xs sm:text-sm leading-relaxed">Area 48, Bingu National Stadium, Corporate Box E14, Lilongwe</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-slate-400 flex-shrink-0" />

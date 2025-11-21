@@ -45,7 +45,7 @@ export function Header() {
         ? 'bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm' 
         : 'bg-transparent border-b border-transparent'
     }`}>
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link 
@@ -62,7 +62,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-white/70 shadow-sm ring-1 ring-slate-200/80 p-2 rounded-2xl backdrop-blur-md">
+          <nav className="hidden md:flex items-center space-x-1 bg-white/70 shadow-sm ring-1 ring-slate-200/80 p-2 rounded-2xl backdrop-blur-md">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -79,7 +79,7 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <Button 
               asChild 
               className="bg-slate-900 hover:bg-slate-800 text-white px-6 rounded-xl transition-all duration-200 group/btn shadow-md hover:shadow-lg"
@@ -95,7 +95,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm ring-1 ring-slate-200/80"
+            className="md:hidden p-2 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm ring-1 ring-slate-200/80"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6 text-slate-700" />
@@ -107,7 +107,7 @@ export function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-[calc(100%_+_0.5rem)] left-0 right-0 mx-4 animate-in slide-in-from-top-5 duration-300">
+          <div className="md:hidden absolute top-[calc(100%_+_0.5rem)] left-0 right-0 mx-4 sm:mx-6 animate-in slide-in-from-top-5 duration-300">
             <div className="bg-white/95 backdrop-blur-lg border border-slate-200 rounded-2xl shadow-xl p-4">
               <nav className="grid gap-1">
                 {navLinks.map((link) => (

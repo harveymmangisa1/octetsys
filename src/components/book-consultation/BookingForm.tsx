@@ -90,8 +90,8 @@ export function BookingForm() {
 
   return (
     <section id="booking-form" className="py-24 bg-white">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
           {/* Header Section */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-6">

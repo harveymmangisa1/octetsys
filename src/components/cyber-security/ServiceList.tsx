@@ -1,5 +1,5 @@
 'use client';
-import { serviceData } from '@/lib/service-data.tsx';
+import { serviceData } from '@/lib/service-data';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -43,7 +43,7 @@ export function ServiceList() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {serviceIds.map(id => services.find(s => s.id === id)).filter(Boolean).map((service) => {
+              {serviceIds.map(id => services.find(s => s.id === id)).filter((service): service is NonNullable<typeof service> => Boolean(service)).map((service) => {
                 const Icon = service.icon;
                 return (
                   <Link 

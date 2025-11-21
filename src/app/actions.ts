@@ -267,7 +267,12 @@ export async function chatWithBwenzi(
         if(urlMatch) {
             const input: LinkAssessmentInput = { url: urlMatch[0] };
             const result = await assessLinkFlow(input);
-            bwenziResponse = formatLinkAssessmentResult(result);
+            const linkState: LinkAssessmentState = {
+                isPhishing: result.isPhishing,
+                explanation: result.explanation,
+                error: null
+            };
+            bwenziResponse = formatLinkAssessmentResult(linkState);
         } else {
             bwenziResponse = "That doesn't look like a valid URL. Please provide a full URL starting with http or https.";
         }

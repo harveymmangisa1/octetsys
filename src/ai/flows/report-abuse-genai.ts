@@ -32,12 +32,14 @@ export async function reportAbuse(input: ReportAbuseInput): Promise<ReportAbuseO
 
 const saveReportToFirestore = async (report: ReportAbuseInput) => {
     try {
-        const { firestore } = initializeFirebase();
-        const reportsCollection = collection(firestore, 'abuseReports');
-        await addDoc(reportsCollection, {
-            ...report,
-            submittedAt: serverTimestamp()
-        });
+        // Firebase integration disabled until configuration is complete
+        // const { firestore } = initializeFirebase();
+        // const reportsCollection = collection(firestore, 'abuseReports');
+        // await addDoc(reportsCollection, {
+        //     ...report,
+        //     submittedAt: serverTimestamp()
+        // });
+        console.log('Report saved locally:', report);
     } catch (error) {
         console.error("Error saving abuse report to Firestore:", error);
         // We don't want to block the user response if Firestore fails

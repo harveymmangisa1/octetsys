@@ -31,22 +31,30 @@ export function BwenziChatbot({ onClose }: BwenziChatbotProps) {
       try {
         const response = await chatWithBwenzi(trimmedMessage);
         if (response.error) {
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: `Error: ${response.error}`, sender: 'bwenzi' },
-          ]);
+          const errorMessage: { text: string; sender: 'bwenzi' } = {
+            text: `Error: ${response.error}`,
+            sender: 'bwenzi'
+          };
+          setMessages((prevMessages) => [...prevMessages, errorMessage]);
         } else if (response.response) {
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: response.response, sender: 'bwenzi' },
-          ]);
+          const responseMessage: { text: string; sender: 'bwenzi' } = {
+            text: response.response,
+            sender: 'bwenzi'
+          };
+          setMessages((prevMessages) => [...prevMessages, responseMessage]);
+        } else {
+          const fallbackMessage: { text: string; sender: 'bwenzi' } = {
+            text: 'I apologize, but I could not process your request. Please try again.',
+            sender: 'bwenzi'
+          };
+          setMessages((prevMessages) => [...prevMessages, fallbackMessage]);
         }
       } catch (error) {
         console.error(error);
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: 'My apologies, I seem to be having trouble connecting. Please try again in a moment.', sender: 'bwenzi' },
-        ]);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: 'My apologies, I seem to be having trouble connecting. Please try again in a moment.', sender: 'bwenzi' as const },
+          ]);
       } finally {
         setIsThinking(false);
       }

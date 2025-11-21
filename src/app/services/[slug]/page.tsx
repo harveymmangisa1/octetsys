@@ -5,8 +5,9 @@ import { serviceData } from '@/lib/service-data';
 import { cn } from '@/lib/utils';
 import { ArrowRight, CheckCircle2, Shield, Clock, Target, FileText, Layers, LineChart, BadgeCheck, Award, ShieldCheck, Globe } from 'lucide-react';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const service = (serviceData as any)[params.slug];
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const service = (serviceData as any)[slug];
   if (!service) return { title: 'Service Not Found' };
   return {
     title: `${service.title} | Octet Systems Cybersecurity`,
@@ -78,8 +79,9 @@ function Section({ id, title, children, className }: { id: string; title: string
   );
 }
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = (serviceData as any)[params.slug];
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = (serviceData as any)[slug];
   if (!service) return notFound();
 
   const S = {
