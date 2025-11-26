@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -54,7 +53,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             <div className="flex items-center justify-center w-10 h-10 bg-slate-900 rounded-xl group-hover:bg-slate-800 transition-colors duration-200">
-              <Logo className="h-6 w-6 text-white" />
+              <Logo className="h-6 w-6" />
             </div>
             <span className="font-semibold text-slate-900 text-lg tracking-tight">
               Octet Systems

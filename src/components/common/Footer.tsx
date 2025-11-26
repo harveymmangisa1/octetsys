@@ -14,7 +14,7 @@ export function Footer() {
           <div className="lg:col-span-1 space-y-6">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-10 h-10 bg-slate-900 rounded-xl">
-                <Logo className="h-6 w-6 text-white" />
+                <Logo className="h-6 w-6" />
               </div>
               <span className="text-lg font-semibold text-slate-900 tracking-tight">Octet Systems</span>
             </div>

@@ -25,7 +25,7 @@ export function FlyerPreview() {
         <header className="bg-white text-slate-900 px-6 py-4 flex justify-between items-center h-[10%] relative border-b border-slate-100">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 flex items-center justify-center">
-              <Logo className="h-8 w-8 text-slate-900" />
+              <Logo className="h-8 w-8" />
             </div>
             <div>
               <span className="font-semibold text-base block leading-tight tracking-tight">Octet Systems</span>
