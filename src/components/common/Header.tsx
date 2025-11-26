@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronRight } from 'lucide-react';
-import { Logo } from './Logo';
+import Logo from './Logo';
 import { Button } from '../ui/button';
 
 export function Header() {

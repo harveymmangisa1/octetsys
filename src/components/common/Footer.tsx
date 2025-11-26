@@ -1,6 +1,6 @@
 import { Twitter, Linkedin, Facebook, Mail, Phone, MapPin, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { Logo } from "./Logo"
+import Logo from "./Logo"
 
 export function Footer() {
   return (

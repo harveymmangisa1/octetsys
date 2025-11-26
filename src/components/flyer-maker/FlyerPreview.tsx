@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useFlyerState } from '@/lib/hooks/useFlyerState';
-import { Logo } from '../common/Logo';
+import Logo from '../common/Logo';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';

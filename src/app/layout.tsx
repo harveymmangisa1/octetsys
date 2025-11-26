@@ -8,6 +8,9 @@ import { ThemeProvider } from '@/components/common/ThemeProvider';
 export const metadata: Metadata = {
   title: 'Octet Systems',
   description: 'Innovation, Reliability, and Education-First IT Services',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
