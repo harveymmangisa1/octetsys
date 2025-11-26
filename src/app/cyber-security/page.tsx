@@ -6,6 +6,7 @@ import { Cta } from "@/components/cyber-security/Cta";
 import { ThreatSubmission } from "@/components/cyber-security/ThreatSubmission";
 import { ServiceList } from "@/components/cyber-security/ServiceList";
 import { ContactProcess } from "@/components/cyber-security/ContactProcess";
+import { CyberViolenceReportCTA } from "@/components/cyber-violence/CyberViolenceReportCTA";
 
 export default function CyberSecurityPage() {
   return (
@@ -15,6 +16,9 @@ export default function CyberSecurityPage() {
         <CyberSecurityHero />
         <ServiceList />
         <ContactProcess />
+        <div className="container mx-auto px-4 py-12">
+          <CyberViolenceReportCTA />
+        </div>
         <ThreatSubmission />
         <Cta />
       </main>

@@ -1,7 +1,5 @@
 'use client';
 
-// Firebase disabled currently
-/*
 import { firebaseConfig } from '@/firebase/config';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
@@ -47,9 +45,6 @@ export function getSdks(firebaseApp: FirebaseApp) {
     firestore: getFirestore(firebaseApp)
   };
 }
-*/
-// Export stubs to avoid import errors
-export const initializeFirebase = () => ({ firebaseApp: null as any, auth: null as any, firestore: null as any });
 export * from './provider';
 export * from './client-provider';
 export * from './firestore/use-collection';

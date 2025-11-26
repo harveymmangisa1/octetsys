@@ -2,6 +2,7 @@
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { Hero } from "@/components/home/Hero";
+import { SixteenDaysCampaignCTA } from "@/components/campaign/SixteenDaysCampaignCTA";
 import { FlyerMakerCta } from "@/components/home/FlyerMakerCta";
 import { LatestReport } from "@/components/home/LatestReport";
 import { CyberSecurityCta } from "@/components/home/CyberSecurityCta";
@@ -20,6 +21,9 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <div className="container mx-auto px-4 py-12">
+          <SixteenDaysCampaignCTA />
+        </div>
         <FlyerMakerCta />
         <LatestReport />
         <CyberSecurityCta />

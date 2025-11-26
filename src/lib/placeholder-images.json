@@ -97,8 +97,8 @@
     {
       "title": "MedVet Ltd",
       "src": "https://picsum.photos/seed/medvet/800/600",
-      "hint": "veterinary medicine",
-      "description": "A comprehensive web portal for a leading veterinary supplier, featuring an e-commerce platform and resource library.",
+      "hint": "pharmaceutical medicine",
+      "description": "A comprehensive web portal for a leading pharmaceutical supplier, featuring an e-commerce platform and resource library.",
       "category": "Web Development",
       "url": "https://medvetltd.com",
       "tags": [
@@ -124,12 +124,11 @@
       "title": "Joyful Kids",
       "src": "https://picsum.photos/seed/joyfulkids/800/600",
       "hint": "children playing",
-      "description": "A fun and educational mobile app for a non-profit, designed to teach children about local wildlife.",
-      "category": "Mobile App",
+      "description": "A fun and educational website for a charity organisation, designed to teach children about local wildlife.",
+      "category": "Web Development",
       "url": "https://joyfulkidsmw.org",
       "tags": [
         "React Native",
-        "Gamification",
         "Education"
       ]
     },

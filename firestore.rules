@@ -43,6 +43,18 @@ service cloud.firestore {
     }
 
     /**
+     * @description Allows anyone to create a cyber violence report but restricts all other operations.
+     * @path /cyberViolenceReports/{reportId}
+     * @allow (create): Any user, authenticated or not, can submit a cyber violence report.
+     * @deny (get, list, update, delete): No one can retrieve, list, update, or delete cyber violence reports.
+     * @principle Create-only access for cyber violence reports.
+     */
+    match /cyberViolenceReports/{reportId} {
+      allow create: if true;
+      allow get, list, update, delete: if false;
+    }
+
+    /**
      * @description Checks if the request is authenticated.
      * @returns {boolean} True if the request is authenticated, false otherwise.
      */
