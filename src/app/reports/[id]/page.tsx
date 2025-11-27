@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { Header } from '@/components/common/Header';
-import { Footer } from '@/components/common/Footer';
 
 interface Report {
   id: number;
@@ -41,7 +39,6 @@ const ReportPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="flex flex-col min-h-dvh bg-background">
-      <Header />
       <main className="flex-1 container mx-auto px-4 py-12">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
@@ -53,7 +50,6 @@ const ReportPage = ({ params }: { params: { id: string } }) => {
           </article>
         )}
       </main>
-      <Footer />
     </div>
   );
 };

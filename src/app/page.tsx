@@ -1,6 +1,4 @@
 
-import { Header } from "@/components/common/Header";
-import { Footer } from "@/components/common/Footer";
 import { Hero } from "@/components/home/Hero";
 import RecentReports from "@/components/cyber-violence/RecentReports";
 import { SixteenDaysCampaignCTA } from "@/components/campaign/SixteenDaysCampaignCTA";
@@ -21,11 +19,11 @@ export default function Home() {
     <div className="flex flex-col min-h-dvh bg-background">
       <main className="flex-1">
         <Hero />
+        <FlyerMakerCta />
         <RecentReports />
         <div className="container mx-auto px-4 py-12">
           <SixteenDaysCampaignCTA />
         </div>
-        <FlyerMakerCta />
         <LatestReport />
         <CyberSecurityCta />
         <Services />
@@ -36,7 +34,6 @@ export default function Home() {
         <Consultation />
         <Cta />
       </main>
-      <Footer />
       {/* <BwenziFAB /> */}
     </div>
   );

@@ -34,7 +34,6 @@ export default function RootLayout({
             disableTransitionOnChange
 > 
           <Header />
-          {/* Firebase disabled for now */}
           {children}
           <Toaster />
           <Footer />

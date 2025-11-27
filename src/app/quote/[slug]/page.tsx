@@ -5,8 +5,6 @@ import { useSearchParams, notFound, useRouter, useParams } from 'next/navigation
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
-import { Header } from '@/components/common/Header';
-import { Footer } from '@/components/common/Footer';
 import { Button } from '@/components/ui/button';
 
 export default function QuoteRequestPage() {
@@ -47,7 +45,6 @@ export default function QuoteRequestPage() {
   if(submitted) {
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-slate-50">
-            <Header />
             <div className="flex-grow flex items-center justify-center">
                  <div className="text-center max-w-2xl mx-auto p-8">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6">
@@ -65,14 +62,12 @@ export default function QuoteRequestPage() {
                     </Button>
                 </div>
             </div>
-            <Footer />
         </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50">
-      <Header />
       <div className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <Button
@@ -191,7 +186,6 @@ export default function QuoteRequestPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
