@@ -31,6 +31,12 @@ export async function PostList() {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
+                Image
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Title
               </th>
               <th
@@ -53,6 +59,8 @@ export async function PostList() {
           <tbody className="bg-white divide-y divide-gray-200">
             {posts.map((post) => (
               <tr key={post.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {post.image && <img src={post.image} alt={post.title} className="h-10 w-10 rounded-full" />}n                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {post.title}
                 </td>

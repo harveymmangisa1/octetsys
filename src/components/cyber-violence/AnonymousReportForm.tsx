@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, Send, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 
 const violenceTypes = [
   "Harassment",
@@ -29,6 +29,7 @@ export function AnonymousReportForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [reportId, setReportId] = useState("");
   const { toast } = useToast();
+  const supabase = createClient();
 
   const [formData, setFormData] = useState({
     violenceType: "",

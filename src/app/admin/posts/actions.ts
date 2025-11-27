@@ -8,6 +8,7 @@ const formSchema = z.object({
   content: z.string(),
   type: z.enum(['news', 'blog', 'event']),
   status: z.enum(['draft', 'published']),
+  image: z.string().optional(),
 });
 
 export async function createPost(values: z.infer<typeof formSchema>) {
@@ -24,6 +25,7 @@ export async function createPost(values: z.infer<typeof formSchema>) {
       content: values.content,
       type: values.type,
       status: values.status,
+      image: values.image,
       author_id: user.id,
     },
   ]);
@@ -50,6 +52,7 @@ export async function updatePost(id: string, values: z.infer<typeof formSchema>)
       content: values.content,
       type: values.type,
       status: values.status,
+      image: values.image,
     })
     .eq('id', id);
 
