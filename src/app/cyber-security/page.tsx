@@ -6,6 +6,8 @@ import { ServiceList } from "@/components/cyber-security/ServiceList";
 import { ContactProcess } from "@/components/cyber-security/ContactProcess";
 import { CyberViolenceReportCTA } from "@/components/cyber-violence/CyberViolenceReportCTA";
 
+export const runtime = 'edge';
+
 export default function CyberSecurityPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">

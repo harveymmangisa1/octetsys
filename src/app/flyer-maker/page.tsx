@@ -2,6 +2,8 @@
 import { FlyerMaker } from "@/components/flyer-maker/FlyerMaker";
 import { FlyerProvider } from "@/lib/hooks/useFlyerState";
 
+export const runtime = 'edge';
+
 export default function FlyerMakerPage() {
   return (
     <FlyerProvider>

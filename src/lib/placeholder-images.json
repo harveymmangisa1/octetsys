@@ -59,33 +59,55 @@
         }
       },
       {
-        "name": "Brenda Smith",
-        "role": "Lead Developer",
-        "src": "https://picsum.photos/seed/team2/400/400",
-        "hint": "professional headshot female",
-        "bio": "Expert coder and problem-solver, turning complex challenges into elegant software solutions.",
+        "name": "Vincent Ngoma",
+        "role": "Administration & Web Development",
+        "src": "https://picsum.photos/seed/team5/400/400",
+        "hint": "professional headshot tech",
+        "bio": "Vincent handles administration and web development, leveraging his background in Business Information Technology from MUST to ensure operational efficiency and deliver robust web solutions.",
         "social": {
           "linkedin": "#",
           "twitter": "#"
         }
       },
       {
-        "name": "Chris Johnson",
-        "role": "Cybersecurity Expert",
-        "src": "https://picsum.photos/seed/team3/400/400",
-        "hint": "professional headshot security",
-        "bio": "Dedicated to protecting digital assets and staying ahead of emerging cyber threats.",
+        "name": "Tsanzo Makuya",
+        "role": "Networks & AI",
+        "src": "https://picsum.photos/seed/team6/400/400",
+        "hint": "professional headshot engineer",
+        "bio": "With a degree in Computer Networks Engineering from UNIMA, Tsanzo specializes in designing and managing resilient network infrastructures and exploring innovative AI applications.",
         "social": {
           "linkedin": "#",
           "twitter": "#"
         }
       },
       {
-        "name": "Diana Garcia",
-        "role": "UI/UX Designer",
-        "src": "https://picsum.photos/seed/team4/400/400",
-        "hint": "professional headshot designer",
-        "bio": "Crafting intuitive and beautiful user experiences that delight and engage.",
+        "name": "Victoria Kankhokwe",
+        "role": "Business Development & Cyber Security",
+        "src": "https://picsum.photos/seed/team7/400/400",
+        "hint": "professional headshot business",
+        "bio": "Victoria combines her ICT knowledge from Mzuni with a passion for cybersecurity to drive business growth and help clients strengthen their digital defenses.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
+      },
+      {
+        "name": "Prince M'bwinja",
+        "role": "Communications & Marketing",
+        "src": "https://picsum.photos/seed/team8/400/400",
+        "hint": "professional headshot marketing",
+        "bio": "Prince leads our communications and marketing efforts, crafting compelling narratives that connect our technology solutions with the clients who need them most.",
+        "social": {
+          "linkedin": "#",
+          "twitter": "#"
+        }
+      },
+      {
+        "name": "Bright Mataya",
+        "role": "Software Development",
+        "src": "https://picsum.photos/seed/team9/400/400",
+        "hint": "professional headshot developer",
+        "bio": "A skilled software developer with an ICT degree from Dae Yung University, Bright is passionate about building high-quality, scalable software that solves real-world problems.",
         "social": {
           "linkedin": "#",
           "twitter": "#"

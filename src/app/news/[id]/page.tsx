@@ -1,6 +1,9 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export default async function NewsPostPage({ params }: { params: { id: string } }) {
   const supabase = await createSupabaseServerClient();
   const { data: post, error } = await supabase

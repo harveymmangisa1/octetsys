@@ -3,6 +3,9 @@ import { ConsultationHero } from "@/components/book-consultation/ConsultationHer
 import { ContactInfo } from "@/components/book-consultation/ContactInfo";
 import { BookingForm } from "@/components/book-consultation/BookingForm";
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export default function BookConsultationPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
