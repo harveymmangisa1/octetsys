@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitContactForm, type ContactFormState } from '@/app/actions';
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,6 @@ import { Send, CheckCircle2, Clock, MessageCircle, ArrowRight, Lightbulb } from 
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
-
-const initialState: ContactFormState = {
-  confirmationMessage: null,
-  error: null,
-};
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -40,53 +35,12 @@ function SubmitButton() {
   );
 }
 
-export function BookingForm() {
-  const [state, formAction] = useActionState(submitContactForm, initialState);
-  const { toast } = useToast();
+export function BookingForm({
+  formAction
+}: {
+  formAction: (payload: FormData) => void,
+}) {
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (state.error) {
-      toast({
-        title: "Submission Error",
-        description: state.error,
-        variant: "destructive",
-      });
-    }
-    if (state.confirmationMessage) {
-        formRef.current?.reset();
-    }
-  }, [state, toast]);
-  
-  if(state.confirmationMessage) {
-    return (
-      <section id="contact-form" className="py-24 bg-white">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-4xl">
-          <div className="text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6">
-              <CheckCircle2 className="w-8 h-8 text-green-600" />
-            </div>
-            <h1 className="text-4xl font-semibold text-slate-900 mb-4 tracking-tight">
-              Consultation Requested
-            </h1>
-            <p className="text-lg text-slate-600 leading-8 mb-8 font-light">
-              {state.confirmationMessage}
-            </p>
-            <div className="flex items-center justify-center gap-8 text-sm text-slate-500">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>Response within 24 hours</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MessageCircle className="w-4 h-4" />
-                <span>Expert consultation</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
 
   return (
     <section id="booking-form" className="py-24 bg-white">
@@ -238,3 +192,4 @@ export function BookingForm() {
     </section>
   );
 }
+

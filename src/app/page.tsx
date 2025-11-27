@@ -8,6 +8,7 @@ import { FlyerMakerCta } from "@/components/home/FlyerMakerCta";
 import { LatestReport } from "@/components/home/LatestReport";
 import { CyberSecurityCta } from "@/components/home/CyberSecurityCta";
 import { Services } from "@/components/home/Services";
+import { LatestPosts } from "@/components/home/LatestPosts";
 import { Portfolio } from "@/components/home/Portfolio";
 import { Campaigns } from "@/components/home/Campaigns";
 // import { Feedback } from "@/components/home/Feedback";
@@ -18,7 +19,6 @@ import { Cta } from "@/components/home/Cta";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
-      <Header />
       <main className="flex-1">
         <Hero />
         <RecentReports />
@@ -29,6 +29,7 @@ export default function Home() {
         <LatestReport />
         <CyberSecurityCta />
         <Services />
+        <LatestPosts />
         <Portfolio />
         <Campaigns />
         {/* <Feedback /> */}

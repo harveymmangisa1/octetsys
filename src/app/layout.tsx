@@ -1,8 +1,9 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/common/ThemeProvider';
+import { Header } from '@/components/common/Header';
+import { Footer } from '@/components/common/Footer';
 // import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
@@ -32,9 +33,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
 > 
+          <Header />
           {/* Firebase disabled for now */}
           {children}
           <Toaster />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

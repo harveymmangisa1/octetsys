@@ -1,4 +1,4 @@
-
+import { submitContactForm } from "@/app/actions";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { ConsultationHero } from "@/components/book-consultation/ConsultationHero";
@@ -11,7 +11,7 @@ export default function BookConsultationPage() {
       <Header />
       <main className="flex-1">
         <ConsultationHero />
-        <BookingForm />
+        <BookingForm formAction={submitContactForm} />
         <ContactInfo />
       </main>
       <Footer />
