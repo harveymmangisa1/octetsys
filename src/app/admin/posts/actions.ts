@@ -2,6 +2,7 @@
 
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { z } from 'zod';
+import { cookies } from 'next/headers';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -12,7 +13,8 @@ const formSchema = z.object({
 });
 
 export async function createPost(values: z.infer<typeof formSchema>) {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
@@ -38,7 +40,8 @@ export async function createPost(values: z.infer<typeof formSchema>) {
 }
 
 export async function updatePost(id: string, values: z.infer<typeof formSchema>) {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {

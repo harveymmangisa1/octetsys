@@ -1,11 +1,13 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 export default async function NewsPostPage({ params }: { params: { id: string } }) {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
   const { data: post, error } = await supabase
     .from('posts')
     .select('*')

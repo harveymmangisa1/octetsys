@@ -1,0 +1,33 @@
+import { type NextRequest, NextResponse } from 'next/server';
+import { createSupabaseMiddlewareClient } from '@/lib/supabase/middleware';
+
+export async function middleware(request: NextRequest) {
+  const { supabase, response } = await createSupabaseMiddlewareClient(request);
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const { pathname } = request.nextUrl;
+
+  // Public routes that don't require authentication
+  const publicRoutes = ['/login', '/signup'];
+
+  if (pathname === '/admin/posts/new' && request.method === 'POST') {
+    return response;
+  }
+  
+  if (!session && pathname.startsWith('/admin')) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  if (session && publicRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
+
+  return response;
+}
+
+export const config = {
+  matcher: ['/admin/:path*', '/login', '/signup'],
+};
