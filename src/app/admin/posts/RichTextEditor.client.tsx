@@ -1,3 +1,7 @@
 'use client';
 
-export { RichTextEditor } from './RichTextEditor';
+import dynamic from 'next/dynamic';
+
+export const RichTextEditor = dynamic(() =>
+  import('./RichTextEditor').then(mod => mod.RichTextEditor), { ssr: false }
+);
