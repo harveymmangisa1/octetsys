@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { serviceData } from '@/lib/service-data';
 import { Button } from '@/components/ui/button';
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export default function QuoteRequestPage() {
   const params = useParams();
   const slug = params.slug as string;
@@ -179,7 +182,7 @@ export default function QuoteRequestPage() {
                 </Button>
 
                 <p className="text-sm text-slate-500 text-center">
-                  We'll review your request and get back to you within 24 hours
+                  We'll review your request and and get back to you within 24 hours
                 </p>
               </div>
             </form>

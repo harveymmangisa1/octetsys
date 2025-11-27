@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
+export const runtime = 'edge';
+export const dynamic = "force-dynamic";
+
 interface Report {
   id: number;
   title: string;

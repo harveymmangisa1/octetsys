@@ -14,6 +14,8 @@ import { Consultation } from "@/components/home/Consultation";
 import { Cta } from "@/components/home/Cta";
 // import { BwenziFAB } from "@/components/common/NzeruFAB";
 
+export const runtime = 'edge';
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
