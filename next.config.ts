@@ -1,4 +1,6 @@
 import type {NextConfig} from 'next';
+require('dotenv').config({ path: './.env' });
+
 
 const enforceStrict = process.env.ENFORCE_STRICT_BUILD === 'true';
 
