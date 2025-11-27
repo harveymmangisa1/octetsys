@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { createPost, updatePost } from './actions';
 import { toast } from '@/hooks/use-toast';
 import { ImageUpload } from './ImageUpload';
-import { RichTextEditor } from './RichTextEditor.client';
+import { RichTextEditor } from './RichTextEditor';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Save, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -69,8 +69,6 @@ export function PostForm({ post }: { post?: any }) {
         
         if (!post) {
           form.reset();
-          // Redirect to posts list or stay on page based on your needs
-          // router.push('/posts');
         }
       }
     } catch (error) {
@@ -162,13 +160,11 @@ export function PostForm({ post }: { post?: any }) {
                       <FormItem>
                         <FormLabel>Content</FormLabel>
                         <FormControl>
-                          <div className="border rounded-lg">
-                            <RichTextEditor 
-                              value={field.value} 
-                              onChange={field.onChange} 
-                              placeholder="Write your content here..."
-                            />
-                          </div>
+                          <RichTextEditor 
+                            value={field.value} 
+                            onChange={field.onChange} 
+                            placeholder="Write your content here..."
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
