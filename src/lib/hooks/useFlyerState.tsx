@@ -41,15 +41,15 @@ function flyerReducer(state: FlyerState, action: Action): FlyerState {
     case 'SET_STEP':
       return { ...state, step: Math.min(Math.max(action.payload, 1), 4) };
     case 'SET_IMAGE':
-      return { ...state, image: { ...state.image, file: action.payload.file, preview: action.payload.preview, isUploading: false }, step: 2 };
+      return { ...state, image: { ...state.image, file: action.payload.file, preview: action.payload.preview, isUploading: false } };
     case 'CLEAR_IMAGE':
         return { ...state, image: { file: null, preview: null, isUploading: false}, step: 1 };
     case 'SET_UPLOADING':
         return { ...state, image: {...state.image, isUploading: action.payload }};
     case 'SET_QUOTE':
-      return { ...state, quote: action.payload, step: 3 };
+      return { ...state, quote: action.payload };
     case 'SET_THEME':
-      return { ...state, theme: action.payload, step: 4 };
+      return { ...state, theme: action.payload };
     case 'SET_GENERATING':
       return { ...state, isGenerating: action.payload };
     case 'RESET_STATE':

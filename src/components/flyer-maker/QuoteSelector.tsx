@@ -82,6 +82,11 @@ export function QuoteSelector() {
             </div>
           </TabsContent>
         </Tabs>
+        <div className="mt-6 flex justify-end">
+             <Button onClick={() => dispatch({ type: 'SET_STEP', payload: 3 })}>
+                Next Step
+            </Button>
+        </div>
       </CardContent>
     </Card>
   );

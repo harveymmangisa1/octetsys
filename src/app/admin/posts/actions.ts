@@ -10,6 +10,10 @@ const formSchema = z.object({
   type: z.enum(['news', 'blog', 'event']),
   status: z.enum(['draft', 'published']),
   image: z.string().optional(),
+  excerpt: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  seo_title: z.string().optional(),
+  seo_description: z.string().optional(),
 });
 
 export async function createPost(values: z.infer<typeof formSchema>) {
@@ -29,6 +33,10 @@ export async function createPost(values: z.infer<typeof formSchema>) {
       status: values.status,
       image: values.image,
       author_id: user.id,
+      excerpt: values.excerpt,
+      tags: values.tags,
+      seo_title: values.seo_title,
+      seo_description: values.seo_description,
     },
   ]);
 
@@ -56,6 +64,10 @@ export async function updatePost(id: string, values: z.infer<typeof formSchema>)
       type: values.type,
       status: values.status,
       image: values.image,
+      excerpt: values.excerpt,
+      tags: values.tags,
+      seo_title: values.seo_title,
+      seo_description: values.seo_description,
     })
     .eq('id', id);
 

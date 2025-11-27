@@ -30,12 +30,16 @@ const formSchema = z.object({
   type: z.enum(['news', 'blog', 'event']),
   status: z.enum(['draft', 'published']),
   image: z.string().optional(),
+  seo_title: z.string().optional(),
+  seo_description: z.string().optional(),
+  excerpt: z.string().optional(),
+  tags: z.string().optional(), // We'll handle comma-separation in the UI
 });
 
 export function PostForm({ post }: { post?: any }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,16 +48,26 @@ export function PostForm({ post }: { post?: any }) {
       type: post?.type || 'news',
       status: post?.status || 'draft',
       image: post?.image || '',
+      excerpt: post?.excerpt || '',
+      tags: post?.tags ? post.tags.join(', ') : '',
+      seo_title: post?.seo_title || '',
+      seo_description: post?.seo_description || '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    
+
+    // Convert tags string to array
+    const formattedValues = {
+      ...values,
+      tags: values.tags ? values.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : [],
+    };
+
     try {
       const result = post
-        ? await updatePost(post.id, values)
-        : await createPost(values);
+        ? await updatePost(post.id, formattedValues)
+        : await createPost(formattedValues);
 
       if (result.error) {
         toast({
@@ -66,7 +80,7 @@ export function PostForm({ post }: { post?: any }) {
           title: 'Success',
           description: `Post ${post ? 'updated' : 'created'} successfully.`,
         });
-        
+
         if (!post) {
           form.reset();
         }
@@ -135,16 +149,15 @@ export function PostForm({ post }: { post?: any }) {
                       <FormItem>
                         <FormLabel className="flex justify-between items-center">
                           Title
-                          <span className={`text-xs font-normal ${
-                            titleLength > 80 ? 'text-amber-500' : 'text-muted-foreground'
-                          }`}>
+                          <span className={`text-xs font-normal ${titleLength > 80 ? 'text-amber-500' : 'text-muted-foreground'
+                            }`}>
                             {titleLength}/100
                           </span>
                         </FormLabel>
                         <FormControl>
-                          <Input 
-                            placeholder="Enter a compelling title..." 
-                            {...field} 
+                          <Input
+                            placeholder="Enter a compelling title..."
+                            {...field}
                             className="text-lg font-medium"
                           />
                         </FormControl>
@@ -152,7 +165,27 @@ export function PostForm({ post }: { post?: any }) {
                       </FormItem>
                     )}
                   />
-                  
+
+                  <FormField
+                    control={form.control}
+                    name="excerpt"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Excerpt</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="A short summary of the post..."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Displayed in post lists and search results.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
                   <FormField
                     control={form.control}
                     name="content"
@@ -160,11 +193,61 @@ export function PostForm({ post }: { post?: any }) {
                       <FormItem>
                         <FormLabel>Content</FormLabel>
                         <FormControl>
-                          <RichTextEditor 
-                            value={field.value} 
-                            onChange={field.onChange} 
+                          <RichTextEditor
+                            value={field.value}
+                            onChange={field.onChange}
                             placeholder="Write your content here..."
                           />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>SEO & Metadata</CardTitle>
+                  <CardDescription>
+                    Optimize your post for search engines
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="seo_title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>SEO Title</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Custom title for search engines (optional)" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="seo_description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>SEO Description</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Meta description for search results (optional)" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="tags"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tags</FormLabel>
+                        <FormControl>
+                          <Input placeholder="tech, news, update (comma separated)" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -224,8 +307,8 @@ export function PostForm({ post }: { post?: any }) {
                   />
 
                   <div className="flex gap-2 pt-4">
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       disabled={isLoading}
                       className="flex-1"
                     >
@@ -304,7 +387,7 @@ export function PostForm({ post }: { post?: any }) {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <ImageUpload 
+                          <ImageUpload
                             onUpload={(url) => field.onChange(url)}
                             currentImage={field.value}
                           />

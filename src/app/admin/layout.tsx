@@ -50,6 +50,18 @@ export default async function AdminLayout({
           >
             Posts
           </Link>
+          <Link
+            href="/admin/team"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Team
+          </Link>
+          <Link
+            href="/admin/profile"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Profile
+          </Link>
         </nav>
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="ml-auto flex-1 sm:flex-initial">
