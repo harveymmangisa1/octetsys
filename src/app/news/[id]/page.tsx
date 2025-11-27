@@ -1,10 +1,8 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 export default async function NewsPostPage({ params }: { params: { id: string } }) {
-  const cookieStore = cookies();
-  const supabase = await createSupabaseServerClient(cookieStore);
+  const supabase = await createSupabaseServerClient();
   const { data: post, error } = await supabase
     .from('posts')
     .select('*')

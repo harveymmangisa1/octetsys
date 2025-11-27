@@ -19,6 +19,7 @@ export function LatestReport() {
   return (
     <section id="latest-report" className="py-12 bg-amber-50 border-y border-amber-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        {/*
         <Card className="bg-white border-amber-300 shadow-md">
           <CardHeader>
             <div className="flex items-center gap-4">
@@ -45,6 +46,7 @@ export function LatestReport() {
             </p>
           </CardContent>
         </Card>
+        */}
       </div>
     </section>
   );
