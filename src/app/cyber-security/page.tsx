@@ -3,7 +3,7 @@ import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { CyberSecurityHero } from "@/components/cyber-security/CyberSecurityHero";
 import { Cta } from "@/components/cyber-security/Cta";
-import { ThreatSubmission } from "@/components/cyber-security/ThreatSubmission";
+// import { ThreatSubmission } from "@/components/cyber-security/ThreatSubmission";
 import { ServiceList } from "@/components/cyber-security/ServiceList";
 import { ContactProcess } from "@/components/cyber-security/ContactProcess";
 import { CyberViolenceReportCTA } from "@/components/cyber-violence/CyberViolenceReportCTA";
@@ -19,7 +19,7 @@ export default function CyberSecurityPage() {
         <div className="container mx-auto px-4 py-12">
           <CyberViolenceReportCTA />
         </div>
-        <ThreatSubmission />
+        {/* <ThreatSubmission /> */}
         <Cta />
       </main>
       <Footer />

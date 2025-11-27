@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 
 interface Report {
   id: number;
-  title: string;
+  violence_type: string;
   description: string;
 }
 
@@ -18,8 +18,8 @@ const RecentReports: React.FC = () => {
     const fetchReports = async () => {
       const supabase = createClient();
       const { data, error } = await supabase
-        .from('reports')
-        .select('id, title, description')
+        .from('public_reports')
+        .select('id, violence_type, description')
         .order('created_at', { ascending: false })
         .limit(3);
 
@@ -44,7 +44,7 @@ const RecentReports: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {reports.map((report) => (
               <div key={report.id} className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-bold mb-2">{report.title}</h3>
+                <h3 className="text-xl font-bold mb-2">{report.violence_type}</h3>
                 <p className="text-gray-700 mb-4">{report.description}</p>
                 <a href={`/reports/${report.id}`} className="text-blue-500 hover:underline">Read More</a>
               </div>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,8 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, Send, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/firebase/db";
+import { supabase } from "@/lib/supabase";
 
 const violenceTypes = [
   "Harassment",
@@ -44,13 +43,18 @@ export function AnonymousReportForm() {
     setIsSubmitting(true);
 
     try {
-      const docRef = await addDoc(collection(db, "cyberViolenceReports"), {
-        ...formData,
-        timestamp: serverTimestamp(),
-        status: "submitted"
-      });
+        const { data, error } = await supabase.rpc('create_anonymous_report', {
+            violence_type_in: formData.violenceType,
+            description_in: formData.description,
+            platform_in: formData.platform,
+            severity_in: formData.severity,
+            additional_details_in: formData.additionalDetails,
+        });
+
+      if (error) throw error;
+
       
-      setReportId(docRef.id);
+      setReportId(data);
       setIsSubmitted(true);
       
       toast({

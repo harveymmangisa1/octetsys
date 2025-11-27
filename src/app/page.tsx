@@ -9,12 +9,11 @@ import { LatestReport } from "@/components/home/LatestReport";
 import { CyberSecurityCta } from "@/components/home/CyberSecurityCta";
 import { Services } from "@/components/home/Services";
 import { Portfolio } from "@/components/home/Portfolio";
-import { TechFaq } from "@/components/home/TechFaq";
 import { Campaigns } from "@/components/home/Campaigns";
-import { Feedback } from "@/components/home/Feedback";
+// import { Feedback } from "@/components/home/Feedback";
 import { Consultation } from "@/components/home/Consultation";
 import { Cta } from "@/components/home/Cta";
-import { BwenziFAB } from "@/components/common/NzeruFAB";
+// import { BwenziFAB } from "@/components/common/NzeruFAB";
 
 export default function Home() {
   return (
@@ -31,14 +30,13 @@ export default function Home() {
         <CyberSecurityCta />
         <Services />
         <Portfolio />
-        <TechFaq />
         <Campaigns />
-        <Feedback />
+        {/* <Feedback /> */}
         <Consultation />
         <Cta />
       </main>
       <Footer />
-      <BwenziFAB />
+      {/* <BwenziFAB /> */}
     </div>
   );
 }
