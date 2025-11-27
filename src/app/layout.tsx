@@ -6,6 +6,10 @@ import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 // import { FirebaseClientProvider } from '@/firebase';
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 export const metadata: Metadata = {
   title: 'Octet Systems',
   description: 'Innovation, Reliability, and Education-First IT Services',
