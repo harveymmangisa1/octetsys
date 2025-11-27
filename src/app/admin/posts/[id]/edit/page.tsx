@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { PostForm } from '../../PostForm';
+import { PostForm } from '../../PostForm.client';
 
 export default async function EditPostPage({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
