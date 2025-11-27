@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { PlusIcon, UploadCloudIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 export function ImageUpload({ onUpload }: { onUpload: (url: string) => void }) {
   const [uploading, setUploading] = useState(false);
