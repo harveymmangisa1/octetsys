@@ -5,108 +5,58 @@ import { UploadSection } from "./UploadSection";
 import { QuoteSelector } from "./QuoteSelector";
 import { ThemeSelector } from "./ThemeSelector";
 import { FlyerPreview } from "./FlyerPreview";
-import { DownloadButton } from "./DownloadButton";
+import { DownloadSection } from "./DownloadSection";
 import { InfoBanner } from "./InfoBanner";
+
+const steps = [
+    { component: <UploadSection />, name: "Upload" },
+    { component: <QuoteSelector />, name: "Quote" },
+    { component: <ThemeSelector />, name: "Theme" },
+    { component: <DownloadSection />, name: "Download" },
+];
 
 export function FlyerMaker() {
     const { step } = useFlyerState();
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <InfoBanner />
-                
-                {/* Header */}
-                <div className="text-center mb-10 mt-8">
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 tracking-tight">
-                        Social Media Flyer Creator
-                    </h1>
-                    <p className="text-base text-slate-600 max-w-2xl mx-auto">
-                        Create professional, platform-optimized flyers in minutes
-                    </p>
-                </div>
+        <div className="min-h-screen bg-gray-50">
+            <div className="relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+                <div className="relative pt-6 pb-16 sm:pb-24">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <InfoBanner />
+                        
+                        {/* Header */}
+                        <div className="text-center mb-10 mt-8">
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">
+                                Social Media Flyer Creator
+                            </h1>
+                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Create professional, platform-optimized flyers in minutes
+                            </p>
+                        </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mt-8">
-                    {/* Preview - Left side */}
-                    <div className="xl:col-span-5">
-                        <div className="sticky top-8">
-                            <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white/70 backdrop-blur-[2px] shadow-sm">
-                                <FlyerPreview />
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8">
+                            {/* Preview - Left side */}
+                            <div className="lg:col-span-5">
+                                <div className="sticky top-8 transition-all duration-300 ease-in-out hover:scale-105">
+                                    <div className="rounded-2xl p-6 bg-white/70 backdrop-blur-xl shadow-lg">
+                                        <FlyerPreview />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Steps - Right side */}
+                            <div className="lg:col-span-7 space-y-6">
+                                <div className="rounded-2xl p-6 bg-white/70 backdrop-blur-xl shadow-lg">
+                                    <ProgressSteps />
+                                </div>
+                                
+                                <div className="rounded-2xl p-6 bg-white/70 backdrop-blur-xl shadow-lg">
+                                    {steps[step - 1].component}
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Steps - Right side */}
-                    <div className="xl:col-span-7 space-y-6">
-                        <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white shadow-sm">
-                            <ProgressSteps />
-                        </div>
-                        
-                        <div className="rounded-2xl p-6 ring-1 ring-slate-200/60 bg-white shadow-sm">
-                            {step === 1 && <UploadSection />}
-                            {step === 2 && <QuoteSelector />}
-                            {step === 3 && <ThemeSelector />}
-                            {step === 4 && <DownloadSection />}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function DownloadSection() {
-    return (
-        <div className="space-y-6">
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                    Ready to Share
-                </h2>
-                <p className="text-slate-600">
-                    Your flyer is optimized and ready for social media
-                </p>
-            </div>
-            
-            {/* Platform optimization info */}
-            <div className="bg-slate-50 border border-slate-200 rounded-lg p-5 mb-6">
-                <h3 className="font-semibold text-slate-900 mb-4 text-sm">
-                    Platform Optimized For
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-600">
-                    <div className="text-center">
-                        <div className="font-semibold text-slate-900 mb-1">Instagram</div>
-                        <div className="text-xs">4:5 Ratio</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="font-semibold text-slate-900 mb-1">Facebook</div>
-                        <div className="text-xs">1.91:1</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="font-semibold text-slate-900 mb-1">Twitter</div>
-                        <div className="text-xs">16:9</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="font-semibold text-slate-900 mb-1">Pinterest</div>
-                        <div className="text-xs">2:3</div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Download buttons */}
-            <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <DownloadButton format="png" variant="primary" />
-                    <DownloadButton format="jpg" variant="secondary" />
-                </div>
-                
-                {/* Posting tips */}
-                <div className="text-center pt-4 border-t border-slate-200">
-                    <p className="text-sm text-slate-500 mb-2">
-                        Post during peak hours for maximum engagement
-                    </p>
-                    <div className="flex justify-center gap-2 text-xs">
-                        <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-medium">#BestPractices</span>
-                        <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-medium">#SocialMedia</span>
                     </div>
                 </div>
             </div>
