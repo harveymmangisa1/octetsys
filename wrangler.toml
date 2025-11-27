@@ -1,0 +1,7 @@
+
+name = "octet-systems"
+compatibility_date = "2024-05-01"
+
+[pages]
+build_output_dir = ".next"
+build_command = "npm run build"
