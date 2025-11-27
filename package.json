@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "preview": "npm run build:cf && wrangler pages dev",
-    "deploy": "wrangler pages deploy .opennext"
+    "deploy": "wrangler pages deploy .opennext",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",

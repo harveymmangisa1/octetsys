@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-quill/lib/component.js b/node_modules/react-quill/lib/component.js
+index 9e50433..83a233b 100644
+--- a/node_modules/react-quill/lib/component_TEMPLATE.js
++++ b/node_modules/react-quill/lib/component.js
+@@ -34,7 +34,7 @@
+ 	'see': 'link',
+ };
+ 
+-var findDOMNode = ReactDOM.findDOMNode;
++var findDOMNode = function(ref) { return ref; };
+ 
+ /*
+ Creates an editor on a given element.
