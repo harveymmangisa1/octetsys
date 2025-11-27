@@ -1,6 +1,7 @@
 'use client';
 
 import Quill from 'quill';
+import 'react-quill/dist/quill.snow.css';
 
 const Inline = Quill.import('blots/inline');
 
