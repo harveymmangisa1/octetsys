@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { PlusIcon, UploadCloudIcon } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
-import { toast, useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
-export function ImageUpload({ onUpload }: { onUpload: (url: string) => void }) {
+export function ImageUpload({ onUpload, currentImage }: { onUpload: (url: string) => void; currentImage?: string | null }) {
   const [uploading, setUploading] = useState(false);
   const supabase = createClient();
+  const { toast } = useToast();
 
   async function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -39,6 +39,27 @@ export function ImageUpload({ onUpload }: { onUpload: (url: string) => void }) {
     } finally {
       setUploading(false);
     }
+  }
+
+  if (currentImage) {
+    return (
+      <div className="mt-4">
+        <img 
+          src={currentImage} 
+          alt="Featured" 
+          className="w-full h-32 object-cover rounded-md border"
+        />
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="w-full mt-2"
+          onClick={() => onUpload('')}
+        >
+          Remove Image
+        </Button>
+      </div>
+    );
   }
 
   return (

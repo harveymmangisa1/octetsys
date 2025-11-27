@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { createPost, updatePost } from './actions';
 import { toast } from '@/hooks/use-toast';
 import { ImageUpload } from './ImageUpload';
-import { RichTextEditor } from './RichTextEditor';
+import { RichTextEditor } from './RichTextEditor.client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Save, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -313,24 +313,6 @@ export function PostForm({ post }: { post?: any }) {
                             currentImage={field.value}
                           />
                         </FormControl>
-                        {field.value && (
-                          <div className="mt-4">
-                            <img 
-                              src={field.value} 
-                              alt="Featured" 
-                              className="w-full h-32 object-cover rounded-md border"
-                            />
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="w-full mt-2"
-                              onClick={() => field.onChange('')}
-                            >
-                              Remove Image
-                            </Button>
-                          </div>
-                        )}
                         <FormMessage />
                       </FormItem>
                     )}
