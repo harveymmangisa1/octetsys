@@ -11,28 +11,31 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const supabase = createClient();
   const { toast } = useToast();
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
     if (error) {
       toast({
-        title: 'Error signing in',
+        title: 'Error signing up',
         description: error.message,
         variant: 'destructive',
       });
     } else {
-      router.push('/admin');
-      router.refresh();
+      toast({
+        title: 'Check your email!',
+        description: 'A confirmation link has been sent to your email address.',
+      });
+      router.push('/login');
     }
   };
 
@@ -40,13 +43,13 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Admin Login</CardTitle>
+          <CardTitle className="text-2xl">Create an Account</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account.
+            Enter your email and password to create an admin account.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSignIn} className="grid gap-4">
+          <form onSubmit={handleSignUp} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -69,12 +72,12 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Sign In
+              Sign Up
             </Button>
           </form>
         </CardContent>
         <CardFooter className="text-center text-sm">
-          <p>Don't have an account? <Link href="/signup" className="underline">Sign Up</Link></p>
+            <p>Already have an account? <Link href="/login" className="underline">Sign In</Link></p>
         </CardFooter>
       </Card>
     </div>

@@ -10,11 +10,14 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
+  // Public routes that don't require authentication
+  const publicRoutes = ['/login', '/signup'];
+
   if (!session && pathname.startsWith('/admin')) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (session && pathname === '/login') {
+  if (session && publicRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL('/admin', request.url));
   }
 
@@ -22,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/login'],
+  matcher: ['/admin/:path*', '/login', '/signup'],
 };
