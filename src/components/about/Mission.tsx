@@ -1,5 +1,4 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Eye, Handshake } from "lucide-react";
 
 const values = [
@@ -22,16 +21,16 @@ const values = [
 
 export function Mission() {
     return (
-        <section className="py-24 bg-slate-50 border-y border-slate-200">
+        <section className="py-24 bg-secondary/30 border-y border-border">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {values.map((value) => (
-                        <div key={value.title} className="text-center">
-                            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white">
+                        <div key={value.title} className="text-center group p-6 rounded-2xl hover:bg-background hover:shadow-lg transition-all duration-300">
+                            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground group-hover:scale-110 transition-transform duration-300">
                                 <value.icon className="h-7 w-7" />
                             </div>
-                            <h3 className="mt-6 text-xl font-semibold text-slate-900">{value.title}</h3>
-                            <p className="mt-2 text-slate-600 font-light">{value.description}</p>
+                            <h3 className="mt-6 text-xl font-bold text-foreground">{value.title}</h3>
+                            <p className="mt-2 text-muted-foreground font-light leading-relaxed">{value.description}</p>
                         </div>
                     ))}
                 </div>

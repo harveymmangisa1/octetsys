@@ -10,8 +10,24 @@ export default async function TeamPage() {
 
     if (error) {
         return (
-            <div className="p-4 text-red-500">
-                Error loading team members: {error}
+            <div className="space-y-6">
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight">Team Members</h1>
+                    <p className="text-muted-foreground">
+                        View and manage your team.
+                    </p>
+                </div>
+                <Card>
+                    <CardContent className="flex flex-col items-center justify-center py-12">
+                        <div className="text-center">
+                            <h3 className="text-lg font-semibold text-destructive">Error Loading Team</h3>
+                            <p className="text-muted-foreground mb-4">{error}</p>
+                            <p className="text-sm text-muted-foreground">
+                                This might be because the profiles table hasn't been created yet. Please run the database migrations.
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
         );
     }
@@ -40,10 +56,12 @@ export default async function TeamPage() {
                         </CardHeader>
                         <CardContent>
                             <div className="space-y-2">
-                                <div className="flex items-center text-sm text-muted-foreground">
-                                    <Mail className="mr-2 h-4 w-4" />
-                                    {member.email}
-                                </div>
+                                {member.email && (
+                                    <div className="flex items-center text-sm text-muted-foreground">
+                                        <Mail className="mr-2 h-4 w-4" />
+                                        {member.email}
+                                    </div>
+                                )}
                                 <div className="flex gap-2 mt-4">
                                     {member.social_twitter && (
                                         <Link href={member.social_twitter} target="_blank" className="text-muted-foreground hover:text-foreground">
@@ -67,8 +85,20 @@ export default async function TeamPage() {
                 ))}
 
                 {members?.length === 0 && (
-                    <div className="col-span-full text-center py-12 text-muted-foreground">
-                        No team members found. Invite your team to sign up!
+                    <div className="col-span-full">
+                        <Card>
+                            <CardContent className="flex flex-col items-center justify-center py-12">
+                                <div className="text-center">
+                                    <h3 className="text-lg font-semibold">No Team Members Yet</h3>
+                                    <p className="text-muted-foreground mb-4">
+                                        Team members will appear here once they create their profiles.
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                        Ask your team members to sign up and complete their profiles.
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
                 )}
             </div>

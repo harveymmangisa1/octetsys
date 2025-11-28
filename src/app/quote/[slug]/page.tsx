@@ -15,10 +15,8 @@ export default function QuoteRequestPage() {
   const slug = params.slug as string;
   const searchParams = useSearchParams();
   const router = useRouter();
-  const packageName = searchParams.get('package');
 
   const service = serviceData[slug as keyof typeof serviceData];
-  const selectedPackage = service?.packages.find(p => p.name === packageName);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -39,7 +37,6 @@ export default function QuoteRequestPage() {
     // Here you would typically send the data to your backend
     console.log({
       service: service.title,
-      package: selectedPackage?.name,
       ...formData
     });
     setSubmitted(true);
@@ -57,7 +54,7 @@ export default function QuoteRequestPage() {
                         Quote Request Sent!
                     </h1>
                     <p className="text-lg text-slate-600 leading-8 mb-8 font-light">
-                        Thank you, {formData.name}. We've received your request for the <strong>{service.title}{selectedPackage && ` - ${selectedPackage.name}`}</strong> package. Our team will review your requirements and get back to you at <strong>{formData.email}</strong> within 24 hours.
+                        Thank you, {formData.name}. We've received your request for the <strong>{service.title}</strong> service. Our team will review your requirements and get back to you at <strong>{formData.email}</strong> within 24 hours.
                     </p>
                     <Button onClick={() => router.push('/#services')} variant="outline">
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -79,7 +76,7 @@ export default function QuoteRequestPage() {
             className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Packages</span>
+            <span>Back to Services</span>
           </Button>
 
           <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
@@ -87,22 +84,10 @@ export default function QuoteRequestPage() {
               <h2 className="text-3xl font-bold mb-2">Request a Quote</h2>
               <p className="text-white/80">
                 {service.title}
-                {selectedPackage && ` - ${selectedPackage.name} Package`}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="p-8">
-              {selectedPackage && (
-                <div className="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                  <h3 className="font-semibold text-slate-900 mb-2">Selected Package: {selectedPackage.name}</h3>
-                  <div className="flex items-baseline gap-2 mb-2">
-                    <span className="text-2xl font-bold text-slate-900">${selectedPackage.price}</span>
-                    <span className="text-slate-600">{selectedPackage.period}</span>
-                  </div>
-                  <p className="text-sm text-slate-600">{selectedPackage.description}</p>
-                </div>
-              )}
-
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-900 mb-2">

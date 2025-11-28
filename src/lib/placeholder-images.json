@@ -171,5 +171,54 @@
   "home": {
     "hero": "https://picsum.photos/seed/cybersec-hero/1920/1080",
     "consultation": "https://picsum.photos/seed/consultation/1920/1080"
-  }
+  },
+  "blog": [
+    {
+      "id": "cybersecurity-trends",
+      "src": "https://picsum.photos/seed/security-trends/800/600",
+      "hint": "digital lock"
+    },
+    {
+      "id": "ai-future",
+      "src": "https://picsum.photos/seed/ai-future/800/600",
+      "hint": "ai brain"
+    },
+    {
+      "id": "remote-work",
+      "src": "https://picsum.photos/seed/remote-work/800/600",
+      "hint": "home office"
+    }
+  ],
+  "cyber_security": [
+    {
+      "id": "soc-services",
+      "src": "https://picsum.photos/seed/soc/800/600",
+      "hint": "security operations center"
+    },
+    {
+      "id": "managed-detection-response",
+      "src": "https://picsum.photos/seed/mdr/800/600",
+      "hint": "threat detection"
+    },
+    {
+      "id": "cloud-security",
+      "src": "https://picsum.photos/seed/cloudsec/800/600",
+      "hint": "cloud shield"
+    },
+    {
+      "id": "ai-security",
+      "src": "https://picsum.photos/seed/aisec/800/600",
+      "hint": "ai robot shield"
+    },
+    {
+      "id": "pen-testing",
+      "src": "https://picsum.photos/seed/pentest/800/600",
+      "hint": "hacker typing"
+    },
+    {
+      "id": "compliance-management",
+      "src": "https://picsum.photos/seed/compliance/800/600",
+      "hint": "checklist"
+    }
+  ]
 }

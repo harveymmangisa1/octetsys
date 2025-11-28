@@ -1,8 +1,10 @@
 'use client';
 import { serviceData } from '@/lib/service-data';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
+import placeholderImages from '@/lib/placeholder-images.json';
 
 export function ServiceList() {
   const services = Object.entries(serviceData).map(([id, data]) => ({ ...data, id }));
@@ -16,19 +18,29 @@ export function ServiceList() {
     "Niche Expertise": ["sector-specific-security", "supply-chain-security", "security-research", "blockchain-security"]
   };
 
+  // Helper to get image for a service ID
+  const getServiceImage = (id: string) => {
+    const cyberImages = placeholderImages.cyber_security || [];
+    const specificImage = cyberImages.find(img => img.id === id);
+    if (specificImage) return specificImage.src;
+
+    // Fallback to generic images based on keywords or random assignment
+    return `https://picsum.photos/seed/${id}/800/600`;
+  };
+
   return (
-    <section id="services" className="py-20 bg-gradient-to-b from-white to-slate-50">
+    <section id="services" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full mb-6">
-            <div className="w-2 h-2 bg-slate-900 rounded-full"></div>
-            <span className="text-sm font-medium text-slate-700">Our Cyber Offerings</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-primary">Our Cyber Offerings</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-slate-900 mb-6 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
             Comprehensive Cybersecurity Services
           </h1>
-          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
             From infrastructure to innovation, we deliver technology services that
             drive growth and secure your digital future.
           </p>
@@ -36,45 +48,50 @@ export function ServiceList() {
 
         {/* Service Categories */}
         {Object.entries(categories).map(([category, serviceIds]) => (
-          <div key={category} className="mb-16">
-            <div className="flex items-center gap-3 mb-10">
-              <div className="h-px bg-slate-200 w-8"></div>
-              <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider">{category}</h2>
+          <div key={category} className="mb-24 last:mb-0">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="h-8 w-1 bg-primary rounded-full"></div>
+              <h2 className="text-2xl font-bold text-foreground tracking-tight">{category}</h2>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {serviceIds.map(id => services.find(s => s.id === id)).filter((service): service is NonNullable<typeof service> => Boolean(service)).map((service) => {
-                const Icon = service.icon;
                 return (
-                  <Link 
-                    key={service.id} 
-                    href={`/services/${service.id}`}
-                    className="group relative bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-slate-900 transition-all duration-300 flex flex-col"
-                  >
-                    {/* Hover Effect */}
-                    <div className="absolute inset-0 bg-slate-900 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-300"></div>
-                    
-                    <div className="p-8 flex-grow relative">
-                      <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-slate-900 transition-colors duration-300">
-                        <Icon className="w-6 h-6 text-slate-700 group-hover:text-white transition-colors duration-300" />
-                      </div>
-                      
-                      <h3 className="text-lg font-semibold text-slate-900 mb-3 leading-snug">
-                        {service.title}
-                      </h3>
-                      
-                      <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
+                  <div key={service.id} className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+                    {/* Image Container */}
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image
+                        src={getServiceImage(service.id)}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 p-6">
+                      <h3 className="text-xl font-bold text-card-foreground mb-3">{service.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
                         {service.description}
                       </p>
-                    </div>
-                    
-                    <div className="px-8 pb-8 relative">
-                      <div className="flex items-center text-sm font-medium text-slate-900 group-hover:gap-2 gap-1 transition-all duration-300">
-                        <span>Learn more</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+
+                      {/* Actions */}
+                      <div className="flex flex-col gap-3 mt-auto">
+                        <Button asChild className="w-full justify-between group/btn bg-primary hover:bg-primary/90 text-primary-foreground">
+                          <Link href={`/services/${service.id}`}>
+                            Explore Service
+                            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                          </Link>
+                        </Button>
+                        <Button asChild variant="ghost" className="w-full justify-between group/link text-primary hover:text-primary hover:bg-primary/5">
+                          <Link href={`/services/${service.id}#overview`}>
+                            View details
+                            <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" />
+                          </Link>
+                        </Button>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 );
               })}
             </div>

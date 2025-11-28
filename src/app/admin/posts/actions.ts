@@ -68,7 +68,29 @@ export async function updatePost(id: string, values: z.infer<typeof formSchema>)
       tags: values.tags,
       seo_title: values.seo_title,
       seo_description: values.seo_description,
+      updated_at: new Date().toISOString(),
     })
+    .eq('id', id);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { error: null };
+}
+
+export async function deletePost(id: string) {
+  const cookieStore = await cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: 'You must be logged in to delete a post.' };
+  }
+
+  const { error } = await supabase
+    .from('posts')
+    .delete()
     .eq('id', id);
 
   if (error) {

@@ -51,21 +51,59 @@ export function ImageUpload({
 
     try {
       setUploading(true);
+      
+      // Debug: Check if we can list buckets
+      console.log('Checking buckets...');
+      const { data: buckets, error: bucketError } = await supabase.storage.listBuckets();
+      
+      if (bucketError) {
+        console.error('Bucket list error:', bucketError);
+        throw new Error(`Storage access error: ${bucketError.message}`);
+      }
+      
+      console.log('Available buckets:', buckets);
+      const imagesBucket = buckets?.find(b => b.name === 'images');
+      
+      if (!imagesBucket) {
+        console.error('Images bucket not found in:', buckets);
+        throw new Error('Storage bucket "images" not found. Available buckets: ' + buckets?.map(b => b.name).join(', '));
+      }
+      
+      console.log('Images bucket found:', imagesBucket);
+      
+      // Create unique filename
+      const fileName = `${pathPrefix}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+      console.log('Uploading to:', fileName);
+      
       const { data, error } = await supabase.storage
         .from('images')
-        .upload(`${pathPrefix}/${Date.now()}-${file.name}`, file, {
+        .upload(fileName, file, {
           cacheControl: '3600',
           upsert: false
         });
 
       if (error) {
+        console.error('Storage upload error:', error);
+        
+        // Provide helpful error messages
+        if (error.message?.includes('bucket') || error.message?.includes('not found')) {
+          throw new Error('Storage bucket not configured. Please check Supabase Storage settings or run database migrations.');
+        }
+        
+        if (error.message?.includes('permission') || error.message?.includes('unauthorized')) {
+          throw new Error('Permission denied. Please check your account permissions.');
+        }
+        
         throw error;
       }
 
+      console.log('Upload successful:', data);
+      
       const { data: publicUrlData } = supabase.storage
         .from('images')
         .getPublicUrl(data.path);
 
+      console.log('Public URL:', publicUrlData.publicUrl);
       onUpload(publicUrlData.publicUrl);
 
       toast({
@@ -73,9 +111,16 @@ export function ImageUpload({
         description: 'Your image has been uploaded successfully',
       });
     } catch (error: any) {
+      console.error('Upload error:', error);
+      let errorMessage = error.message || 'Failed to upload image. Please try again.';
+      
+      if (error.message?.includes('bucket not found') || error.message?.includes('Bucket not found') || error.message?.includes('not configured')) {
+        errorMessage = 'Storage bucket not configured. Please run database migrations to set up storage.';
+      }
+      
       toast({
         title: 'Error uploading image',
-        description: error.message || 'Failed to upload image. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {

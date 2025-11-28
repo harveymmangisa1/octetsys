@@ -1,72 +1,59 @@
-
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Globe, Server, Database } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import placeholderImages from '@/lib/placeholder-images.json';
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-950">
-      {/* Background with gradient and pattern */}
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background pt-20">
+      {/* Background Effects */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={placeholderImages.home.hero}
-          alt="Enterprise Technology"
-          fill
-          className="object-cover opacity-20"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/90 to-slate-950" />
-        {/* Abstract grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-background to-background" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
       <div className="container relative z-10 px-4 mx-auto">
         <div className="max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            Leading IT Solutions Provider
+            Next-Gen IT Infrastructure
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 leading-tight animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
-            Empowering Business <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400">
-              Through Innovation
+          {/* Main Heading */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-8 leading-[1.1] animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            Secure. Scalable. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500">
+              Future-Ready.
             </span>
           </h1>
 
-          <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            We deliver enterprise-grade cybersecurity, software development, and infrastructure solutions designed to scale with your ambition.
+          {/* Subheading */}
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            We engineer enterprise-grade cybersecurity and software solutions that power the world's most ambitious organizations.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-            <Button size="lg" className="h-14 px-8 text-lg bg-blue-600 hover:bg-blue-500 text-white rounded-full w-full sm:w-auto shadow-lg shadow-blue-900/20 transition-all hover:scale-105" asChild>
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+            <Button size="lg" className="h-14 px-10 text-lg rounded-full shadow-xl shadow-primary/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/30" asChild>
               <Link href="/book-consultation">
-                Start Your Transformation
+                Start Transformation
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-slate-700 text-white hover:bg-slate-800 hover:text-white rounded-full w-full sm:w-auto transition-all hover:scale-105" asChild>
+            <Button size="lg" variant="outline" className="h-14 px-10 text-lg rounded-full border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all hover:scale-105" asChild>
               <Link href="#services">
-                Explore Services
+                Our Solutions
               </Link>
             </Button>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="pt-10 border-t border-slate-800/50 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
-            <p className="text-sm text-slate-500 font-medium mb-8 uppercase tracking-wider">Trusted by Industry Leaders</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
-              <div className="flex items-center gap-2 text-slate-300 font-semibold text-lg hover:text-white transition-colors"><ShieldCheck className="h-6 w-6 text-blue-500" /> SecureTech</div>
-              <div className="flex items-center gap-2 text-slate-300 font-semibold text-lg hover:text-white transition-colors"><Globe className="h-6 w-6 text-blue-500" /> GlobalNet</div>
-              <div className="flex items-center gap-2 text-slate-300 font-semibold text-lg hover:text-white transition-colors"><Server className="h-6 w-6 text-blue-500" /> DataCorp</div>
-              <div className="flex items-center gap-2 text-slate-300 font-semibold text-lg hover:text-white transition-colors"><Database className="h-6 w-6 text-blue-500" /> CloudSystems</div>
-            </div>
-          </div>
+          {/* Social Proof / Trust Strip */}
+
         </div>
       </div>
     </section>

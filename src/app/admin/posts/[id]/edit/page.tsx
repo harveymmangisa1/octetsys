@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { PostForm } from '../../PostForm.client';
+import { PostForm } from '../../PostForm';
 
 export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -18,10 +18,5 @@ export default async function EditPostPage({ params }: { params: Promise<{ id: s
     notFound();
   }
 
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Edit Post</h1>
-      <PostForm post={post} />
-    </div>
-  );
+return <PostForm post={post} />;
 }

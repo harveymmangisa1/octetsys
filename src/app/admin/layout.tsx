@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { User, LogOut } from 'lucide-react';
+import { User, LogOut, Menu, X } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { cookies } from 'next/headers';
 
 async function handleSignOut() {
@@ -36,7 +43,51 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+        {/* Mobile Menu */}
+        <Sheet>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="outline" size="icon">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[240px] sm:w-[300px]">
+            <SheetHeader>
+              <SheetTitle>Admin Menu</SheetTitle>
+            </SheetHeader>
+            <nav className="flex flex-col gap-4 mt-6">
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 text-lg font-semibold"
+              >
+                Octet Systems Admin
+              </Link>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/admin/posts"
+                  className="text-muted-foreground transition-colors hover:text-foreground py-2"
+                >
+                  Posts
+                </Link>
+                <Link
+                  href="/admin/team"
+                  className="text-muted-foreground transition-colors hover:text-foreground py-2"
+                >
+                  Team
+                </Link>
+                <Link
+                  href="/admin/profile"
+                  className="text-muted-foreground transition-colors hover:text-foreground py-2"
+                >
+                  Profile
+                </Link>
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
+
+        {/* Desktop Navigation */}
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link
             href="/admin"
@@ -63,6 +114,8 @@ export default async function AdminLayout({
             Profile
           </Link>
         </nav>
+
+        {/* User Menu */}
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="ml-auto flex-1 sm:flex-initial">
             <DropdownMenu>
