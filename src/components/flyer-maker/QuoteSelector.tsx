@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 
 export function QuoteSelector() {
   const { quote } = useFlyerState();
@@ -35,10 +36,10 @@ export function QuoteSelector() {
 
   return (
     <Card className="shadow-md border-slate-200">
-       <CardHeader>
-            <CardTitle>Choose a Quote</CardTitle>
-            <CardDescription>Select a pre-written quote or write your own message.</CardDescription>
-        </CardHeader>
+      <CardHeader>
+        <CardTitle>Choose a Quote</CardTitle>
+        <CardDescription>Select a pre-written quote or write your own message.</CardDescription>
+      </CardHeader>
       <CardContent>
         <Tabs defaultValue="predefined" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
@@ -67,25 +68,25 @@ export function QuoteSelector() {
           </TabsContent>
           <TabsContent value="custom" className="mt-4">
             <div className="space-y-4">
-                <Textarea
-                    placeholder="Your custom message... (max 280 chars)"
-                    maxLength={280}
-                    value={customText}
-                    onChange={(e) => handleCustomChange(e.target.value, customAuthor)}
-                    rows={4}
-                />
-                <Input
-                    placeholder="Author (optional)"
-                    value={customAuthor}
-                    onChange={(e) => handleCustomChange(customText, e.target.value)}
-                />
+              <Textarea
+                placeholder="Your custom message... (max 280 chars)"
+                maxLength={280}
+                value={customText}
+                onChange={(e) => handleCustomChange(e.target.value, customAuthor)}
+                rows={4}
+              />
+              <Input
+                placeholder="Author (optional)"
+                value={customAuthor}
+                onChange={(e) => handleCustomChange(customText, e.target.value)}
+              />
             </div>
           </TabsContent>
         </Tabs>
         <div className="mt-6 flex justify-end">
-             <Button onClick={() => dispatch({ type: 'SET_STEP', payload: 3 })}>
-                Next Step
-            </Button>
+          <Button onClick={() => dispatch({ type: 'SET_STEP', payload: 3 })}>
+            Next Step
+          </Button>
         </div>
       </CardContent>
     </Card>

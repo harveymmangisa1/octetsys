@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // enable static HTML export
-  // Optional: set the output folder if you want a custom folder
-  distDir: '.vercel/output',
+  // Removed output: 'export' to support Server Actions and dynamic features
+  // Using @cloudflare/next-on-pages for Cloudflare Pages deployment
 };
 
 module.exports = nextConfig;
