@@ -15,7 +15,7 @@ import { cookies } from 'next/headers';
 
 async function handleSignOut() {
   'use server';
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   await supabase.auth.signOut();
   redirect('/login');
@@ -26,7 +26,7 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 

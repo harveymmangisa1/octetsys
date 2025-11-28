@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 export default async function EventsPage() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = await createSupabaseServerClient(cookieStore);
   const { data: posts, error } = await supabase
     .from('posts')

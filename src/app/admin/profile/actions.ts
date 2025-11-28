@@ -14,7 +14,7 @@ const profileSchema = z.object({
 });
 
 export async function getProfile() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -51,7 +51,7 @@ export async function getProfile() {
 }
 
 export async function updateProfile(values: z.infer<typeof profileSchema>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 

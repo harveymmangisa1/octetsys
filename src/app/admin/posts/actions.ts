@@ -17,7 +17,7 @@ const formSchema = z.object({
 });
 
 export async function createPost(values: z.infer<typeof formSchema>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -48,7 +48,7 @@ export async function createPost(values: z.infer<typeof formSchema>) {
 }
 
 export async function updatePost(id: string, values: z.infer<typeof formSchema>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await supabase.auth.getUser();
 

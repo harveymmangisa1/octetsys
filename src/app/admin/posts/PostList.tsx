@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { PlusIcon, EditIcon, TrashIcon } from 'lucide-react';
 
 export async function PostList() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const supabase = await createSupabaseServerClient(cookieStore);
   const { data: posts, error } = await supabase.from('posts').select('*');
 
