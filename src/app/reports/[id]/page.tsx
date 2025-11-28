@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 export const runtime = 'edge';
@@ -13,7 +13,8 @@ interface Report {
   created_at: string;
 }
 
-const ReportPage = ({ params }: { params: { id: string } }) => {
+const ReportPage = ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = use(params);
   const [report, setReport] = useState<Report | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +25,7 @@ const ReportPage = ({ params }: { params: { id: string } }) => {
       const { data, error } = await supabase
         .from('reports')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single();
 
       if (error) {
@@ -35,10 +36,10 @@ const ReportPage = ({ params }: { params: { id: string } }) => {
       setLoading(false);
     };
 
-    if (params.id) {
+    if (id) {
       fetchReport();
     }
-  }, [params.id]);
+  }, [id]);
 
   return (
     <div className="flex flex-col min-h-dvh bg-background">
