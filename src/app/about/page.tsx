@@ -7,7 +7,14 @@ import { getPublicTeamMembers } from "./actions";
 export const runtime = 'edge';
 
 export default async function AboutPage() {
-  const members = await getPublicTeamMembers();
+  let members = [];
+
+  try {
+    members = await getPublicTeamMembers();
+  } catch (error) {
+    console.error('Failed to fetch team members:', error);
+    // Continue with empty array if fetch fails
+  }
 
   return (
     <div className="flex flex-col min-h-dvh bg-background">
