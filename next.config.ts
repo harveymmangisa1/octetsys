@@ -16,6 +16,10 @@ const nextConfig = {
       },
     ],
   },
+  // Turbopack configuration
+  turbopack: {
+    root: __dirname,
+  },
   // Removed output: 'export' to support Server Actions and dynamic features
   // Using @cloudflare/next-on-pages for Cloudflare Pages deployment
 };
