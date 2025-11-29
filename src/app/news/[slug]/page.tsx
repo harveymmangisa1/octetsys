@@ -5,14 +5,14 @@ import { cookies } from 'next/headers';
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-export default async function NewsPostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function NewsPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: post, error } = await supabase
     .from('posts')
     .select('*')
-    .eq('id', id)
+    .eq('slug', slug)
     .single();
 
   if (error || !post) {

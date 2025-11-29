@@ -21,7 +21,7 @@ export type PostType = 'news' | 'blog' | 'event';
 export type PostStatus = 'draft' | 'published';
 
 // Helper types for forms
-export type PostFormData = Omit<PostInsert, 'id' | 'author_id' | 'created_at' | 'updated_at' | 'search_vector'>;
+export type PostFormData = Omit<PostInsert, 'id' | 'author_id' | 'created_at' | 'updated_at' | 'search_vector' | 'slug'>;
 export type ProfileFormData = Omit<ProfileInsert, 'id' | 'created_at' | 'updated_at'>;
 
 // API Response types

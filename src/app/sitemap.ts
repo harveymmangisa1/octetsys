@@ -11,11 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Fetch all published posts
     const { data: posts } = await supabase
         .from('posts')
-        .select('id, type, updated_at')
+        .select('id, type, updated_at, slug')
         .eq('status', 'published');
 
     const postEntries: MetadataRoute.Sitemap = (posts || []).map((post) => ({
-        url: `${baseUrl}/${post.type}/${post.id}`,
+        url: `${baseUrl}/${post.type}/${post.slug || post.id}`,
         lastModified: new Date(post.updated_at),
         changeFrequency: 'weekly' as const,
         priority: 0.7,

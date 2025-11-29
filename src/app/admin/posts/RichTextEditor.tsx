@@ -119,6 +119,7 @@ const TiptapToolbar = ({ editor }: { editor: Editor | null }) => {
 
 export function RichTextEditor({ value, onChange, placeholder }: { value: string, onChange: (value: string) => void, placeholder?: string }) {
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         bulletList: {

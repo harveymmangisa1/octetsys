@@ -9,7 +9,8 @@ export default async function BlogPage() {
     .from('posts')
     .select('*')
     .eq('type', 'blog')
-    .eq('status', 'published');
+    .eq('status', 'published')
+    .order('created_at', { ascending: false });
 
   if (error) {
     return <p className="text-destructive">{error.message}</p>;
@@ -22,7 +23,7 @@ export default async function BlogPage() {
         {posts.map((post) => (
           <div key={post.id}>
             <h2 className="text-2xl font-bold">
-              <Link href={`/blog/${post.id}`}>{post.title}</Link>
+              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
             </h2>
             <p className="text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
             <div className="mt-4">{post.content}</div>

@@ -9,6 +9,7 @@ export interface Database {
                 Row: {
                     id: string;
                     title: string;
+                    slug: string | null;
                     content: string;
                     excerpt: string | null;
                     type: 'news' | 'blog' | 'event';
@@ -25,6 +26,7 @@ export interface Database {
                 Insert: {
                     id?: string;
                     title: string;
+                    slug?: string | null;
                     content: string;
                     excerpt?: string | null;
                     type: 'news' | 'blog' | 'event';
@@ -41,6 +43,7 @@ export interface Database {
                 Update: {
                     id?: string;
                     title?: string;
+                    slug?: string | null;
                     content?: string;
                     excerpt?: string | null;
                     type?: 'news' | 'blog' | 'event';

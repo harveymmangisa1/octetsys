@@ -2,14 +2,14 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-export default async function EventPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const cookieStore = await cookies();
   const supabase = await createSupabaseServerClient(cookieStore);
   const { data: post, error } = await supabase
     .from('posts')
     .select('*')
-    .eq('id', id)
+    .eq('slug', slug)
     .single();
 
   if (error || !post) {

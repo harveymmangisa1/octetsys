@@ -3,14 +3,19 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: post } = await supabase
     .from('posts')
-    .select('*')
-    .eq('id', id)
+    .select(`
+      *,
+      profiles!left (
+        full_name
+      )
+    `)
+    .eq('slug', slug)
     .single();
 
   if (!post) {
@@ -29,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       type: 'article',
       publishedTime: post.created_at,
       modifiedTime: post.updated_at,
-      authors: [post.author_id],
+      authors: post.profiles?.full_name ? [post.profiles.full_name] : [post.author_id],
     },
     twitter: {
       card: 'summary_large_image',
@@ -41,14 +46,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data: post, error } = await supabase
     .from('posts')
-    .select('*')
-    .eq('id', id)
+    .select(`
+      *,
+      profiles!left (
+        id,
+        full_name,
+        avatar_url,
+        bio
+      )
+    `)
+    .eq('slug', slug)
     .single();
 
   if (error || !post) {
@@ -61,6 +74,33 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         {post.excerpt && (
           <p className="text-xl text-muted-foreground mb-4">{post.excerpt}</p>
+        )}
+        {post.profiles && (
+          <div className="flex items-center gap-3 mb-4 p-4 bg-muted/50 rounded-lg">
+            {post.profiles.avatar_url ? (
+              <img
+                src={post.profiles.avatar_url}
+                alt={post.profiles.full_name || 'Author'}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                <span className="text-lg font-semibold">
+                  {post.profiles.full_name?.charAt(0)?.toUpperCase() || 'A'}
+                </span>
+              </div>
+            )}
+            <div className="flex-1">
+              <div className="font-medium text-foreground">
+                {post.profiles.full_name || 'Anonymous Author'}
+              </div>
+              {post.profiles.bio && (
+                <div className="text-sm text-muted-foreground line-clamp-2">
+                  {post.profiles.bio}
+                </div>
+              )}
+            </div>
+          </div>
         )}
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <time dateTime={post.created_at}>
