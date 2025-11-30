@@ -38,7 +38,7 @@ export function FlyerPreview() {
   }, [image.preview]);
 
   return (
-    <div className="aspect-square w-full max-w-[1080px] mx-auto bg-white rounded-lg shadow-2xl overflow-hidden relative border-0">
+    <div id="flyer-preview-container" className="aspect-square w-full max-w-[1080px] mx-auto bg-white rounded-lg shadow-2xl overflow-hidden relative border-0">
       {/* Background Image Container - Using regular img tag for download compatibility */}
       <div
         ref={bgImageRef}

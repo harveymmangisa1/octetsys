@@ -16,8 +16,8 @@ export function DownloadButton({ format, variant }: DownloadButtonProps) {
         try {
             setIsDownloading(true);
 
-            // Capture the entire flyer container, not just the content
-            const element = document.querySelector('.aspect-square') as HTMLElement;
+            // Capture the entire flyer container using the specific ID
+            const element = document.getElementById('flyer-preview-container');
 
             if (!element) {
                 console.error('Flyer container not found');
@@ -30,19 +30,11 @@ export function DownloadButton({ format, variant }: DownloadButtonProps) {
             const canvas = await html2canvas(element, {
                 useCORS: true,
                 allowTaint: false,
-                scale: 3, // Higher quality for better resolution
-                backgroundColor: null,
+                scale: 2, // Reduced from 3 to prevent mobile crashes while maintaining good quality
+                backgroundColor: '#ffffff', // Ensure white background
                 logging: false,
                 width: element.offsetWidth,
                 height: element.offsetHeight,
-                onclone: (clonedDoc) => {
-                    // Ensure all styles are preserved in the clone
-                    const clonedElement = clonedDoc.querySelector('.aspect-square');
-                    if (clonedElement) {
-                        // Force background images to be visible
-                        (clonedElement as HTMLElement).style.backgroundImage = 'none';
-                    }
-                }
             });
 
             // Create a higher quality image
