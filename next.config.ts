@@ -15,6 +15,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['octet-systems.com'],
   },
   // Turbopack configuration
   turbopack: {

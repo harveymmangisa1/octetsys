@@ -14,7 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 
 const violenceTypes = [
   "Harassment",
-  "Bullying", 
+  "Bullying",
   "Threats",
   "Hate Speech",
   "Doxing",
@@ -22,6 +22,25 @@ const violenceTypes = [
   "Impersonation",
   "Sexual Harassment",
   "Other"
+];
+
+const helpTypes = [
+  "Legal Assistance",
+  "Counseling/Therapy",
+  "Police Intervention",
+  "Platform Support (Content Removal)",
+  "Safety Planning",
+  "Support Group",
+  "Medical Help",
+  "Financial Assistance",
+  "Housing Support",
+  "Technical Security (Account Protection)",
+  "Other"
+];
+
+const genderOptions = [
+  "Woman",
+  "Man",
 ];
 
 export function AnonymousReportForm() {
@@ -36,7 +55,10 @@ export function AnonymousReportForm() {
     description: "",
     platform: "",
     severity: "",
-    additionalDetails: ""
+    additionalDetails: "",
+    helpReceived: "",
+    desiredHelpTypes: [] as string[],
+    gender: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,20 +66,23 @@ export function AnonymousReportForm() {
     setIsSubmitting(true);
 
     try {
-        const { data, error } = await supabase.rpc('create_anonymous_report', {
-            violence_type_in: formData.violenceType,
-            description_in: formData.description,
-            platform_in: formData.platform,
-            severity_in: formData.severity,
-            additional_details_in: formData.additionalDetails,
-        });
+      const { data, error } = await supabase.rpc('create_anonymous_report', {
+        violence_type_in: formData.violenceType,
+        description_in: formData.description,
+        platform_in: formData.platform,
+        severity_in: formData.severity,
+        additional_details_in: formData.additionalDetails,
+        help_received_in: formData.helpReceived === 'yes',
+        desired_help_types_in: formData.desiredHelpTypes,
+        gender_in: formData.gender,
+      });
 
       if (error) throw error;
 
-      
+
       setReportId(data);
       setIsSubmitted(true);
-      
+
       toast({
         title: "Report Submitted Successfully",
         description: "Your anonymous report has been received. Thank you for your courage.",
@@ -99,13 +124,13 @@ export function AnonymousReportForm() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-              <Button 
+              <Button
                 onClick={() => window.location.href = "/"}
                 variant="outline"
               >
                 Return Home
               </Button>
-              <Button 
+              <Button
                 onClick={() => {
                   setIsSubmitted(false);
                   setFormData({
@@ -113,7 +138,10 @@ export function AnonymousReportForm() {
                     description: "",
                     platform: "",
                     severity: "",
-                    additionalDetails: ""
+                    additionalDetails: "",
+                    helpReceived: "",
+                    desiredHelpTypes: [],
+                    gender: ""
                   });
                 }}
               >
@@ -143,8 +171,8 @@ export function AnonymousReportForm() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="violenceType">Type of Cyber Violence *</Label>
-              <Select 
-                value={formData.violenceType} 
+              <Select
+                value={formData.violenceType}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, violenceType: value }))}
                 required
               >
@@ -171,9 +199,29 @@ export function AnonymousReportForm() {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="gender">Gender Identity (Optional)</Label>
+              <Select
+                value={formData.gender}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your gender identity" />
+                </SelectTrigger>
+                <SelectContent>
+                  {genderOptions.map((option) => (
+                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-gray-500 mt-1">
+                This helps us understand demographic patterns in cyber violence. Your response is anonymous.
+              </p>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="severity">Severity Level *</Label>
-              <Select 
-                value={formData.severity} 
+              <Select
+                value={formData.severity}
                 onValueChange={(value) => setFormData(prev => ({ ...prev, severity: value }))}
                 required
               >
@@ -212,6 +260,57 @@ export function AnonymousReportForm() {
               />
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="helpReceived">Were you able to get help after the incident? *</Label>
+              <Select
+                value={formData.helpReceived}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, helpReceived: value }))}
+                required
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Did you receive any help?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yes">Yes, I got help</SelectItem>
+                  <SelectItem value="no">No, I couldn't get help</SelectItem>
+                  <SelectItem value="tried">I tried but help wasn't effective</SelectItem>
+                  <SelectItem value="not_needed">I didn't need help</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>What type of help would you have liked to receive? (Select all that apply)</Label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                {helpTypes.map((type) => (
+                  <div key={type} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id={type}
+                      checked={formData.desiredHelpTypes.includes(type)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setFormData(prev => ({
+                            ...prev,
+                            desiredHelpTypes: [...prev.desiredHelpTypes, type]
+                          }));
+                        } else {
+                          setFormData(prev => ({
+                            ...prev,
+                            desiredHelpTypes: prev.desiredHelpTypes.filter(t => t !== type)
+                          }));
+                        }
+                      }}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <Label htmlFor={type} className="text-sm font-normal text-gray-700">
+                      {type}
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <div className="flex items-start gap-2">
                 <AlertCircle className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -227,9 +326,9 @@ export function AnonymousReportForm() {
               </div>
             </div>
 
-            <Button 
-              type="submit" 
-              className="w-full" 
+            <Button
+              type="submit"
+              className="w-full"
               disabled={isSubmitting}
               size="lg"
             >

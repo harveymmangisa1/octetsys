@@ -26,12 +26,12 @@ export function ThemeSelector() {
                     onClick={() => dispatch({ type: 'SET_THEME', payload: { name: t.name, gradient: t.gradient } })}
                     className="cursor-pointer group space-y-2"
                 >
-                    <div
+<div
                         className={cn(
-                            "relative w-full h-24 rounded-xl ring-1 transition-all",
+                            "relative w-full h-24 rounded-xl ring-1 transition-all bg-gradient-to-br",
+                            t.gradient,
                             isSelected ? 'ring-slate-900 shadow-lg scale-[1.01]' : 'ring-slate-200 hover:ring-slate-400'
                         )}
-                        style={{ background: t.preview }}
                     >
                     {isSelected && (
                         <div className="absolute top-2 right-2 bg-white/80 rounded-full p-1">

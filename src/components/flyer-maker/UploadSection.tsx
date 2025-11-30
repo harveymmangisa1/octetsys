@@ -1,4 +1,3 @@
-
 'use client';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -39,8 +38,8 @@ export function UploadSection() {
           <CardDescription>This photo will be featured on your flyer.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="relative group aspect-[4/5] rounded-xl overflow-hidden ring-1 ring-slate-200">
-            <Image src={image.preview} alt="Uploaded preview" fill className="object-cover" />
+          <div className="relative group aspect-square max-w-md mx-auto rounded-xl overflow-hidden ring-1 ring-slate-200">
+            <Image src={image.preview} alt="Uploaded preview" fill sizes="(max-width: 768px) 100vw, 450px" className="object-cover" />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <Button variant="destructive" onClick={() => dispatch({ type: 'CLEAR_IMAGE' })}>
                 <X className="mr-2 h-4 w-4" /> Remove
@@ -54,7 +53,7 @@ export function UploadSection() {
             </Button>
           </div>
         </CardContent>
-      </Card >
+      </Card>
     )
   }
 

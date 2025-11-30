@@ -96,7 +96,7 @@ export interface Database {
                     updated_at?: string;
                 };
             };
-            cyber_violence_reports: {
+cyber_violence_reports: {
                 Row: {
                     id: string;
                     violence_type: string;
@@ -104,6 +104,9 @@ export interface Database {
                     platform: string | null;
                     severity: string | null;
                     additional_details: string | null;
+                    help_received: boolean | null;
+                    desired_help_types: string[] | null;
+                    gender: string | null;
                     created_at: string;
                 };
                 Insert: {
@@ -113,6 +116,9 @@ export interface Database {
                     platform?: string | null;
                     severity?: string | null;
                     additional_details?: string | null;
+                    help_received?: boolean | null;
+                    desired_help_types?: string[] | null;
+                    gender?: string | null;
                     created_at?: string;
                 };
                 Update: {
@@ -122,6 +128,9 @@ export interface Database {
                     platform?: string | null;
                     severity?: string | null;
                     additional_details?: string | null;
+                    help_received?: boolean | null;
+                    desired_help_types?: string[] | null;
+                    gender?: string | null;
                     created_at?: string;
                 };
             };
@@ -137,13 +146,16 @@ export interface Database {
             };
         };
         Functions: {
-            create_anonymous_report: {
+create_anonymous_report: {
                 Args: {
                     violence_type_in: string;
                     description_in: string;
                     platform_in: string;
                     severity_in: string;
                     additional_details_in: string;
+                    help_received_in: boolean;
+                    desired_help_types_in: string[];
+                    gender_in: string;
                 };
                 Returns: string;
             };

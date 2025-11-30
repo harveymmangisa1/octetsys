@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function BlogPage() {
   const cookieStore = await cookies();
@@ -21,13 +22,40 @@ export default async function BlogPage() {
       <h1 className="text-3xl font-bold mb-4">Blog</h1>
       <div className="space-y-8">
         {posts.map((post) => (
-          <div key={post.id}>
-            <h2 className="text-2xl font-bold">
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <article key={post.id} className="border-b pb-8">
+            {post.image && (
+              <div className="relative w-full aspect-video mb-4 rounded-lg overflow-hidden bg-gray-100">
+                <Image
+                  src={post.image.startsWith('http') ? post.image : `${process.env.NEXT_PUBLIC_SITE_URL || ''}${post.image}`}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            )}
+            <h2 className="text-2xl font-bold mb-2">
+              <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors">
+                {post.title}
+              </Link>
             </h2>
-            <p className="text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
-            <div className="mt-4">{post.content}</div>
-          </div>
+            {post.excerpt && (
+              <p className="text-gray-600 mb-2">{post.excerpt}</p>
+            )}
+            <p className="text-sm text-gray-500 mb-4">
+              {new Date(post.created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </p>
+            <Link
+              href={`/blog/${post.slug}`}
+              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Read more →
+            </Link>
+          </article>
         ))}
       </div>
     </div>

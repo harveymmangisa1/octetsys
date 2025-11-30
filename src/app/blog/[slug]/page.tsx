@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -77,19 +78,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
         {post.profiles && (
           <div className="flex items-center gap-3 mb-4 p-4 bg-muted/50 rounded-lg">
-            {post.profiles.avatar_url ? (
-              <img
-                src={post.profiles.avatar_url}
-                alt={post.profiles.full_name || 'Author'}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-            ) : (
-              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                <span className="text-lg font-semibold">
-                  {post.profiles.full_name?.charAt(0)?.toUpperCase() || 'A'}
-                </span>
-              </div>
-            )}
+            <div className="relative w-12 h-12">
+              {post.profiles.avatar_url && (
+                <Image
+                  src={post.profiles.avatar_url}
+                  alt={post.profiles.full_name || 'Author'}
+                  fill
+                  className="rounded-full object-cover"
+                />
+              )}
+              {!post.profiles.avatar_url && (
+                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                  <span className="text-lg font-semibold">
+                    {post.profiles.full_name?.charAt(0)?.toUpperCase() || 'A'}
+                  </span>
+                </div>
+              )}
+            </div>
             <div className="flex-1">
               <div className="font-medium text-foreground">
                 {post.profiles.full_name || 'Anonymous Author'}
@@ -122,11 +127,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       </header>
       {post.image && (
-        <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-auto rounded-lg mb-8"
-        />
+        <div className="relative w-full aspect-video rounded-lg mb-8 overflow-hidden bg-gray-100">
+          <Image
+            src={post.image.startsWith('http') ? post.image : `${process.env.NEXT_PUBLIC_SITE_URL || ''}${post.image}`}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 800px"
+            priority
+          />
+        </div>
       )}
       <div
         className="prose prose-lg dark:prose-invert max-w-none"

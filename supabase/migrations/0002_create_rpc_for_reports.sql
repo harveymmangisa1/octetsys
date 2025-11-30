@@ -3,7 +3,10 @@ CREATE OR REPLACE FUNCTION public.create_anonymous_report(
     description_in text,
     platform_in text,
     severity_in text,
-    additional_details_in text
+    additional_details_in text,
+    help_received_in boolean,
+    desired_help_types_in text[],
+    gender_in text
 )
 RETURNS bigint
 LANGUAGE plpgsql
@@ -13,8 +16,8 @@ AS $$
 DECLARE
     new_report_id bigint;
 BEGIN
-    INSERT INTO cyber_violence_reports(violence_type, description, platform, severity, additional_details, status)
-    VALUES (violence_type_in, description_in, platform_in, severity_in, additional_details_in, 'submitted')
+    INSERT INTO cyber_violence_reports(violence_type, description, platform, severity, additional_details, help_received, desired_help_types, gender, status)
+    VALUES (violence_type_in, description_in, platform_in, severity_in, additional_details_in, help_received_in, desired_help_types_in, gender_in, 'submitted')
     RETURNING id INTO new_report_id;
 
     RETURN new_report_id;
