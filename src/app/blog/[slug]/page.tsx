@@ -51,6 +51,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
+
+  console.log('Fetching blog post with slug:', slug);
+
   const { data: post, error } = await supabase
     .from('posts')
     .select(`
@@ -65,9 +68,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .eq('slug', slug)
     .single();
 
+  if (error) {
+    console.error('Error fetching blog post:', error);
+    console.error('Slug attempted:', slug);
+  }
+
   if (error || !post) {
+    console.log('Post not found for slug:', slug);
     notFound();
   }
+
+  console.log('Successfully loaded post:', post.title);
 
   return (
     <article className="max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">

@@ -11,10 +11,21 @@ export default async function BlogPage() {
     .select('*')
     .eq('type', 'blog')
     .eq('status', 'published')
+    .not('slug', 'is', null) // Filter out posts without slugs
     .order('created_at', { ascending: false });
 
   if (error) {
-    return <p className="text-destructive">{error.message}</p>;
+    console.error('Error fetching blog posts:', error);
+    return <p className="text-destructive">Error loading blog posts. Please try again later.</p>;
+  }
+
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold mb-4">Blog</h1>
+        <p className="text-muted-foreground">No blog posts available yet. Check back soon!</p>
+      </div>
+    );
   }
 
   return (
