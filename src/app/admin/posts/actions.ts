@@ -16,6 +16,16 @@ const formSchema = z.object({
   seo_description: z.string().optional(),
 });
 
+function slugify(text: string) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+    .replace(/\-\-+/g, '-');  // Replace multiple - with single -
+}
+
 export async function createPost(values: z.infer<typeof formSchema>) {
   const cookieStore = await cookies();
   const supabase = createSupabaseServerClient(cookieStore);
@@ -25,9 +35,12 @@ export async function createPost(values: z.infer<typeof formSchema>) {
     return { error: 'You must be logged in to create a post.' };
   }
 
+  const slug = slugify(values.title);
+
   const { error } = await supabase.from('posts').insert([
     {
       title: values.title,
+      slug,
       content: values.content,
       type: values.type,
       status: values.status,
@@ -55,6 +68,9 @@ export async function updatePost(id: string, values: z.infer<typeof formSchema>)
   if (!user) {
     return { error: 'You must be logged in to update a post.' };
   }
+
+  // We don't automatically update slug on title change to preserve existing links
+  // But we could add logic here if needed. For now, we keep it stable.
 
   const { error } = await supabase
     .from('posts')
