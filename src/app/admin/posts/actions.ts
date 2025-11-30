@@ -23,7 +23,15 @@ function slugify(text: string) {
     .trim()
     .replace(/\s+/g, '-')     // Replace spaces with -
     .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-');  // Replace multiple - with single -
+    .replace(/\-\-+/g, '-')   // Replace multiple - with single -
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+}
+
+function generateUniqueSlug(title: string): string {
+  const baseSlug = slugify(title);
+  const timestamp = Date.now().toString(36); // Convert timestamp to base36 for shorter string
+  const randomStr = Math.random().toString(36).substring(2, 6); // Add random component
+  return `${baseSlug}-${timestamp}${randomStr}`;
 }
 
 export async function createPost(values: z.infer<typeof formSchema>) {
@@ -35,9 +43,10 @@ export async function createPost(values: z.infer<typeof formSchema>) {
     return { error: 'You must be logged in to create a post.' };
   }
 
-  const slug = slugify(values.title);
+  // Generate unique slug with timestamp and random component
+  const slug = generateUniqueSlug(values.title);
 
-  const { error } = await supabase.from('posts').insert([
+  const { error, data } = await supabase.from('posts').insert([
     {
       title: values.title,
       slug,
@@ -51,13 +60,17 @@ export async function createPost(values: z.infer<typeof formSchema>) {
       seo_title: values.seo_title,
       seo_description: values.seo_description,
     },
-  ]);
+  ]).select();
 
   if (error) {
+    // Check if it's a duplicate slug error
+    if (error.message?.includes('duplicate key') || error.message?.includes('unique constraint')) {
+      return { error: 'A post with a similar title already exists. Please modify the title slightly.' };
+    }
     return { error: error.message };
   }
 
-  return { error: null };
+  return { error: null, data };
 }
 
 export async function updatePost(id: string, values: z.infer<typeof formSchema>) {
