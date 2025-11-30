@@ -39,7 +39,7 @@ export function FlyerPreview() {
 
   return (
     <div id="flyer-preview-container" className="aspect-square w-full max-w-[1080px] mx-auto bg-white rounded-lg shadow-2xl overflow-hidden relative border-0">
-      {/* Background Image Container - Using regular img tag for download compatibility */}
+      {/* Background Image Container */}
       <div
         ref={bgImageRef}
         className="absolute inset-0 z-0"
@@ -72,57 +72,57 @@ export function FlyerPreview() {
         }}
       />
 
-      {/* Content Container */}
+      {/* Content Container - Responsive padding */}
       <div
         id="flyer-canvas"
-        className="w-full h-full flex flex-col relative p-6 text-white z-10"
+        className="w-full h-full flex flex-col relative p-4 sm:p-6 md:p-8 text-white z-10"
       >
-        {/* Header */}
-        <header className="flex justify-between items-start z-10 mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-lg shadow-md">
-              <Logo className="h-5 w-5 text-slate-800" />
+        {/* Header - Responsive sizing */}
+        <header className="flex justify-between items-start z-10 mb-2 sm:mb-3 gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink min-w-0">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center bg-white/95 backdrop-blur-sm rounded-lg shadow-md flex-shrink-0">
+              <Logo className="h-4 w-4 sm:h-5 sm:w-5 text-slate-800" />
             </div>
-            <span className="font-black text-base tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <span className="font-black text-xs sm:text-sm md:text-base tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] truncate">
               Octet Systems
             </span>
           </div>
-          <Badge className="bg-white/95 backdrop-blur-sm border-0 text-slate-900 text-xs px-3 py-1.5 font-semibold shadow-md">
+          <Badge className="bg-white/95 backdrop-blur-sm border-0 text-slate-900 text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 font-semibold shadow-md flex-shrink-0 whitespace-nowrap">
             #16DaysOfActivism
           </Badge>
         </header>
 
-        {/* Main Content Area */}
-        <main className="flex-1 flex flex-col justify-center items-center text-center z-10 relative px-4">
+        {/* Main Content Area - Responsive spacing and sizing */}
+        <main className="flex-1 flex flex-col justify-center items-center text-center z-10 relative px-2 sm:px-4">
           {/* Show placeholder icon when no image uploaded */}
           {!image.preview && (
-            <div className="relative mb-4 group">
-              <div className="relative w-32 h-32">
+            <div className="relative mb-3 sm:mb-4 group">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32">
                 {/* Subtle Glow Effect */}
                 <div className="absolute inset-0 bg-white/15 rounded-2xl blur-lg transition-all duration-300 opacity-50"></div>
 
                 {/* Icon Container */}
                 <div className="relative w-full h-full bg-white/5 backdrop-blur-sm rounded-xl border border-white/20 shadow-xl overflow-hidden flex items-center justify-center">
-                  <ImageIcon className="w-8 h-8 text-white/30" />
+                  <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white/30" />
                 </div>
               </div>
             </div>
           )}
 
-          {/* Text Content */}
-          <div className="space-y-3 max-w-lg mx-auto">
-            <h2 className="font-black text-2xl leading-tight tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+          {/* Text Content - Responsive sizing and spacing */}
+          <div className="space-y-2 sm:space-y-3 max-w-full sm:max-w-md md:max-w-lg mx-auto px-2">
+            <h2 className="font-black text-base sm:text-xl md:text-2xl leading-tight tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] break-words">
               #UniteAgainstDigitalViolence
             </h2>
 
-            <blockquote className="space-y-3">
+            <blockquote className="space-y-2 sm:space-y-3">
               <div className="relative">
-                <p className="italic text-base leading-relaxed font-semibold text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                <p className="italic text-sm sm:text-base leading-relaxed font-semibold text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] break-words">
                   "{quote.text}"
                 </p>
               </div>
               {quote.author && (
-                <cite className="block not-italic font-black text-sm text-white/90 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                <cite className="block not-italic font-black text-xs sm:text-sm text-white/90 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] break-words">
                   — {quote.author}
                 </cite>
               )}
@@ -130,13 +130,13 @@ export function FlyerPreview() {
           </div>
         </main>
 
-        {/* Footer */}
+        {/* Footer - Responsive sizing */}
         <footer className="text-center z-10 mt-2">
-          <p className="text-xs font-bold tracking-wider text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] mb-1">
+          <p className="text-[10px] sm:text-xs font-bold tracking-wider text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] mb-0.5 sm:mb-1 break-words px-2">
             Stand Up. Speak Out. Create Change.
           </p>
-          <p className="font-black text-sm tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            Octet Systems
+          <p className="font-black text-xs sm:text-sm tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            Octet Systems. Web Dev | Cyber Sec | Networks | +265 999 77 11 55
           </p>
         </footer>
       </div>
