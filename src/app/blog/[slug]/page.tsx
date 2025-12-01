@@ -90,12 +90,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const stats: {
+  const stats = (engagementStats as {
     views_count: number;
     likes_count: number;
     comments_count: number;
     user_liked: boolean;
-  } = engagementStats || {
+  } | null) || {
     views_count: post.views_count || 0,
     likes_count: 0,
     comments_count: 0,
