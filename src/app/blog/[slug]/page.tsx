@@ -90,7 +90,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const stats = engagementStats || {
+  const stats: {
+    views_count: number;
+    likes_count: number;
+    comments_count: number;
+    user_liked: boolean;
+  } = engagementStats || {
     views_count: post.views_count || 0,
     likes_count: 0,
     comments_count: 0,
@@ -156,7 +161,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
           </div>
-          
+
           <BlogEngagement
             postId={post.id}
             initialViews={stats.views_count}
@@ -182,7 +187,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         className="prose prose-lg dark:prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
-      
+
       <div className="mt-12 pt-8 border-t">
         <BlogComments postId={post.id} />
       </div>
