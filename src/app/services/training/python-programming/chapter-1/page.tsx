@@ -149,7 +149,7 @@ export default function Chapter1Page() {
                                 <ul className="space-y-2 text-muted-foreground">
                                     <li className="flex items-start gap-2">
                                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                                        <span><strong>Simple &amp; Readable:</strong> Python code looks like plain English, making it easy to read and understand</span>
+                                        <span><strong>Simple & Readable:</strong> Python code looks like plain English, making it easy to read and understand</span>
                                     </li>
                                     <li className="flex items-start gap-2">
                                         <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -196,10 +196,10 @@ export default function Chapter1Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Try it yourself:</h4>
                                 <p className="text-muted-foreground mb-4">
-                                    Click &quot;Run&quot; to see the output. Try changing the message inside the quotes!
+                                    Click "Run" to see the output. Try changing the message inside the quotes!
                                 </p>
                                 <CodeEditor
-                                    initialCode='# Your first Python program!\nprint(&quot;Hello, World!&quot;)\nprint(&quot;Welcome to Python programming!&quot;)\n\n# Try changing the messages above\n# and run the code again!'
+                                    initialCode='# Your first Python program!\nprint("Hello, World!")\nprint("Welcome to Python programming!")\n\n# Try changing the messages above\n# and run the code again!'
                                     expectedOutput="Hello, World!\nWelcome to Python programming!"
                                     hint="Python uses the print() function to display text. Anything inside quotes will be printed exactly as written."
                                 />
@@ -228,13 +228,13 @@ export default function Chapter1Page() {
                                 <h4 className="font-semibold text-green-800 mb-2">💡 Key Concepts</h4>
                                 <ul className="text-green-700 text-sm space-y-1">
                                     <li><strong>Comments:</strong> Lines starting with <code className="bg-green-100 px-1 rounded">#</code> are ignored by Python</li>
-                                        <span><strong>Indentation:</strong> Python uses spaces/tabs to organize code (we&apos;ll learn more later)</span>
-                                    <li><strong>No semicolons:</strong> Unlike many languages, Python doesn&apos;t require semicolons at line ends</li>
+                                    <li><strong>Indentation:</strong> Python uses spaces/tabs to organize code (we'll learn more later)</li>
+                                    <li><strong>No semicolons:</strong> Unlike many languages, Python doesn't require semicolons at line ends</li>
                                 </ul>
                             </div>
 
                             <div>
-                                <h4 className="font-semibold mb-3">Practice with comments and syntax:</h4>
+                                <h4 className="font-semib old mb-3">Practice with comments and syntax:</h4>
                                 <CodeEditor
                                     initialCode={"# This is a comment - Python will ignore this line\n\n# Let's print multiple lines\nprint(\"Python is fun!\")\nprint(\"Syntax is clean and readable\")\n\n# You can write comments anywhere\n# to explain what your code does\nprint(\"Comments help others understand your code\")"}
                                     expectedOutput="Python is fun!\nSyntax is clean and readable\nComments help others understand your code"
@@ -277,7 +277,7 @@ export default function Chapter1Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Try these calculations:</h4>
                                 <CodeEditor
-                                    initialCode='# Python can do math!\nprint(&quot;Basic Math Operations:&quot;)\nprint(2 + 3)      # Addition\nprint(10 - 4)     # Subtraction\nprint(6 * 7)      # Multiplication\nprint(15 / 3)     # Division\n\n# Try your own calculations\nprint(20 + 30 * 2) # Order of operations'
+                                    initialCode='# Python can do math!\nprint("Basic Math Operations:")\nprint(2 + 3)      # Addition\nprint(10 - 4)     # Subtraction\nprint(6 * 7)      # Multiplication\nprint(15 / 3)     # Division\n\n# Try your own calculations\nprint(20 + 30 * 2) # Order of operations'
                                     expectedOutput="Basic Math Operations:\n5\n6\n42\n5.0\n80"
                                     hint="Python follows standard mathematical order of operations (PEMDAS). Try different combinations!"
                                 />
@@ -328,7 +328,7 @@ export default function Chapter1Page() {
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
-                                    Great job! You&apos;ve written your first Python programs and learned the basics.
+                                    Great job! You've written your first Python programs and learned the basics.
                                     Ready to continue your journey?
                                 </p>
                             </div>
