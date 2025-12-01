@@ -124,7 +124,7 @@ export default function Chapter2Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Try creating variables:</h4>
                                 <CodeEditor
-                                    initialCode={"# Creating variables in Python\nname = \"Alice\"\nage = 25\ncity = \"New York\"\n\n# Let's see what we stored\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"City:\", city)\n\n# Try changing the values above!"}
+                                    initialCode={"# Creating variables in Python\nname = \"Alice\"\nage = 25\ncity = \"New York\"\n\n# Let&apos;s see what we stored\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"City:\", city)\n\n# Try changing the values above!"}
                                     expectedOutput="Name: Alice\nAge: 25\nCity: New York"
                                     hint="Variable names go on the left, values on the right of the equals sign. Use quotes for text."
                                 />
@@ -299,7 +299,7 @@ export default function Chapter2Page() {
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
                                     Excellent! You've mastered variables and data types.
-                                    You're ready to learn about controlling program flow!
+                                    You&apos;re ready to learn about controlling program flow!
                                 </p>
                             </div>
 

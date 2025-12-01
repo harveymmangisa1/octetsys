@@ -54,7 +54,7 @@ export default function QuoteRequestPage() {
                         Quote Request Sent!
                     </h1>
                     <p className="text-lg text-slate-600 leading-8 mb-8 font-light">
-                        Thank you, {formData.name}. We've received your request for the <strong>{service.title}</strong> service. Our team will review your requirements and get back to you at <strong>{formData.email}</strong> within 24 hours.
+                        Thank you, {formData.name}. We&apos;ve received your request for the <strong>{service.title}</strong> service. Our team will review your requirements and get back to you at <strong>{formData.email}</strong> within 24 hours.
                     </p>
                     <Button onClick={() => router.push('/#services')} variant="outline">
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -167,7 +167,7 @@ export default function QuoteRequestPage() {
                 </Button>
 
                 <p className="text-sm text-slate-500 text-center">
-                  We'll review your request and and get back to you within 24 hours
+                  We&apos;ll review your request and and get back to you within 24 hours
                 </p>
               </div>
             </form>

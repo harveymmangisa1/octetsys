@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Code, Shield, FileText, Monitor, Brain, Users, Award, BookOpen, PlayCircle, Download, CheckCircle2, Clock, Star } from 'lucide-react';
+import React from 'react';
 
 export const metadata: Metadata = {
     title: 'Interactive Training Modules | Octet Systems',
@@ -16,7 +17,7 @@ interface Module {
     id: string;
     title: string;
     description: string;
-    icon: any;
+    icon: React.ElementType;
     color: string;
     duration: string;
     chapters: number;

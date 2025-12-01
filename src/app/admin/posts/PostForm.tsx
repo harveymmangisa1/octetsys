@@ -24,6 +24,7 @@ import { RichTextEditor } from './RichTextEditor.client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Save, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { Database } from '@/types/database';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title must be less than 100 characters'),
@@ -37,7 +38,9 @@ const formSchema = z.object({
   tags: z.string().optional(), // We'll handle comma-separation in the UI
 });
 
-export function PostForm({ post }: { post?: any }) {
+type Post = Database['public']['Tables']['posts']['Row'];
+
+export function PostForm({ post }: { post?: Post }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 

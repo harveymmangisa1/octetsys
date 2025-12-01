@@ -60,7 +60,7 @@ return (
         <CardHeader>
           <CardTitle className="text-destructive">Confirm Deletion</CardTitle>
           <CardDescription>
-            Are you sure you want to delete the post "{post.title}"? This action cannot be undone and will permanently remove all content.
+            Are you sure you want to delete the post &quot;{post.title}&quot;? This action cannot be undone and will permanently remove all content.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

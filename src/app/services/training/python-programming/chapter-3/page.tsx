@@ -54,7 +54,7 @@ export default function Chapter3Page() {
                                 Control Flow and Logic
                             </h1>
                             <p className="text-lg text-muted-foreground mb-6">
-                                Learn to control your program's execution path with conditional statements and loops.
+                                Learn to control your program&apos;s execution path with conditional statements and loops.
                                 Make decisions and repeat actions to create powerful programs.
                             </p>
 

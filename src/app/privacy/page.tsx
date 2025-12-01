@@ -136,7 +136,7 @@ export default function PrivacyPage() {
                         <CardContent className="prose prose-slate max-w-none">
                             <p>
                                 We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new
-                                Privacy Policy on this page and updating the "Last Updated" date.
+                                Privacy Policy on this page and updating the &quot;Last Updated&quot; date.
                             </p>
                             <p className="mt-4">
                                 <strong>Last Updated:</strong> November 30, 2024

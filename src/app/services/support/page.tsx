@@ -371,7 +371,7 @@ export default function SupportPage() {
                         Ready for reliable IT support?
                     </h2>
                     <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                        Let's discuss how we can provide the IT support your business needs to thrive.
+                        Let&apos;s discuss how we can provide the IT support your business needs to thrive.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <Link

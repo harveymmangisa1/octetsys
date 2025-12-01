@@ -284,7 +284,7 @@ export default function MSOfficeToolsModule() {
                                         <span className="font-semibold">Module Complete!</span>
                                     </div>
                                     <p className="text-sm text-green-700 mb-3">
-                                        You've earned your Office Specialist badge
+                                        You&apos;ve earned your Office Specialist badge
                                     </p>
                                     <button className="w-full bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
                                         <Download className="w-4 h-4" />
@@ -426,7 +426,7 @@ export default function MSOfficeToolsModule() {
                                                     All Exercises Complete!
                                                 </h4>
                                                 <p className="text-green-700 mb-4">
-                                                    You've successfully completed all exercises for this chapter.
+                                                    You&apos;ve successfully completed all exercises for this chapter.
                                                 </p>
                                                 <button
                                                     onClick={() => {

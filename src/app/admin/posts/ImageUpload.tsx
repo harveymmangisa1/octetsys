@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { PlusIcon, UploadCloudIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import Image from 'next/image';
 
 export function ImageUpload({
   onUpload,
@@ -95,12 +96,16 @@ export function ImageUpload({
         title: 'Image uploaded',
         description: 'Your image has been uploaded successfully',
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Upload error:', error);
-      let errorMessage = error.message || 'Failed to upload image. Please try again.';
+      let errorMessage = 'Failed to upload image. Please try again.';
 
-      if (error.message?.includes('bucket not found') || error.message?.includes('Bucket not found') || error.message?.includes('not configured')) {
-        errorMessage = 'Storage bucket not configured. Please run database migrations to set up storage.';
+      if (error instanceof Error) {
+        if (error.message?.includes('bucket not found') || error.message?.includes('Bucket not found') || error.message?.includes('not configured')) {
+          errorMessage = 'Storage bucket not configured. Please run database migrations to set up storage.';
+        } else {
+          errorMessage = error.message;
+        }
       }
 
       toast({
@@ -117,9 +122,11 @@ export function ImageUpload({
   if (currentImage) {
     return (
       <div className="mt-4">
-        <img
+        <Image
           src={currentImage}
           alt="Featured"
+          width={500}
+          height={500}
           className="w-full h-32 object-cover rounded-md border"
         />
         <Button

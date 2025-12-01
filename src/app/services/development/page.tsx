@@ -338,7 +338,7 @@ export default function DevelopmentPage() {
                         Ready to bring your idea to life?
                     </h2>
                     <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                        Let's discuss your project and create a custom solution that exceeds your expectations.
+                        Let&apos;s discuss your project and create a custom solution that exceeds your expectations.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <Link

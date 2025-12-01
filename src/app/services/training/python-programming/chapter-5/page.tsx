@@ -93,7 +93,7 @@ export default function Chapter5Page() {
                                 Working with Data Structures
                             </h1>
                             <p className="text-lg text-muted-foreground mb-6">
-                                Explore Python's powerful data structures to organize, store, and manipulate data efficiently. 
+                                Explore Python&apos;s powerful data structures to organize, store, and manipulate data efficiently. 
                                 Master lists, dictionaries, tuples, sets, and learn the elegant syntax of list comprehensions.
                             </p>
 

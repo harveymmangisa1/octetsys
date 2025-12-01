@@ -309,7 +309,7 @@ export default function NetworkingPage() {
                         Ready to upgrade your network infrastructure?
                     </h2>
                     <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                        Let's discuss how we can design and implement a robust, scalable network solution for your business.
+                        Let&apos;s discuss how we can design and implement a robust, scalable network solution for your business.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <Link

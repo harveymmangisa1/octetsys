@@ -1,14 +1,15 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { serviceData } from '@/lib/service-data';
+import { serviceData, IService, IServiceData } from '@/lib/service-data';
 import { cn } from '@/lib/utils';
 import { ArrowRight, Shield, Layers, BadgeCheck, ShieldCheck, Award, Globe, Clock, Target, FileText } from 'lucide-react';
 import { ServiceDetails } from '@/components/services/ServiceDetails';
+import React from 'react';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const service = (serviceData as any)[slug];
+  const service = (serviceData as IServiceData)[slug];
   if (!service) return { title: 'Service Not Found' };
   return {
     title: `${service.title} | Octet Systems Cybersecurity`,
@@ -23,10 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = (serviceData as any)[slug];
+  const service: IService = (serviceData as IServiceData)[slug];
   if (!service) return notFound();
 
-  const Icon = service.icon as any;
+  const Icon: React.ElementType = service.icon;
 
   return (
     <div className="flex flex-col min-h-dvh bg-background">
@@ -52,7 +53,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'FAQPage',
-              mainEntity: service.faqs.map((f: any) => ({
+              mainEntity: service.faqs.map((f: { q: string; a: string }) => ({
                 '@type': 'Question',
                 name: f.q,
                 acceptedAnswer: {

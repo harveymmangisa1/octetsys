@@ -23,7 +23,7 @@ export default async function TeamPage() {
                             <h3 className="text-lg font-semibold text-destructive">Error Loading Team</h3>
                             <p className="text-muted-foreground mb-4">{error}</p>
                             <p className="text-sm text-muted-foreground">
-                                This might be because the profiles table hasn't been created yet. Please run the database migrations.
+                                This might be because the profiles table hasn&apos;t been created yet. Please run the database migrations.
                             </p>
                         </div>
                     </CardContent>

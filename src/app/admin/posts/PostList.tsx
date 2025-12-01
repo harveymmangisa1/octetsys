@@ -11,9 +11,13 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlusIcon, EditIcon, TrashIcon, Calendar, User, Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { Database } from '@/types/database';
+import Image from 'next/image';
+
+type Post = Database['public']['Tables']['posts']['Row'];
 
 export function PostList() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
@@ -192,9 +196,11 @@ const supabase = createClient();
                 {/* Featured Image */}
                 <div className="flex-shrink-0">
                   {post.image ? (
-                    <img
+                    <Image
                       src={post.image}
                       alt={post.title}
+                      width={64} // Corresponds to w-16 (16 * 4 = 64px)
+                      height={64} // Corresponds to h-16 (16 * 4 = 64px)
                       className="h-16 w-16 rounded-lg object-cover"
                     />
                   ) : (
