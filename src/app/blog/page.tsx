@@ -2,13 +2,18 @@ import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Eye, Heart, MessageCircle } from 'lucide-react';
 
 export default async function BlogPage() {
   const cookieStore = await cookies();
   const supabase = await createSupabaseServerClient(cookieStore);
   const { data: posts, error } = await supabase
     .from('posts')
-    .select('*')
+    .select(`
+      *,
+      post_likes(count),
+      post_comments(count)
+    `)
     .eq('type', 'blog')
     .eq('status', 'published')
     .not('slug', 'is', null) // Filter out posts without slugs
@@ -53,13 +58,30 @@ export default async function BlogPage() {
             {post.excerpt && (
               <p className="text-gray-600 mb-2">{post.excerpt}</p>
             )}
-            <p className="text-sm text-gray-500 mb-4">
-              {new Date(post.created_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </p>
+            <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+              <time>
+                {new Date(post.created_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1">
+                  <Eye className="w-4 h-4" />
+                  <span>{post.views_count || 0}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Heart className="w-4 h-4" />
+                  <span>{post.post_likes?.length || 0}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{post.post_comments?.length || 0}</span>
+                </div>
+              </div>
+            </div>
             <Link
               href={`/blog/${post.slug}`}
               className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"

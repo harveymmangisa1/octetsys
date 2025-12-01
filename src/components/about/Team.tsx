@@ -217,7 +217,7 @@ export function Team({ members = [] }: { members?: TeamMemberProfile[] }) {
                               {selectedMember.email && (
                                 <a href={`mailto:${selectedMember.email}`} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium shadow-md hover:shadow-lg inline-flex items-center">
                                   <Mail className="w-4 h-4 inline mr-2" />
-                                  Email
+                                  {selectedMember.email.split('@')[0]}
                                 </a>
                               )}
                               <Button variant="outline" className="px-4 py-2">

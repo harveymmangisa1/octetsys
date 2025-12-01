@@ -66,7 +66,7 @@ export function Footer() {
                 <Link href="/services/application-security">Software Security</Link>
               </li>
               <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
-                <Link href="/services/security-awareness-training">Security Training</Link>
+                <Link href="/services/training">Interactive Training</Link>
               </li>
               <li className="hover:text-primary transition-colors duration-200 cursor-pointer">
                 <Link href="/services/ai-security">AI Security</Link>

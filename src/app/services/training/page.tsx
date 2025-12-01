@@ -1,116 +1,94 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, GraduationCap, Users, BookOpen, Award, Target, TrendingUp, CheckCircle2, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Code, Shield, FileText, Monitor, Brain, Users, Award, BookOpen, PlayCircle, Download, CheckCircle2, Clock, Star } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'IT Training & Certification Programs | Octet Systems',
-    description: 'Empower your team with professional IT training, from basic cybersecurity awareness to advanced technical skills.',
+    title: 'Interactive Training Modules | Octet Systems',
+    description: 'Learn essential digital skills with our interactive training modules. From Python programming to AI tools, master new technologies at your own pace.',
     openGraph: {
-        title: 'IT Training & Certification Programs | Octet Systems',
-        description: 'Empower your team with professional IT training, from basic cybersecurity awareness to advanced technical skills.',
+        title: 'Interactive Training Modules | Octet Systems',
+        description: 'Learn essential digital skills with our interactive training modules. From Python programming to AI tools, master new technologies at your own pace.',
         type: 'website',
     },
 };
 
-export default function TrainingPage() {
-    const packages = [
-        {
-            name: 'Security Awareness',
-            price: 1500,
-            period: 'per session',
-            description: 'Essential cybersecurity awareness training for all employees.',
-            features: [
-                { text: 'Up to 30 participants', included: true },
-                { text: 'Phishing Awareness', included: true },
-                { text: 'Password Security', included: true },
-                { text: 'Social Engineering Defense', included: true },
-                { text: 'Certification', included: false },
-                { text: 'Advanced Topics', included: false },
-            ],
-            popular: false,
-        },
-        {
-            name: 'Technical Training',
-            price: 4500,
-            period: 'per course',
-            description: 'In-depth technical training with hands-on labs and certification prep.',
-            features: [
-                { text: 'Up to 20 participants', included: true },
-                { text: 'Hands-on Lab Sessions', included: true },
-                { text: 'Course Materials', included: true },
-                { text: 'Certification Preparation', included: true },
-                { text: 'Official Certification Exam', included: true },
-                { text: 'Post-Training Support (30 days)', included: true },
-            ],
-            popular: true,
-        },
-        {
-            name: 'Enterprise Program',
-            price: 3000,
-            period: 'per month',
-            description: 'Comprehensive ongoing training program with custom curriculum.',
-            features: [
-                { text: 'Unlimited participants', included: true },
-                { text: 'Custom Curriculum Design', included: true },
-                { text: 'Monthly Training Sessions', included: true },
-                { text: 'Skills Assessment', included: true },
-                { text: 'Progress Tracking Dashboard', included: true },
-                { text: 'Dedicated Training Manager', included: true },
-            ],
-            popular: false,
-        },
-    ];
+interface Module {
+    id: string;
+    title: string;
+    description: string;
+    icon: any;
+    color: string;
+    duration: string;
+    chapters: number;
+    level: string;
+    badge: string;
+    features: string[];
+}
 
-    const courses = [
-        {
-            icon: Shield,
-            title: 'Cybersecurity Fundamentals',
-            description: 'Essential security concepts, threat landscape, and best practices for protecting organizational assets.',
-            duration: '2 days',
-        },
-        {
-            icon: Target,
-            title: 'Network Security',
-            description: 'Advanced network security concepts including firewalls, VPNs, IDS/IPS, and secure network design.',
-            duration: '3 days',
-        },
-        {
-            icon: BookOpen,
-            title: 'Ethical Hacking',
-            description: 'Penetration testing methodologies, vulnerability assessment, and security testing techniques.',
-            duration: '5 days',
-        },
-        {
-            icon: Users,
-            title: 'Security Awareness',
-            description: 'Practical security awareness for employees covering phishing, social engineering, and safe practices.',
-            duration: '1 day',
-        },
-        {
-            icon: Award,
-            title: 'Compliance Training',
-            description: 'Understanding regulatory requirements including GDPR, HIPAA, PCI-DSS, and ISO 27001.',
-            duration: '2 days',
-        },
-        {
-            icon: TrendingUp,
-            title: 'Cloud Security',
-            description: 'Securing cloud environments including AWS, Azure, and GCP with best practices and tools.',
-            duration: '3 days',
-        },
-    ];
+const modules: Module[] = [
+    {
+        id: 'python-programming',
+        title: 'Introduction to Python Programming',
+        description: 'Master Python programming fundamentals through interactive lessons and hands-on coding exercises.',
+        icon: Code,
+        color: 'bg-blue-500',
+        duration: '5 hours',
+        chapters: 5,
+        level: 'Beginner',
+        badge: 'Python Fundamentals',
+        features: ['Interactive coding environment', 'Real-time feedback', '5 progressive chapters', 'Downloadable certificate']
+    },
+    {
+        id: 'safe-internet-habits',
+        title: 'Safe Internet Habits',
+        description: 'Learn essential online safety practices to protect yourself from digital threats and scams.',
+        icon: Shield,
+        color: 'bg-green-500',
+        duration: '3 hours',
+        chapters: 4,
+        level: 'Essential',
+        badge: 'Digital Safety Certified',
+        features: ['Real-world scenarios', 'Threat detection practice', 'Safety checklists', 'Personal security plan']
+    },
+    {
+        id: 'ms-office-tools',
+        title: 'MS Office Tools Mastery',
+        description: 'Become proficient in Microsoft Office suite with practical exercises and real-world applications.',
+        icon: FileText,
+        color: 'bg-orange-500',
+        duration: '6 hours',
+        chapters: 6,
+        level: 'Intermediate',
+        badge: 'Office Specialist',
+        features: ['Word, Excel, PowerPoint', 'Practical templates', 'Productivity tips', 'Business applications']
+    },
+    {
+        id: 'computer-basics',
+        title: 'Computer Basics',
+        description: 'Build a strong foundation in computer fundamentals, from hardware to software essentials.',
+        icon: Monitor,
+        color: 'bg-purple-500',
+        duration: '4 hours',
+        chapters: 5,
+        level: 'Beginner',
+        badge: 'Computer Essentials',
+        features: ['Hardware & software', 'File management', 'Troubleshooting basics', 'Digital literacy']
+    },
+    {
+        id: 'ai-collaboration-tools',
+        title: 'AI and Collaboration Tools',
+        description: 'Explore cutting-edge AI tools and collaboration platforms to boost productivity and teamwork.',
+        icon: Brain,
+        color: 'bg-pink-500',
+        duration: '4 hours',
+        chapters: 4,
+        level: 'Modern Skills',
+        badge: 'AI Tools Proficient',
+        features: ['AI assistants', 'Team collaboration', 'Productivity automation', 'Future-ready skills']
+    }
+];
 
-    const certifications = [
-        'CompTIA Security+',
-        'Certified Ethical Hacker (CEH)',
-        'CISSP',
-        'CISM',
-        'AWS Certified Security',
-        'Azure Security Engineer',
-        'CCNA Security',
-        'ISO 27001 Lead Implementer',
-    ];
-
+export default function InteractiveTrainingPage() {
     return (
         <div className="flex flex-col min-h-dvh bg-background">
             {/* JSON-LD Structured Data */}
@@ -119,12 +97,17 @@ export default function TrainingPage() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         '@context': 'https://schema.org',
-                        '@type': 'Service',
-                        name: 'IT Training & Certification Programs',
-                        description: 'Empower your team with professional IT training, from basic cybersecurity awareness to advanced technical skills.',
+                        '@type': 'EducationalOccupationalProgram',
+                        name: 'Interactive Training Modules',
+                        description: 'Learn essential digital skills with our interactive training modules',
                         provider: { '@type': 'Organization', name: 'Octet Systems' },
-                        areaServed: 'Global',
-                        category: 'IT Training',
+                        educationalLevel: 'Beginner to Intermediate',
+                        timeRequired: 'PT3H-PT6H',
+                        offers: {
+                            '@type': 'Offer',
+                            price: '0',
+                            priceCurrency: 'USD'
+                        }
                     }),
                 }}
             />
@@ -136,7 +119,7 @@ export default function TrainingPage() {
                     <span className="mx-2">/</span>
                     <Link href="/#services" className="hover:text-primary transition-colors">Services</Link>
                     <span className="mx-2">/</span>
-                    <span className="text-foreground font-medium">IT Training</span>
+                    <span className="text-foreground font-medium">Interactive Training</span>
                 </div>
             </div>
 
@@ -148,115 +131,124 @@ export default function TrainingPage() {
                 </div>
 
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                        <div className="lg:col-span-2">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6 border border-primary/20">
-                                <GraduationCap className="w-5 h-5 text-primary" />
-                                <span className="text-sm font-medium text-primary">Professional Training</span>
-                            </div>
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-foreground mb-6">
-                                IT Training & Certification
-                            </h1>
-                            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                                Empower your team with professional IT training, from basic cybersecurity awareness to advanced technical skills.
-                            </p>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6 border border-primary/20">
+                            <BookOpen className="w-5 h-5 text-primary" />
+                            <span className="text-sm font-medium text-primary">Interactive Learning</span>
+                        </div>
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-foreground mb-6">
+                            Master Digital Skills
+                            <span className="block text-primary">Interactively</span>
+                        </h1>
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
+                            Learn at your own pace with hands-on exercises, real-time feedback, and downloadable badges. 
+                            From Python programming to AI tools, build practical skills for the digital age.
+                        </p>
 
-                            <div className="mt-8 flex flex-wrap gap-3">
-                                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Expert Instructors
-                                </span>
-                                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Hands-on Labs
-                                </span>
-                                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Industry Certifications
-                                </span>
-                            </div>
-
-                            <div className="mt-10 flex flex-wrap gap-4">
-                                <Link href="/book-consultation" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-full px-8 py-4 font-semibold shadow-lg hover:shadow-primary/25">
-                                    Enroll Your Team
-                                    <ArrowRight className="w-5 h-5" />
-                                </Link>
-                                <Link href="#courses" className="inline-flex items-center justify-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors rounded-full px-8 py-4 font-semibold">
-                                    Browse Courses
-                                </Link>
-                            </div>
+                        <div className="flex flex-wrap gap-3 justify-center mb-10">
+                            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
+                                <PlayCircle className="w-4 h-4 text-primary" />
+                                Interactive Lessons
+                            </span>
+                            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
+                                <Award className="w-4 h-4 text-primary" />
+                                Earn Badges
+                            </span>
+                            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-sm font-medium text-foreground">
+                                <Clock className="w-4 h-4 text-primary" />
+                                Self-Paced
+                            </span>
                         </div>
 
-                        <div className="lg:col-span-1">
-                            <div className="rounded-3xl border border-border bg-card/50 backdrop-blur-sm p-8 shadow-xl">
-                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                                    <GraduationCap className="w-8 h-8 text-primary" />
-                                </div>
-                                <div className="grid grid-cols-3 gap-4 mb-6 text-center text-muted-foreground text-xs font-medium">
-                                    <div className="flex flex-col items-center gap-2 p-2 rounded-lg bg-secondary/50">
-                                        <Clock className="w-5 h-5 text-foreground" />
-                                        <span>Flexible</span>
-                                    </div>
-                                    <div className="flex flex-col items-center gap-2 p-2 rounded-lg bg-secondary/50">
-                                        <Award className="w-5 h-5 text-foreground" />
-                                        <span>Certified</span>
-                                    </div>
-                                    <div className="flex flex-col items-center gap-2 p-2 rounded-lg bg-secondary/50">
-                                        <Users className="w-5 h-5 text-foreground" />
-                                        <span>Expert Led</span>
-                                    </div>
-                                </div>
-                                <ul className="space-y-4 text-sm font-medium text-foreground">
-                                    <li className="flex items-center gap-3">
-                                        <div className="p-1 rounded-full bg-green-500/10">
-                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                        </div>
-                                        Industry-recognized certs
-                                    </li>
-                                    <li className="flex items-center gap-3">
-                                        <div className="p-1 rounded-full bg-blue-500/10">
-                                            <CheckCircle2 className="w-4 h-4 text-blue-500" />
-                                        </div>
-                                        Practical hands-on labs
-                                    </li>
-                                    <li className="flex items-center gap-3">
-                                        <div className="p-1 rounded-full bg-purple-500/10">
-                                            <CheckCircle2 className="w-4 h-4 text-purple-500" />
-                                        </div>
-                                        Custom corporate programs
-                                    </li>
-                                </ul>
-                            </div>
+                        <div className="flex flex-wrap gap-4 justify-center">
+                            <Link href="#modules" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-full px-8 py-4 font-semibold shadow-lg hover:shadow-primary/25">
+                                Explore Modules
+                                <ArrowRight className="w-5 h-5" />
+                            </Link>
+                            <Link href="/book-consultation" className="inline-flex items-center justify-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors rounded-full px-8 py-4 font-semibold">
+                                Get Guidance
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Courses Grid */}
-            <section id="courses" className="py-16 lg:py-24 bg-secondary/20">
+            {/* Modules Grid */}
+            <section id="modules" className="py-16 lg:py-24 bg-secondary/20">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Our Training Courses</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Interactive Training Modules</h2>
                         <p className="text-lg text-muted-foreground">
-                            Comprehensive training programs designed to build real-world skills
+                            Choose your learning path and start building practical skills today
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {courses.map((course, index) => {
-                            const Icon = course.icon;
+                        {modules.map((module) => {
+                            const Icon = module.icon;
                             return (
-                                <div key={index} className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-shadow">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                                            <Icon className="w-6 h-6 text-primary" />
+                                <div key={module.id} className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                                    {/* Module Header */}
+                                    <div className={`h-2 ${module.color}`}></div>
+                                    <div className="p-6">
+                                        <div className="flex items-start justify-between mb-4">
+                                            <div className={`w-14 h-14 rounded-xl ${module.color} flex items-center justify-center`}>
+                                                <Icon className="w-7 h-7 text-white" />
+                                            </div>
+                                            <div className="text-right">
+                                                <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                                                    {module.level}
+                                                </span>
+                                                <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                                                    <Clock className="w-3 h-3" />
+                                                    {module.duration}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                                            {course.duration}
-                                        </span>
+
+                                        <h3 className="text-xl font-bold text-card-foreground mb-3 group-hover:text-primary transition-colors">
+                                            {module.title}
+                                        </h3>
+                                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                                            {module.description}
+                                        </p>
+
+                                        {/* Module Stats */}
+                                        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+                                            <div className="flex items-center gap-1">
+                                                <BookOpen className="w-3 h-3" />
+                                                {module.chapters} chapters
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <Award className="w-3 h-3" />
+                                                {module.badge}
+                                            </div>
+                                        </div>
+
+                                        {/* Features */}
+                                        <div className="space-y-2 mb-6">
+                                            {module.features.slice(0, 3).map((feature, idx) => (
+                                                <div key={idx} className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                    <CheckCircle2 className="w-3 h-3 text-green-500 flex-shrink-0" />
+                                                    <span className="line-clamp-1">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Action Buttons */}
+                                        <div className="flex gap-3">
+                                            <Link
+                                                href={`/services/training/${module.id}`}
+                                                className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors rounded-full px-4 py-2 text-sm font-semibold"
+                                            >
+                                                Start Learning
+                                                <PlayCircle className="w-4 h-4" />
+                                            </Link>
+                                            <button className="inline-flex items-center justify-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors rounded-full px-3 py-2 text-sm">
+                                                <Download className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </div>
-                                    <h3 className="text-xl font-bold text-card-foreground mb-3">{course.title}</h3>
-                                    <p className="text-muted-foreground">{course.description}</p>
                                 </div>
                             );
                         })}
@@ -264,85 +256,56 @@ export default function TrainingPage() {
                 </div>
             </section>
 
-            {/* Certifications */}
+            {/* Learning Features */}
             <section className="py-16 lg:py-24 border-y border-border">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-3xl mx-auto mb-12">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Certification Preparation</h2>
-                        <p className="text-lg text-muted-foreground">
-                            We prepare you for industry-leading certifications
-                        </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 justify-center max-w-4xl mx-auto">
-                        {certifications.map((cert, index) => (
-                            <div
-                                key={index}
-                                className="px-6 py-3 bg-card border border-border rounded-full text-foreground font-medium hover:border-primary hover:bg-primary/5 transition-colors"
-                            >
-                                {cert}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Pricing */}
-            <section id="pricing" className="py-16 lg:py-24 bg-secondary/20">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Training Packages</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Why Choose Interactive Learning?</h2>
                         <p className="text-lg text-muted-foreground">
-                            Flexible training options to fit your organization's needs
+                            Experience a new way of learning that adapts to your pace and style
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        {packages.map((pkg, index) => (
-                            <div
-                                key={index}
-                                className={`relative bg-card border-2 rounded-3xl p-8 ${pkg.popular ? 'border-primary shadow-xl shadow-primary/10' : 'border-border'
-                                    }`}
-                            >
-                                {pkg.popular && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-sm font-semibold rounded-full">
-                                        Most Popular
-                                    </div>
-                                )}
-
-                                <h3 className="text-2xl font-bold text-card-foreground mb-2">{pkg.name}</h3>
-                                <p className="text-muted-foreground text-sm mb-6">{pkg.description}</p>
-
-                                <div className="mb-6">
-                                    <span className="text-4xl font-bold text-foreground">${pkg.price.toLocaleString()}</span>
-                                    <span className="text-muted-foreground ml-2">/ {pkg.period}</span>
-                                </div>
-
-                                <ul className="space-y-3 mb-8">
-                                    {pkg.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-start gap-3">
-                                            <CheckCircle2
-                                                className={`w-5 h-5 mt-0.5 flex-shrink-0 ${feature.included ? 'text-green-500' : 'text-muted-foreground/30'
-                                                    }`}
-                                            />
-                                            <span className={feature.included ? 'text-foreground' : 'text-muted-foreground/50'}>
-                                                {feature.text}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <Link
-                                    href="/book-consultation"
-                                    className={`block w-full text-center py-3 px-6 rounded-full font-semibold transition-all ${pkg.popular
-                                            ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-primary/25'
-                                            : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-                                        }`}
-                                >
-                                    Get Started
-                                </Link>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+                                <PlayCircle className="w-8 h-8 text-blue-500" />
                             </div>
-                        ))}
+                            <h3 className="text-lg font-semibold text-foreground mb-2">Hands-On Practice</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Learn by doing with interactive exercises and real-time feedback
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center mx-auto mb-4">
+                                <Award className="w-8 h-8 text-green-500" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-foreground mb-2">Earn Certificates</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Receive downloadable badges and certificates upon completion
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto mb-4">
+                                <Users className="w-8 h-8 text-purple-500" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-foreground mb-2">Expert Support</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Get help from instructors and join a community of learners
+                            </p>
+                        </div>
+
+                        <div className="text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center mx-auto mb-4">
+                                <Star className="w-8 h-8 text-orange-500" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-foreground mb-2">Track Progress</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Monitor your learning journey with detailed progress tracking
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -351,24 +314,24 @@ export default function TrainingPage() {
             <section className="py-16 lg:py-24 bg-primary/5 border-y border-border">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                        Ready to upskill your team?
+                        Ready to Start Your Learning Journey?
                     </h2>
                     <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                        Contact us to discuss a custom training program tailored to your organization's needs.
+                        Join thousands of learners building practical digital skills with our interactive training modules.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <Link
-                            href="/book-consultation"
+                            href="#modules"
                             className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-full px-8 py-4 font-semibold shadow-lg hover:shadow-primary/25"
                         >
-                            Schedule Consultation
+                            Browse All Modules
                             <ArrowRight className="w-5 h-5" />
                         </Link>
                         <Link
-                            href="/quote"
+                            href="/book-consultation"
                             className="inline-flex items-center justify-center gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors rounded-full px-8 py-4 font-semibold"
                         >
-                            Request Quote
+                            Get Learning Advice
                         </Link>
                     </div>
                 </div>

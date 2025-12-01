@@ -3,6 +3,8 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { BlogEngagement } from '@/components/blog/BlogEngagement';
+import { BlogComments } from '@/components/blog/BlogComments';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -68,6 +70,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     .eq('slug', slug)
     .single();
 
+  // Get engagement stats
+  const { data: engagementStats } = await supabase
+    .rpc('get_post_engagement_stats', { post_uuid: post?.id })
+    .single();
+
+  // Increment view count
+  if (post) {
+    await supabase.rpc('increment_post_views', { post_uuid: post.id });
+  }
+
   if (error) {
     console.error('Error fetching blog post:', error);
     console.error('Slug attempted:', slug);
@@ -77,6 +89,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     console.log('Post not found for slug:', slug);
     notFound();
   }
+
+  const stats = engagementStats || {
+    views_count: post.views_count || 0,
+    likes_count: 0,
+    comments_count: 0,
+    user_liked: false
+  };
 
   console.log('Successfully loaded post:', post.title);
 
@@ -118,23 +137,33 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
           </div>
         )}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <time dateTime={post.created_at}>
-            {new Date(post.created_at).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex gap-2">
-              {post.tags.map((tag: string) => (
-                <span key={tag} className="px-2 py-1 bg-secondary rounded-md text-xs">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+        <div className="space-y-4">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <time dateTime={post.created_at}>
+              {new Date(post.created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex gap-2">
+                {post.tags.map((tag: string) => (
+                  <span key={tag} className="px-2 py-1 bg-secondary rounded-md text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          <BlogEngagement
+            postId={post.id}
+            initialViews={stats.views_count}
+            initialLikes={stats.likes_count}
+            initialComments={stats.comments_count}
+            isLiked={stats.user_liked}
+          />
         </div>
       </header>
       {post.image && (
@@ -153,6 +182,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         className="prose prose-lg dark:prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
+      
+      <div className="mt-12 pt-8 border-t">
+        <BlogComments postId={post.id} />
+      </div>
     </article>
   );
 }

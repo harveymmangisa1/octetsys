@@ -34,10 +34,10 @@ export function Services() {
     {
       id: "training",
       image: "/placeholder-images/trainings.png",
-      title: "IT Training",
-      description: "Empower your team with professional IT training, from basic cybersecurity awareness to advanced technical skills.",
+      title: "Interactive Training",
+      description: "Master essential digital skills with interactive modules. Learn Python, AI tools, and more at your own pace with hands-on exercises.",
       href: "/services/training",
-      cta: "Explore Training"
+      cta: "Start Learning"
     },
     {
       id: "cctv",
