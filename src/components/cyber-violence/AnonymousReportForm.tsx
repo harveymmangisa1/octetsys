@@ -80,7 +80,7 @@ export function AnonymousReportForm() {
       if (error) throw error;
 
 
-      setReportId(data);
+      setReportId(data?.toString() ?? "");
       setIsSubmitted(true);
 
       toast({

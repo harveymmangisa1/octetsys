@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION public.create_anonymous_report(
     desired_help_types_in text[],
     gender_in text
 )
-RETURNS bigint
+RETURNS text
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
@@ -20,6 +20,6 @@ BEGIN
     VALUES (violence_type_in, description_in, platform_in, severity_in, additional_details_in, help_received_in, desired_help_types_in, gender_in, 'submitted')
     RETURNING id INTO new_report_id;
 
-    RETURN new_report_id;
+    RETURN new_report_id::text;
 END;
 $$;
