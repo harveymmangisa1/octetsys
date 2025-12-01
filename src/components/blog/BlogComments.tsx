@@ -17,7 +17,7 @@ interface Comment {
   profiles: {
     full_name: string;
     avatar_url: string;
-  };
+  }[];
 }
 
 interface BlogCommentsProps {
@@ -57,7 +57,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
         .order('created_at', { ascending: true });
 
       if (error) throw error;
-      setComments(data || []);
+      setComments(data as Comment[] || []);
     } catch (error) {
       console.error('Error fetching comments:', error);
       toast({ title: 'Failed to load comments', variant: 'destructive' });
@@ -106,7 +106,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
 
       if (error) throw error;
 
-      setComments(prev => [...prev, data]);
+      setComments(prev => [...prev, data as Comment]);
       setNewComment('');
       toast({ title: 'Comment posted successfully!' });
     } catch (error) {
@@ -147,15 +147,15 @@ export function BlogComments({ postId }: BlogCommentsProps) {
           comments.map((comment) => (
             <div key={comment.id} className="flex gap-4 p-4 bg-muted/30 rounded-lg">
               <Avatar className="w-10 h-10 flex-shrink-0">
-                <AvatarImage src={comment.profiles.avatar_url} />
+                <AvatarImage src={comment.profiles[0]?.avatar_url} />
                 <AvatarFallback>
-                  {comment.profiles.full_name?.charAt(0)?.toUpperCase() || 'U'}
+                  {comment.profiles[0]?.full_name?.charAt(0)?.toUpperCase() || 'U'}
                 </AvatarFallback>
               </Avatar>
               
               <div className="flex-1 space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium">{comment.profiles.full_name}</span>
+                  <span className="font-medium">{comment.profiles[0]?.full_name}</span>
                   <span className="text-sm text-muted-foreground">
                     {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
                   </span>

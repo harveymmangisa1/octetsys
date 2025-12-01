@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Monitor, CheckCircle2, Download, BookOpen, Award, Clock, ChevronRight, ChevronLeft, PlayCircle, Cpu, HardDrive, Wifi, Mouse, Keyboard, Settings } from 'lucide-react';
+import { ArrowRight, Monitor, CheckCircle2, Download, BookOpen, Award, Clock, ChevronRight, ChevronLeft, PlayCircle, Cpu, HardDrive, Wifi, Mouse, Keyboard, Settings, Lock } from 'lucide-react';
 
 interface Chapter {
     id: number;
@@ -181,7 +181,7 @@ export default function ComputerBasicsModule() {
                             <span>{completedChapters.length} of {chapters.length} chapters completed</span>
                         </div>
                         <div className="w-full bg-purple-800/30 rounded-full h-3">
-                            <div 
+                            <div
                                 className="bg-white rounded-full h-3 transition-all duration-500"
                                 style={{ width: `${progress}%` }}
                             ></div>
@@ -205,15 +205,14 @@ export default function ComputerBasicsModule() {
                                             key={chapter.id}
                                             onClick={() => !chapter.locked && setCurrentChapter(chapter.id)}
                                             disabled={chapter.locked}
-                                            className={`w-full text-left p-3 rounded-xl transition-all ${
-                                                currentChapter === chapter.id
+                                            className={`w-full text-left p-3 rounded-xl transition-all ${currentChapter === chapter.id
                                                     ? 'bg-primary text-primary-foreground'
                                                     : chapter.locked
-                                                    ? 'bg-muted/50 text-muted-foreground cursor-not-allowed'
-                                                    : completedChapters.includes(chapter.id)
-                                                    ? 'bg-green-50 border border-green-200 text-green-800 hover:bg-green-100'
-                                                    : 'bg-secondary/50 hover:bg-secondary text-foreground'
-                                            }`}
+                                                        ? 'bg-muted/50 text-muted-foreground cursor-not-allowed'
+                                                        : completedChapters.includes(chapter.id)
+                                                            ? 'bg-green-50 border border-green-200 text-green-800 hover:bg-green-100'
+                                                            : 'bg-secondary/50 hover:bg-secondary text-foreground'
+                                                }`}
                                         >
                                             <div className="flex items-center gap-3">
                                                 <div className="flex-shrink-0">
@@ -409,7 +408,7 @@ export default function ComputerBasicsModule() {
                                             <CheckCircle2 className="w-5 h-5" />
                                             {completedChapters.includes(currentChapter) ? 'Chapter Completed' : 'Mark as Complete'}
                                         </button>
-                                        
+
                                         {currentChapter < chapters.length && (
                                             <button
                                                 onClick={() => setCurrentChapter(currentChapter + 1)}
@@ -419,7 +418,7 @@ export default function ComputerBasicsModule() {
                                                 <ChevronRight className="w-5 h-5" />
                                             </button>
                                         )}
-                                        
+
                                         {currentChapter > 1 && (
                                             <button
                                                 onClick={() => setCurrentChapter(currentChapter - 1)}
@@ -445,7 +444,7 @@ export default function ComputerBasicsModule() {
                                                 <Award className="w-5 h-5" />
                                                 Apply to Study Further
                                             </button>
-                                            <Link 
+                                            <Link
                                                 href="/services/training"
                                                 className="px-6 py-3 bg-white text-purple-600 border border-purple-200 rounded-xl font-semibold hover:bg-purple-50 transition-colors flex items-center justify-center gap-2"
                                             >

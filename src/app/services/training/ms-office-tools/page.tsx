@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, FileText, CheckCircle2, Download, BookOpen, Award, Clock, ChevronRight, ChevronLeft, PlayCircle, Table, PieChart, FileSpreadsheet, FileImage, Mail, Calendar } from 'lucide-react';
+import { ArrowRight, FileText, CheckCircle2, Download, BookOpen, Award, Clock, ChevronRight, ChevronLeft, PlayCircle, Table, PieChart, FileSpreadsheet, FileImage, Mail, Calendar, Lock } from 'lucide-react';
 
 interface Chapter {
     id: number;
