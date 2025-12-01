@@ -278,8 +278,67 @@ export default function Chapter4Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Practice built-in functions:</h4>
                                 <CodeEditor
-                                    initialCode='# Using built-in functions\n\n# String functions\nmessage = "Hello, Python Programming!"\nprint("Original message:", message)\nprint("Length:", len(message))\nprint("Uppercase:", message.upper())\nprint("Lowercase:", message.lower())\nprint()\n\n# Number functions\nnumbers = [5, 2, 8, 1, 9, 3]\nprint("Numbers:", numbers)\nprint("Maximum:", max(numbers))\nprint("Minimum:", min(numbers))\nprint("Length of list:", len(numbers))\nprint()\n\n# Type conversion functions\ntext_number = "42"\ndecimal_number = 3.7\nnegative_number = -15\n\nprint("Text \'" + text_number + "\' as integer:", int(text_number))\nprint("Decimal", decimal_number, "as integer:", int(decimal_number))\nprint("Integer 10 as float:", float(10))\nprint("Absolute value of", negative_number, ":", abs(negative_number))\nprint()\n\n# Combining functions\ndef analyze_text(text):\n    return {\n        "length": len(text),\n        "words": len(text.split()),\n        "uppercase": text.upper(),\n        "lowercase": text.lower()\n    }\n\nsample_text = "Python is amazing!"\nanalysis = analyze_text(sample_text)\nprint("Text analysis for:", sample_text)\nprint("Character count:", analysis["length"])\nprint("Word count:", analysis["words"])'
-                                    expectedOutput="Original message: Hello, Python Programming!\nLength: 22\nUppercase: HELLO, PYTHON PROGRAMMING!\nLowercase: hello, python programming!\n\nNumbers: [5, 2, 8, 1, 9, 3]\nMaximum: 9\nMinimum: 1\nLength of list: 6\n\nText '42' as integer: 42\nDecimal 3.7 as integer: 3\nInteger 10 as float: 10.0\nAbsolute value of -15 : 15\n\nText analysis for: Python is amazing!\nCharacter count: 19\nWord count: 3"
+                                    initialCode={`# Using built-in functions
+
+# String functions
+message = "Hello, Python Programming!"
+print("Original message:", message)
+print("Length:", len(message))
+print("Uppercase:", message.upper())
+print("Lowercase:", message.lower())
+print()
+
+# Number functions
+numbers = [5, 2, 8, 1, 9, 3]
+print("Numbers:", numbers)
+print("Maximum:", max(numbers))
+print("Minimum:", min(numbers))
+print("Length of list:", len(numbers))
+print()
+
+# Type conversion functions
+text_number = "42"
+decimal_number = 3.7
+negative_number = -15
+
+print("Text '" + text_number + "' as integer:", int(text_number))
+print("Decimal", decimal_number, "as integer:", int(decimal_number))
+print("Integer 10 as float:", float(10))
+print("Absolute value of", negative_number, ":", abs(negative_number))
+print()
+
+# Combining functions
+def analyze_text(text):
+    return {
+        "length": len(text),
+        "words": len(text.split()),
+        "uppercase": text.upper(),
+        "lowercase": text.lower()
+    }
+
+sample_text = "Python is amazing!"
+analysis = analyze_text(sample_text)
+print("Text analysis for:", sample_text)
+print("Character count:", analysis["length"])
+print("Word count:", analysis["words"])`}
+                                    expectedOutput={`Original message: Hello, Python Programming!
+Length: 22
+Uppercase: HELLO, PYTHON PROGRAMMING!
+Lowercase: hello, python programming!
+
+Numbers: [5, 2, 8, 1, 9, 3]
+Maximum: 9
+Minimum: 1
+Length of list: 6
+
+Text '42' as integer: 42
+Decimal 3.7 as integer: 3
+Integer 10 as float: 10.0
+Absolute value of -15 : 15
+
+Text analysis for: Python is amazing!
+Character count: 19
+Word count: 3`}
                                     hint="Built-in functions save time. Combine them to create powerful solutions!"
                                 />
                             </div>
