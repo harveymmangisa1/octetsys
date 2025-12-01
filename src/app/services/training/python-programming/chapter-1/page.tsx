@@ -85,7 +85,7 @@ export default function Chapter1Page() {
                                 Getting Started with Python
                             </h1>
                             <p className="text-lg text-muted-foreground mb-6">
-                                Learn Python basics, understand what makes Python special, and write your first program. 
+                                Learn Python basics, understand what makes Python special, and write your first program.
                                 No prior programming experience required!
                             </p>
 
@@ -131,7 +131,7 @@ export default function Chapter1Page() {
             {/* Chapter Content */}
             <div className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="max-w-4xl mx-auto space-y-12">
-                    
+
                     {/* Introduction */}
                     <Card className="p-8">
                         <CardHeader className="pb-6">
@@ -188,7 +188,7 @@ export default function Chapter1Page() {
                             <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                                 <h4 className="font-semibold text-blue-800 mb-2">💡 Key Concept: The print() Function</h4>
                                 <p className="text-blue-700 text-sm">
-                                    In Python, <code className="bg-blue-100 px-1 rounded">print()</code> is a built-in function that displays text or values on the screen. 
+                                    In Python, <code className="bg-blue-100 px-1 rounded">print()</code> is a built-in function that displays text or values on the screen.
                                     Anything you put inside the parentheses will be displayed.
                                 </p>
                             </div>
@@ -236,7 +236,7 @@ export default function Chapter1Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Practice with comments and syntax:</h4>
                                 <CodeEditor
-                                    initialCode='# This is a comment - Python will ignore this line\n\n# Let\'s print multiple lines\nprint("Python is fun!")\nprint("Syntax is clean and readable")\n\n# You can write comments anywhere\n# to explain what your code does\nprint("Comments help others understand your code")'
+                                    initialCode={"# This is a comment - Python will ignore this line\n\n# Let's print multiple lines\nprint(\"Python is fun!\")\nprint(\"Syntax is clean and readable\")\n\n# You can write comments anywhere\n# to explain what your code does\nprint(\"Comments help others understand your code\")"}
                                     expectedOutput="Python is fun!\nSyntax is clean and readable\nComments help others understand your code"
                                     hint="Comments start with # and are ignored by Python. They're used to explain your code."
                                 />
@@ -328,7 +328,7 @@ export default function Chapter1Page() {
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
-                                    Great job! You've written your first Python programs and learned the basics. 
+                                    Great job! You've written your first Python programs and learned the basics.
                                     Ready to continue your journey?
                                 </p>
                             </div>
@@ -340,7 +340,7 @@ export default function Chapter1Page() {
                                         Back to Module
                                     </Link>
                                 </Button>
-                                
+
                                 <Button asChild className="gap-2 flex-1">
                                     <Link href="/services/training/python-programming/chapter-2">
                                         Next Chapter: Variables & Data Types

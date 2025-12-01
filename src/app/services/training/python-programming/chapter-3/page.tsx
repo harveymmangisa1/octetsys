@@ -54,7 +54,7 @@ export default function Chapter3Page() {
                                 Control Flow and Logic
                             </h1>
                             <p className="text-lg text-muted-foreground mb-6">
-                                Learn to control your program's execution path with conditional statements and loops. 
+                                Learn to control your program's execution path with conditional statements and loops.
                                 Make decisions and repeat actions to create powerful programs.
                             </p>
 
@@ -100,7 +100,7 @@ export default function Chapter3Page() {
             {/* Chapter Content */}
             <div className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="max-w-4xl mx-auto space-y-12">
-                    
+
                     {/* If Statements */}
                     <Card className="p-8">
                         <CardHeader className="pb-6">
@@ -116,7 +116,7 @@ export default function Chapter3Page() {
                             <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                                 <h4 className="font-semibold text-yellow-800 mb-2">💡 Key Concept: If Statements</h4>
                                 <p className="text-yellow-700 text-sm">
-                                    <code className="bg-yellow-100 px-1 rounded">if</code> statements let your program make decisions. 
+                                    <code className="bg-yellow-100 px-1 rounded">if</code> statements let your program make decisions.
                                     The code inside the <code className="bg-yellow-100 px-1 rounded">if</code> block runs only when the condition is True.
                                     Python uses indentation (spaces) to define code blocks.
                                 </p>
@@ -192,10 +192,10 @@ export default function Chapter3Page() {
                                 <div className="grid grid-cols-2 gap-2 text-blue-700 text-sm">
                                     <div><code className="bg-blue-100 px-1 rounded">==</code> Equal to</div>
                                     <div><code className="bg-blue-100 px-1 rounded">!=</code> Not equal to</div>
-                                    <div><code className="bg-blue-100 px-1 rounded">></code> Greater than</div>
-                                    <div><code className="bg-blue-100 px-1 rounded"><</code> Less than</div>
-                                    <div><code className="bg-blue-100 px-1 rounded">>=</code> Greater or equal</div>
-                                    <div><code className="bg-blue-100 px-1 rounded"><=</code> Less or equal</div>
+                                    <div><code className="bg-blue-100 px-1 rounded">&gt;</code> Greater than</div>
+                                    <div><code className="bg-blue-100 px-1 rounded">&lt;</code> Less than</div>
+                                    <div><code className="bg-blue-100 px-1 rounded">&gt;=</code> Greater or equal</div>
+                                    <div><code className="bg-blue-100 px-1 rounded">&lt;=</code> Less or equal</div>
                                 </div>
                             </div>
 
@@ -276,7 +276,7 @@ export default function Chapter3Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Practice while loops:</h4>
                                 <CodeEditor
-                                    initialCode='# While loop example\n\ncount = 0\nprint("Counting up to 5:")\nwhile count <= 5:\n    print("Count:", count)\n    count = count + 1  # Important: update the variable!\n\nprint("Loop finished!")\n\n# Another example: user input simulation\npassword_attempts = 0\ncorrect_password = "python123"\n\nprint("\\nPassword check simulation:")\nwhile password_attempts < 3:\n    print("Attempt", password_attempts + 1, "- Checking password...")\n    # In real program, you\'d get user input here\n    password_attempts = password_attempts + 1\n    if password_attempts == 2:  # Simulate correct password on 2nd try\n        print("Password correct! Access granted.")\n        break\n\nif password_attempts >= 3:\n    print("Too many attempts. Access denied.")'
+                                    initialCode={"# While loop example\n\ncount = 0\nprint(\"Counting up to 5:\")\nwhile count <= 5:\n    print(\"Count:\", count)\n    count = count + 1  # Important: update the variable!\n\nprint(\"Loop finished!\")\n\n# Another example: user input simulation\npassword_attempts = 0\ncorrect_password = \"python123\"\n\nprint(\"\\nPassword check simulation:\")\nwhile password_attempts < 3:\n    print(\"Attempt\", password_attempts + 1, \"- Checking password...\")\n    # In real program, you'd get user input here\n    password_attempts = password_attempts + 1\n    if password_attempts == 2:  # Simulate correct password on 2nd try\n        print(\"Password correct! Access granted.\")\n        break\n\nif password_attempts >= 3:\n    print(\"Too many attempts. Access denied.\")"}
                                     expectedOutput="Counting up to 5:\nCount: 0\nCount: 1\nCount: 2\nCount: 3\nCount: 4\nCount: 5\nLoop finished!\n\nPassword check simulation:\nAttempt 1 - Checking password...\nAttempt 2 - Checking password...\nPassword correct! Access granted."
                                     hint="While loops continue until condition becomes False. Always update variables in the loop!"
                                 />
@@ -312,7 +312,7 @@ export default function Chapter3Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Build the guessing game:</h4>
                                 <CodeEditor
-                                    initialCode='# Number guessing game\n\nsecret_number = 42\nlow = 1\nhigh = 100\nattempts = 0\nmax_attempts = 7\n\nprint("Welcome to the Number Guessing Game!")\nprint("Think of a number between 1 and 100")\nprint("I\'ll try to guess it in", max_attempts, "attempts or less!")\nprint()\n\nwhile attempts < max_attempts:\n    attempts = attempts + 1\n    \n    # Computer makes a guess\n    guess = (low + high) // 2  # Binary search strategy\n    \n    print("Attempt", attempts, ": Is your number", guess, "?")\n    \n    # Simulate user response (in real game, you\'d ask user)\n    if guess == secret_number:\n        print("🎉 I got it! Your number is", guess)\n        print("It took me", attempts, "attempts!")\n        break\n    elif guess < secret_number:\n        print("Too low!")\n        low = guess + 1\n    else:\n        print("Too high!")\n        high = guess - 1\n    \n    print("Range is now:", low, "to", high)\n    print()\n\nif attempts >= max_attempts and guess != secret_number:\n    print("😔 I couldn\'t guess your number in", max_attempts, "attempts")\n    print("The number was", secret_number)\n\n# Try changing secret_number and play again!'
+                                    initialCode={"# Number guessing game\n\nsecret_number = 42\nlow = 1\nhigh = 100\nattempts = 0\nmax_attempts = 7\n\nprint(\"Welcome to the Number Guessing Game!\")\nprint(\"Think of a number between 1 and 100\")\nprint(\"I'll try to guess it in\", max_attempts, \"attempts or less!\")\nprint()\n\nwhile attempts < max_attempts:\n    attempts = attempts + 1\n    \n    # Computer makes a guess\n    guess = (low + high) // 2  # Binary search strategy\n    \n    print(\"Attempt\", attempts, \": Is your number\", guess, \"?\")\n    \n    # Simulate user response (in real game, you'd ask user)\n    if guess == secret_number:\n        print(\"🎉 I got it! Your number is\", guess)\n        print(\"It took me\", attempts, \"attempts!\")\n        break\n    elif guess < secret_number:\n        print(\"Too low!\")\n        low = guess + 1\n    else:\n        print(\"Too high!\")\n        high = guess - 1\n    \n    print(\"Range is now:\", low, \"to\", high)\n    print()\n\nif attempts >= max_attempts and guess != secret_number:\n    print(\"😔 I couldn't guess your number in\", max_attempts, \"attempts\")\n    print(\"The number was\", secret_number)\n\n# Try changing secret_number and play again!"}
                                     expectedOutput="Welcome to the Number Guessing Game!\nThink of a number between 1 and 100\nI'll try to guess it in 7 attempts or less!\n\nAttempt 1 : Is your number 50 ?\nToo high!\nRange is now: 1 to 49\n\nAttempt 2 : Is your number 25 ?\nToo low!\nRange is now: 26 to 49\n\nAttempt 3 : Is your number 37 ?\nToo low!\nRange is now: 38 to 49\n\nAttempt 4 : Is your number 43 ?\nToo high!\nRange is now: 38 to 42\n\nAttempt 5 : Is your number 40 ?\nToo low!\nRange is now: 41 to 42\n\nAttempt 6 : Is your number 41 ?\nToo low!\nRange is now: 42 to 42\n\nAttempt 7 : Is your number 42 ?\n🎉 I got it! Your number is 42\nIt took me 7 attempts!"
                                     hint="Use binary search: guess middle of range, then adjust range based on feedback. This is very efficient!"
                                 />
@@ -326,7 +326,7 @@ export default function Chapter3Page() {
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
-                                    Fantastic! You've mastered control flow and logic. 
+                                    Fantastic! You've mastered control flow and logic.
                                     You can now make decisions and repeat actions in your programs!
                                 </p>
                             </div>
@@ -338,7 +338,7 @@ export default function Chapter3Page() {
                                         Previous Chapter
                                     </Link>
                                 </Button>
-                                
+
                                 <Button asChild className="gap-2 flex-1">
                                     <Link href="/services/training/python-programming/chapter-4">
                                         Next Chapter: Functions and Modules

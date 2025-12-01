@@ -54,7 +54,7 @@ export default function Chapter2Page() {
                                 Variables and Data Types
                             </h1>
                             <p className="text-lg text-muted-foreground mb-6">
-                                Learn how to store and work with different types of data in Python. 
+                                Learn how to store and work with different types of data in Python.
                                 Variables are like containers that hold information for your programs.
                             </p>
 
@@ -100,7 +100,7 @@ export default function Chapter2Page() {
             {/* Chapter Content */}
             <div className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="max-w-4xl mx-auto space-y-12">
-                    
+
                     {/* Introduction to Variables */}
                     <Card className="p-8">
                         <CardHeader className="pb-6">
@@ -124,7 +124,7 @@ export default function Chapter2Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Try creating variables:</h4>
                                 <CodeEditor
-                                    initialCode='# Creating variables in Python\nname = "Alice"\nage = 25\ncity = "New York"\n\n# Let\'s see what we stored\nprint("Name:", name)\nprint("Age:", age)\nprint("City:", city)\n\n# Try changing the values above!'
+                                    initialCode={"# Creating variables in Python\nname = \"Alice\"\nage = 25\ncity = \"New York\"\n\n# Let's see what we stored\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"City:\", city)\n\n# Try changing the values above!"}
                                     expectedOutput="Name: Alice\nAge: 25\nCity: New York"
                                     hint="Variable names go on the left, values on the right of the equals sign. Use quotes for text."
                                 />
@@ -174,7 +174,7 @@ export default function Chapter2Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Practice with different data types:</h4>
                                 <CodeEditor
-                                    initialCode='# Different data types in Python\n\n# String (text)\nstudent_name = "John Doe"\nmessage = \'Hello, Python!\'\n\n# Integer (whole numbers)\nstudent_age = 20\ngrade = 95\n\n# Float (decimal numbers)\nheight = 5.8\ngpa = 3.7\n\n# Boolean\nis_student = True\nhas_graduated = False\n\n# Print all variables\nprint("Student Info:")\nprint("Name:", student_name)\nprint("Age:", student_age)\nprint("Height:", height)\nprint("Is student:", is_student)'
+                                    initialCode={"# Different data types in Python\n\n# String (text)\nstudent_name = \"John Doe\"\nmessage = 'Hello, Python!'\n\n# Integer (whole numbers)\nstudent_age = 20\ngrade = 95\n\n# Float (decimal numbers)\nheight = 5.8\ngpa = 3.7\n\n# Boolean\nis_student = True\nhas_graduated = False\n\n# Print all variables\nprint(\"Student Info:\")\nprint(\"Name:\", student_name)\nprint(\"Age:\", student_age)\nprint(\"Height:\", height)\nprint(\"Is student:\", is_student)"}
                                     expectedOutput="Student Info:\nName: John Doe\nAge: 20\nHeight: 5.8\nIs student: True"
                                     hint="Strings use quotes, integers are whole numbers, floats have decimals, and booleans are True/False."
                                 />
@@ -276,7 +276,7 @@ export default function Chapter2Page() {
                             <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
                                 <h4 className="font-semibold text-orange-800 mb-2">🎯 Your Task</h4>
                                 <p className="text-orange-700 text-sm">
-                                    You have user input as text. Convert it to numbers, perform calculations, 
+                                    You have user input as text. Convert it to numbers, perform calculations,
                                     and display results. Practice converting between strings, integers, and floats.
                                 </p>
                             </div>
@@ -298,7 +298,7 @@ export default function Chapter2Page() {
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
-                                    Excellent! You've mastered variables and data types. 
+                                    Excellent! You've mastered variables and data types.
                                     You're ready to learn about controlling program flow!
                                 </p>
                             </div>
@@ -310,7 +310,7 @@ export default function Chapter2Page() {
                                         Previous Chapter
                                     </Link>
                                 </Button>
-                                
+
                                 <Button asChild className="gap-2 flex-1">
                                     <Link href="/services/training/python-programming/chapter-3">
                                         Next Chapter: Control Flow and Logic
