@@ -176,8 +176,7 @@ export default function Chapter5Page() {
                             <CardHeader>
                                 <CardTitle>📋 Lists - Ordered Collections</CardTitle>
                                 <CardDescription>
-                                    Lists are Python's most versatile data structure. They can hold any type of data and are mutable.
-                                </CardDescription>
+                                                                            Lists are Python&apos;s most versatile data structure. They can hold any type of data and are mutable.                                </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 <div>
