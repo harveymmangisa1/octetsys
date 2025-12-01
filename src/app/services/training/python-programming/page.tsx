@@ -497,7 +497,7 @@ export default function PythonProgrammingModule() { // Clock import fixed
                                 <Award className="w-10 h-10 text-white" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">🎉 Congratulations!</h3>
-                            <p className="text-gray-600">You've completed the Python Fundamentals course!</p>
+                            <p className="text-gray-600">You&apos;ve completed the Python Fundamentals course!</p>
                         </div>
 
                         <div className="mb-6">
