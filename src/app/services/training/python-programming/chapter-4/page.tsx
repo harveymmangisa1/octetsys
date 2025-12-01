@@ -17,6 +17,206 @@ export const metadata: Metadata = {
     },
 };
 
+const builtInFunctionsCode = `# Using built-in functions
+
+# String functions
+message = "Hello, Python Programming!"
+print("Original message:", message)
+print("Length:", len(message))
+print("Uppercase:", message.upper())
+print("Lowercase:", message.lower())
+print()
+
+# Number functions
+numbers = [5, 2, 8, 1, 9, 3]
+print("Numbers:", numbers)
+print("Maximum:", max(numbers))
+print("Minimum:", min(numbers))
+print("Length of list:", len(numbers))
+print()
+
+# Type conversion functions
+text_number = "42"
+decimal_number = 3.7
+negative_number = -15
+
+print("Text '" + text_number + "' as integer:", int(text_number))
+print("Decimal", decimal_number, "as integer:", int(decimal_number))
+print("Integer 10 as float:", float(10))
+print("Absolute value of", negative_number, ":", abs(negative_number))
+print()
+
+# Combining functions
+def analyze_text(text):
+    return {
+        "length": len(text),
+        "words": len(text.split()),
+        "uppercase": text.upper(),
+        "lowercase": text.lower()
+    }
+
+sample_text = "Python is amazing!"
+analysis = analyze_text(sample_text)
+print("Text analysis for:", sample_text)
+print("Character count:", analysis["length"])
+print("Word count:", analysis["words"])`;
+
+const builtInFunctionsOutput = `Original message: Hello, Python Programming!
+Length: 22
+Uppercase: HELLO, PYTHON PROGRAMMING!
+Lowercase: hello, python programming!
+
+Numbers: [5, 2, 8, 1, 9, 3]
+Maximum: 9
+Minimum: 1
+Length of list: 6
+
+Text '42' as integer: 42
+Decimal 3.7 as integer: 3
+Integer 10 as float: 10.0
+Absolute value of -15 : 15
+
+Text analysis for: Python is amazing!
+Character count: 19
+Word count: 3`;
+
+const calculatorCode = `# Calculator with functions
+
+def add(a, b):
+    """Add two numbers and return result"""
+    return a + b
+
+def subtract(a, b):
+    """Subtract b from a and return result"""
+    return a - b
+
+def multiply(a, b):
+    """Multiply two numbers and return result"""
+    return a * b
+
+def divide(a, b):
+    """Divide a by b and return result (with error handling)"""
+    if b == 0:
+        return "Error: Cannot divide by zero!"
+    return a / b
+
+def power(base, exponent):
+    """Calculate base to the power of exponent"""
+    return base ** exponent
+
+def calculator_menu():
+    """Display calculator menu and get user choice"""
+    print("\\n" + "="*40)
+    print("PYTHON CALCULATOR")
+    print("="*40)
+    print("1. Addition (+)")
+    print("2. Subtraction (-)")
+    print("3. Multiplication (*)")
+    print("4. Division (/)")
+    print("5. Power (^)")
+    print("6. Exit")
+    print("="*40)
+
+def get_numbers():
+    """Get two numbers from user (simulated here)"""
+    # In real program, you'd use input()
+    num1 = 10  # Simulated user input
+    num2 = 5   # Simulated user input
+    print("First number:", num1)
+    print("Second number:", num2)
+    return num1, num2
+
+def run_calculation(choice, num1, num2):
+    """Run the selected calculation and return result"""
+    if choice == 1:
+        result = add(num1, num2)
+        operation = "+"
+    elif choice == 2:
+        result = subtract(num1, num2)
+        operation = "-"
+    elif choice == 3:
+        result = multiply(num1, num2)
+        operation = "*"
+    elif choice == 4:
+        result = divide(num1, num2)
+        operation = "/"
+    elif choice == 5:
+        result = power(num1, num2)
+        operation = "^"
+    else:
+        return "Invalid choice!"
+    
+    return f"{num1} {operation} {num2} = {result}"
+
+# Main calculator function
+def main():
+    """Main calculator program"""
+    calculator_menu()
+    
+    # Simulate different operations
+    test_operations = [
+        (1, "Addition"),
+        (2, "Subtraction"), 
+        (3, "Multiplication"),
+        (4, "Division"),
+        (5, "Power")
+    ]
+    
+    for choice, operation_name in test_operations:
+        print(f"\\n--- {operation_name} ---")
+        num1, num2 = get_numbers()
+        result = run_calculation(choice, num1, num2)
+        print("Result:", result)
+    
+    print("\\n" + "="*40)
+    print("Calculator demonstration complete!")
+    print("You've mastered functions in Python!")
+    print("="*40)
+
+# Run the calculator
+main()`;
+
+const calculatorOutput = `========================================
+PYTHON CALCULATOR
+========================================
+1. Addition (+)
+2. Subtraction (-)
+3. Multiplication (*)
+4. Division (/)
+5. Power (^)
+6. Exit
+========================================
+
+--- Addition ---
+First number: 10
+Second number: 5
+Result: 10 + 5 = 15
+
+--- Subtraction ---
+First number: 10
+Second number: 5
+Result: 10 - 5 = 5
+
+--- Multiplication ---
+First number: 10
+Second number: 5
+Result: 10 * 5 = 50
+
+--- Division ---
+First number: 10
+Second number: 5
+Result: 10 / 5 = 2.0
+
+--- Power ---
+First number: 10
+Second number: 5
+Result: 10 ^ 5 = 100000
+
+========================================
+Calculator demonstration complete!
+You've mastered functions in Python!
+========================================`;
+
 export default function Chapter4Page() {
     const currentProgress = 90; // 4 of 4 chapters completed
 
@@ -254,7 +454,7 @@ export default function Chapter4Page() {
                                         Exercise: Built-in Functions
                                     </CardTitle>
                                     <CardDescription>
-                                        Explore Python\'s powerful built-in functions
+                                        Explore Python&apos;s powerful built-in functions
                                     </CardDescription>
                                 </div>
                                 <Badge variant="secondary">12 min</Badge>
@@ -278,9 +478,9 @@ export default function Chapter4Page() {
                             <div>
                                 <h4 className="font-semibold mb-3">Practice built-in functions:</h4>
                                 <CodeEditor
-                                    initialCode='# Using built-in functions\n\n# String functions\nmessage = "Hello, Python Programming!"\nprint("Original message:", message)\nprint("Length:", len(message))\nprint("Uppercase:", message.upper())\nprint("Lowercase:", message.lower())\nprint()\n\n# Number functions\nnumbers = [5, 2, 8, 1, 9, 3]\nprint("Numbers:", numbers)\nprint("Maximum:", max(numbers))\nprint("Minimum:", min(numbers))\nprint("Length of list:", len(numbers))\nprint()\n\n# Type conversion functions\ntext_number = "42"\ndecimal_number = 3.7\nnegative_number = -15\n\nprint("Text \'" + text_number + "\' as integer:", int(text_number))\nprint("Decimal", decimal_number, "as integer:", int(decimal_number))\nprint("Integer 10 as float:", float(10))\nprint("Absolute value of", negative_number, ":", abs(negative_number))\nprint()\n\n# Combining functions\ndef analyze_text(text):\n    return {\n        "length": len(text),\n        "words": len(text.split()),\n        "uppercase": text.upper(),\n        "lowercase": text.lower()\n    }\n\nsample_text = "Python is amazing!"\nanalysis = analyze_text(sample_text)\nprint("Text analysis for:", sample_text)\nprint("Character count:", analysis["length"])\nprint("Word count:", analysis["words"])'
-                                expectedOutput="Original message: Hello, Python Programming!\nLength: 22\nUppercase: HELLO, PYTHON PROGRAMMING!\nLowercase: hello, python programming!\n\nNumbers: [5, 2, 8, 1, 9, 3]\nMaximum: 9\nMinimum: 1\nLength of list: 6\n\nText '42' as integer: 42\nDecimal 3.7 as integer: 3\nInteger 10 as float: 10.0\nAbsolute value of -15 : 15\n\nText analysis for: Python is amazing!\nCharacter count: 19\nWord count: 3"
-                                hint="Built-in functions save time. Combine them to create powerful solutions!"
+                                    initialCode={builtInFunctionsCode}
+                                    expectedOutput={builtInFunctionsOutput}
+                                    hint="Built-in functions save time. Combine them to create powerful solutions!"
                                 />
                             </div>
                         </CardContent>
@@ -308,16 +508,16 @@ export default function Chapter4Page() {
                                 <p className="text-red-700 text-sm">
                                     Create a complete calculator with functions for basic operations,
                                     error handling, and a main function that orchestrates everything.
-                                    Practice everything you've learned about functions!
+                                    Practice everything you&apos;ve learned about functions!
                                 </p>
                             </div>
 
                             <div>
                                 <h4 className="font-semibold mb-3">Build your calculator:</h4>
                                 <CodeEditor
-                                    initialCode='# Calculator with functions\n\ndef add(a, b):\n    """Add two numbers and return result"""\n    return a + b\n\ndef subtract(a, b):\n    """Subtract b from a and return result"""\n    return a - b\n\ndef multiply(a, b):\n    """Multiply two numbers and return result"""\n    return a * b\n\ndef divide(a, b):\n    """Divide a by b and return result (with error handling)"""\n    if b == 0:\n        return "Error: Cannot divide by zero!"\n    return a / b\n\ndef power(base, exponent):\n    """Calculate base to the power of exponent"""\n    return base ** exponent\n\ndef calculator_menu():\n    """Display calculator menu and get user choice"""\n    print("\\n" + "="*40)\n    print("PYTHON CALCULATOR")\n    print("="*40)\n    print("1. Addition (+)")\n    print("2. Subtraction (-)")\n    print("3. Multiplication (*)")\n    print("4. Division (/)")\n    print("5. Power (^)")\n    print("6. Exit")\n    print("="*40)\n\ndef get_numbers():\n    """Get two numbers from user (simulated here)"""\n    # In real program, you\' d use input()\n    num1 = 10  # Simulated user input\n    num2 = 5   # Simulated user input\n    print("First number:", num1)\n    print("Second number:", num2)\n    return num1, num2\n\ndef run_calculation(choice, num1, num2):\n    """Run the selected calculation and return result"""\n    if choice == 1:\n        result = add(num1, num2)\n        operation = "+"\n    elif choice == 2:\n        result = subtract(num1, num2)\n        operation = "-"\n    elif choice == 3:\n        result = multiply(num1, num2)\n        operation = "*"\n    elif choice == 4:\n        result = divide(num1, num2)\n        operation = "/"\n    elif choice == 5:\n        result = power(num1, num2)\n        operation = "^"\n    else:\n        return "Invalid choice!"\n    \n    return f"{num1} {operation} {num2} = {result}"\n\n# Main calculator function\ndef main():\n    """Main calculator program"""\n    calculator_menu()\n    \n    # Simulate different operations\n    test_operations = [\n        (1, "Addition"),\n        (2, "Subtraction"), \n        (3, "Multiplication"),\n        (4, "Division"),\n        (5, "Power")\n    ]\n    \n    for choice, operation_name in test_operations:\n        print(f"\\n--- {operation_name} ---")\n        num1, num2 = get_numbers()\n        result = run_calculation(choice, num1, num2)\n        print("Result:", result)\n    \n    print("\\n" + "="*40)\n    print("Calculator demonstration complete!")\n    print("You\'ve mastered functions in Python!")\n    print("="*40)\n\n# Run the calculator\nmain()'
-                                expectedOutput="========================================\nPYTHON CALCULATOR\n========================================\n1. Addition (+)\n2. Subtraction (-)\n3. Multiplication (*)\n4. Division (/)\n5. Power (^)\n6. Exit\n========================================\n\n--- Addition ---\nFirst number: 10\nSecond number: 5\nResult: 10 + 5 = 15\n\n--- Subtraction ---\nFirst number: 10\nSecond number: 5\nResult: 10 - 5 = 5\n\n--- Multiplication ---\nFirst number: 10\nSecond number: 5\nResult: 10 * 5 = 50\n\n--- Division ---\nFirst number: 10\nSecond number: 5\nResult: 10 / 5 = 2.0\n\n--- Power ---\nFirst number: 10\nSecond number: 5\nResult: 10 ^ 5 = 100000\n\n========================================\nCalculator demonstration complete!\nYou've mastered functions in Python!\n========================================"
-                                hint="Create separate functions for each operation, then use a main function to coordinate everything. This is modular programming!"
+                                    initialCode={calculatorCode}
+                                    expectedOutput={calculatorOutput}
+                                    hint="Create separate functions for each operation, then use a main function to coordinate everything. This is modular programming!"
                                 />
                             </div>
                         </CardContent>
@@ -329,8 +529,8 @@ export default function Chapter4Page() {
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold mb-2">🎉 Chapter Complete!</h3>
                                 <p className="text-muted-foreground mb-6">
-                                    Amazing! You've mastered functions and modular programming.
-                                    You're ready for the final chapter on data structures!
+                                    Amazing! You&apos;ve mastered functions and modular programming.
+                                    You&apos;re ready for the final chapter on data structures!
                                 </p>
                             </div>
 
