@@ -9,11 +9,7 @@ export default async function BlogPage() {
   const supabase = await createSupabaseServerClient(cookieStore);
   const { data: posts, error } = await supabase
     .from('posts')
-    .select(`
-      *,
-      post_likes(count),
-      post_comments(count)
-    `)
+    .select('*')
     .eq('type', 'blog')
     .eq('status', 'published')
     .not('slug', 'is', null) // Filter out posts without slugs
@@ -74,11 +70,11 @@ export default async function BlogPage() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Heart className="w-4 h-4" />
-                  <span>{post.post_likes?.length || 0}</span>
+                  <span>0</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MessageCircle className="w-4 h-4" />
-                  <span>{post.post_comments?.length || 0}</span>
+                  <span>0</span>
                 </div>
               </div>
             </div>

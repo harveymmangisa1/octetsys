@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { useToast } from '@/hooks/use-toast';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Comment {
@@ -29,8 +29,9 @@ export function BlogComments({ postId }: BlogCommentsProps) {
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchComments();
@@ -59,7 +60,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
       setComments(data || []);
     } catch (error) {
       console.error('Error fetching comments:', error);
-      toast.error('Failed to load comments');
+      toast({ title: 'Failed to load comments', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +70,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
     e.preventDefault();
     
     if (!newComment.trim()) {
-      toast.error('Please write a comment');
+      toast({ title: 'Please write a comment', variant: 'destructive' });
       return;
     }
 
@@ -79,7 +80,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        toast.error('Please sign in to comment');
+        toast({ title: 'Please sign in to comment', variant: 'destructive' });
         router.push('/login');
         return;
       }
@@ -107,10 +108,10 @@ export function BlogComments({ postId }: BlogCommentsProps) {
 
       setComments(prev => [...prev, data]);
       setNewComment('');
-      toast.success('Comment posted successfully!');
+      toast({ title: 'Comment posted successfully!' });
     } catch (error) {
       console.error('Error posting comment:', error);
-      toast.error('Failed to post comment');
+      toast({ title: 'Failed to post comment', variant: 'destructive' });
     } finally {
       setIsSubmitting(false);
     }

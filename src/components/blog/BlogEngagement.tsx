@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { Heart, MessageCircle, Eye } from 'lucide-react';
-import { Button } from './button';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { Button } from '../ui/button';
+import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { useToast } from '@/hooks/use-toast';
 
 interface BlogEngagementProps {
   postId: string;
@@ -25,8 +25,9 @@ export function BlogEngagement({
   const [likes, setLikes] = React.useState(initialLikes);
   const [isLiked, setIsLiked] = React.useState(initialIsLiked);
   const [isLoading, setIsLoading] = React.useState(false);
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleLike = async () => {
     if (isLoading) return;
@@ -37,7 +38,7 @@ export function BlogEngagement({
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        toast.error('Please sign in to like posts');
+        toast({ title: 'Please sign in to like posts', variant: 'destructive' });
         router.push('/login');
         return;
       }
@@ -54,7 +55,7 @@ export function BlogEngagement({
         
         setLikes(prev => prev - 1);
         setIsLiked(false);
-        toast.success('Post unliked');
+        toast({ title: 'Post unliked' });
       } else {
         // Like the post
         const { error } = await supabase
@@ -68,11 +69,11 @@ export function BlogEngagement({
         
         setLikes(prev => prev + 1);
         setIsLiked(true);
-        toast.success('Post liked!');
+        toast({ title: 'Post liked!' });
       }
     } catch (error) {
       console.error('Error toggling like:', error);
-      toast.error('Failed to update like');
+      toast({ title: 'Failed to update like', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
