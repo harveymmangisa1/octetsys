@@ -285,7 +285,7 @@ export default function PythonProgrammingModule() { // Clock import fixed
                                         <span className="font-semibold">Module Complete!</span>
                                     </div>
                                     <p className="text-sm text-green-700 mb-3">
-                                        You've earned your Python Fundamentals badge
+                                        You&apos;ve earned your Python Fundamentals badge
                                     </p>
                                     <button 
                                         onClick={() => setShowBadgeModal(true)}
