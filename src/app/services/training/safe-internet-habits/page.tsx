@@ -213,7 +213,7 @@ export default function SafeInternetHabitsModule() {
         setFeedback({
             correct: isCorrect,
             message: isCorrect 
-                ? "Correct! You've successfully identified the safe action." 
+                ? "Correct! You&apos;ve successfully identified the safe action." 
                 : `Not quite. The best action would be: ${scenario.correctAction}`
         });
 
@@ -321,7 +321,7 @@ export default function SafeInternetHabitsModule() {
                                         <span className="font-semibold">Module Complete!</span>
                                     </div>
                                     <p className="text-sm text-green-700 mb-3">
-                                        You've earned your Digital Safety Certified badge
+                                        You&apos;ve earned your Digital Safety Certified badge
                                     </p>
                                     <button className="w-full bg-green-600 text-white rounded-lg px-4 py-2 text-sm font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
                                         <Download className="w-4 h-4" />
@@ -456,7 +456,7 @@ export default function SafeInternetHabitsModule() {
                                                     All Scenarios Complete!
                                                 </h4>
                                                 <p className="text-green-700 mb-4">
-                                                    You've successfully completed all scenarios for this chapter.
+                                                    You&apos;ve successfully completed all scenarios for this chapter.
                                                 </p>
                                                 <button
                                                     onClick={() => {

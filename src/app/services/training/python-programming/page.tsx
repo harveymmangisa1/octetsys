@@ -15,6 +15,13 @@ interface Chapter {
     exercises: number;
 }
 
+interface BadgeData {
+    name: string;
+    course: string;
+    date: string;
+    certificateId: string;
+}
+
 const chapters: Chapter[] = [
     {
         id: 1,
@@ -610,7 +617,7 @@ export default function PythonProgrammingModule() { // Clock import fixed
         downloadBadge(badgeData);
     }
 
-    function downloadBadge(badgeData: any) {
+    function downloadBadge(badgeData: BadgeData) {
         // Create a simple text-based certificate
         const certificate = `
 ╔══════════════════════════════════════════════════════════════╗

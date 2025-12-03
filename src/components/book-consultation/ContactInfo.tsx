@@ -70,7 +70,7 @@ export function ContactInfo() {
             <span className="block font-semibold mt-2">Multiple Ways to Connect</span>
           </h2>
           <p className="text-lg text-slate-600 leading-8 font-light max-w-2xl">
-            We're here to help you succeed. Choose the most convenient way to reach out, 
+            We&apos;re here to help you succeed. Choose the most convenient way to reach out, 
             and our team will assist you promptly.
           </p>
         </div>
@@ -151,7 +151,7 @@ export function ContactInfo() {
             </h4>
             <p className="text-slate-600 font-light mb-4">
               For urgent matters or to speak directly with our project managers, 
-              call our main line during business hours. We're committed to providing 
+              call our main line during business hours. We&apos;re committed to providing 
               personalized attention to every client.
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">

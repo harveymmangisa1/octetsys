@@ -41,7 +41,7 @@ export function ConsultationHero() {
                 </div>
                 <div>
                   <h4 className="font-medium text-slate-900 mb-1">Quick Response</h4>
-                  <p className="text-slate-600 text-sm font-light">We'll get back to you within 24 hours</p>
+                  <p className="text-slate-600 text-sm font-light">We&apos;ll get back to you within 24 hours</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">

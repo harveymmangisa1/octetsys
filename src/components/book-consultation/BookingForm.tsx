@@ -58,7 +58,7 @@ export function BookingForm({
                 <span className="block font-semibold mt-2">Free Consultation</span>
               </h1>
               <p className="text-lg text-slate-600 leading-8 font-light">
-                Let's discuss your technology needs and create a tailored solution 
+                Let&apos;s discuss your technology needs and create a tailored solution 
                 that drives your business forward.
               </p>
             </div>
@@ -92,7 +92,7 @@ export function BookingForm({
                   Consultation Request
                 </CardTitle>
                 <CardDescription className="text-slate-600 font-light">
-                  Complete the form below and we'll contact you to schedule your consultation
+                  Complete the form below and we&apos;ll contact you to schedule your consultation
                 </CardDescription>
               </CardHeader>
               <CardContent>
