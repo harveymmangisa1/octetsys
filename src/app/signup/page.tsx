@@ -112,6 +112,7 @@ export default function SignupPage() {
             🤨 <strong>You sure you belong here?</strong>
           </div>
 
+          {/*
           <form onSubmit={handleSignUp} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -145,6 +146,7 @@ export default function SignupPage() {
               Sign Up 😈
             </Button>
           </form>
+          */}
 
           <div className="flex justify-center mt-6">
             <img
@@ -175,7 +177,7 @@ export default function SignupPage() {
 
       {/* SIGNUP POLICE GIF */}
       <img
-        src="https://media.giphy.com/media/5xtDarziK8Jj0J7jGJq/giphy.gif"
+        src="https://media.giphy.com/media/5xtDarziKJj0J7jGJq/giphy.gif"
         className="w-48 h-48 absolute bottom-4 right-4 animate-bounce"
         alt="Running chaos"
       />
