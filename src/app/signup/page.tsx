@@ -94,7 +94,7 @@ export default function SignupPage() {
           </CardTitle>
 
           <CardDescription className="text-center text-gray-300">
-            Only serious members of the secret admin cult allowed.
+            Only serious members of the secret admin group allowed.
           </CardDescription>
 
           <div className="flex justify-center mt-4">
