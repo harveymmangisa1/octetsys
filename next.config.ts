@@ -23,6 +23,15 @@ const nextConfig = {
     ],
     domains: ['octet-systems.com'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/team/signup',
+        destination: '/team-signup-timeout',
+        permanent: false,
+      },
+    ]
+  },
   // Temporarily disable turbopack to see if it's causing the timeout
   // turbopack: {
   //   root: __dirname,
